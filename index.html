@@ -1223,23 +1223,28 @@ nav{
 
   /* Menu skryté, bude se rozbalovat po kliknutí */
   nav ul{
-    display:none;
+    opacity: 0;
+    transform: translateY(-10px); /* mírně posunout nahoru při skrytí */
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    pointer-events: none; /* aby se nedalo klikat, když je skryté */
     flex-direction: column;
     width:100%;
     background: rgba(255,255,255,0.95);
     position:absolute;
-    top:60px; /* pod nav */
+    top:60px;
     left:0;
     padding:10px 0;
     text-align:center;
     box-shadow:0 5px 15px rgba(0,0,0,0.1);
     backdrop-filter: blur(12px);
     z-index:150;
-  }
+}
 
-  nav ul.show{
-    display:flex;
-  }
+nav ul.show{
+    opacity: 1;
+    transform: translateY(0); /* vrátit na místo */
+    pointer-events: auto; /* aktivní při zobrazení */
+}
 
   nav li{
     margin:10px 0;
@@ -1667,6 +1672,7 @@ navMenu.querySelectorAll("a").forEach(link => {
 </body>
 
 </html>
+
 
 
 
