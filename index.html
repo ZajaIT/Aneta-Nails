@@ -1568,18 +1568,24 @@ hamburger.addEventListener("click", () => {
 });
     
     let touchStartX = 0;
-let touchEndX = 0;
+    let touchEndX = 0;
+
+    let touchStartY = 0;
+    let touchEndY = 0;
 
 navMenu.addEventListener("touchstart", (e) => {
     touchStartX = e.changedTouches[0].screenX;
+    touchStartY = e.changedTouches[0].screenY; // ← nově
 });
 
 navMenu.addEventListener("touchend", (e) => {
     touchEndX = e.changedTouches[0].screenX;
+    touchEndY = e.changedTouches[0].screenY; // ← nově
     handleSwipeGesture();
 });
 
 function handleSwipeGesture() {
+    // horizontální swipe (pokud chceš zachovat)
     if (touchEndX - touchStartX > 50) {  
         navMenu.classList.remove("show");
         hamburger.classList.remove("open");
@@ -1588,6 +1594,21 @@ function handleSwipeGesture() {
         spans[0].style.transform = "rotate(0) translate(0,0)";
         spans[1].style.opacity = "1";
         spans[2].style.transform = "rotate(0) translate(0,0)";
+        
+        document.body.classList.remove("no-scroll"); // obnovíme scroll
+    }
+
+    // vertikální swipe zespodu nahoru
+    if (touchStartY - touchEndY > 50) {
+        navMenu.classList.remove("show");
+        hamburger.classList.remove("open");
+
+        const spans = hamburger.querySelectorAll("span");
+        spans[0].style.transform = "rotate(0) translate(0,0)";
+        spans[1].style.opacity = "1";
+        spans[2].style.transform = "rotate(0) translate(0,0)";
+
+        document.body.classList.remove("no-scroll"); // obnovíme scroll
     }
 }
 
@@ -1646,6 +1667,7 @@ navMenu.querySelectorAll("a").forEach(link => {
 </body>
 
 </html>
+
 
 
 
