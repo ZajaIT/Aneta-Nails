@@ -1276,9 +1276,11 @@ nav a.active {
 
     body.no-scroll {
     overflow: hidden;
-    touch-action: none;
-
-        
+    touch-action: none;       
+}
+    /* Skrýt bubble efekt na mobilu */
+nav a::before {
+    display: none;
 }
 }
     
@@ -1690,6 +1692,7 @@ navMenu.querySelectorAll("a").forEach(link => {
 </body>
 
 </html>
+
 
 
 
