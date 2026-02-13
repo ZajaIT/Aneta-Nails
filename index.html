@@ -1682,16 +1682,23 @@ mobileLinks.forEach(link => {
 // Aktivní položka podle scrollu (mobil)
 function updateActiveMenuOnScroll() {
     if(window.innerWidth > 768) return; // jen mobil
-    let currentSectionId = "";
-    document.querySelectorAll("section").forEach(sec => {
-        const rect = sec.getBoundingClientRect();
-        if(rect.top <= window.innerHeight/2 && rect.bottom >= window.innerHeight/2){
-            currentSectionId = sec.id;
-        }
-    });
 
-    // --- NOVÉ: DOMŮ (#home) se nezvýrazní ---
-    if(currentSectionId === "home") currentSectionId = ""; 
+    let currentSectionId = "";
+
+    // pokud jsme úplně nahoře, nic nezvýrazňovat
+    if(window.scrollY < 50) {
+        currentSectionId = "";
+    } else {
+        document.querySelectorAll("section").forEach(sec => {
+            const rect = sec.getBoundingClientRect();
+            if(rect.top <= window.innerHeight/2 && rect.bottom >= window.innerHeight/2){
+                currentSectionId = sec.id;
+            }
+        });
+
+        // DOMŮ (#home) se nezvýrazní
+        if(currentSectionId === "home") currentSectionId = ""; 
+    }
 
     mobileLinks.forEach(link => {
         link.classList.remove("active");
@@ -1726,6 +1733,7 @@ updateActiveMenuOnScroll(); // inicializace
 </body>
 
 </html>
+
 
 
 
