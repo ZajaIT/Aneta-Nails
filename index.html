@@ -1280,7 +1280,9 @@ nav a.active {
 }
     /* Skrýt bubble efekt na mobilu */
 nav a::before {
-    display: none;
+    display: none;       /* zůstane skrytý */
+    opacity: 0 !important;   
+    transform: none !important;
 }
 }
     
@@ -1692,6 +1694,7 @@ navMenu.querySelectorAll("a").forEach(link => {
 </body>
 
 </html>
+
 
 
 
