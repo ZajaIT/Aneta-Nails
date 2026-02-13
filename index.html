@@ -1679,7 +1679,7 @@ mobileLinks.forEach(link => {
     });
 });
 
-// Aktivní položka podle scrollu
+// Aktivní položka podle scrollu (mobil)
 function updateActiveMenuOnScroll() {
     if(window.innerWidth > 768) return; // jen mobil
     let currentSectionId = "";
@@ -1689,6 +1689,17 @@ function updateActiveMenuOnScroll() {
             currentSectionId = sec.id;
         }
     });
+
+    // --- NOVÉ: DOMŮ (#home) se nezvýrazní ---
+    if(currentSectionId === "home") currentSectionId = ""; 
+
+    mobileLinks.forEach(link => {
+        link.classList.remove("active");
+        if(link.getAttribute("href") === "#" + currentSectionId){
+            link.classList.add("active");
+        }
+    });
+}
 
     mobileLinks.forEach(link => {
         link.classList.remove("active");
@@ -1723,6 +1734,7 @@ updateActiveMenuOnScroll(); // inicializace
 </body>
 
 </html>
+
 
 
 
