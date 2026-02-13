@@ -817,6 +817,13 @@ nav{
     f
 </a>
 
+<!-- Hamburger button -->
+<button class="hamburger" aria-label="Otevřít menu">
+  <span></span>
+  <span></span>
+  <span></span>
+</button>
+
 <ul>
     <li><a href="#">DOMŮ</a></li>
     <li><a href="#about">O MNĚ</a></li>
@@ -1157,6 +1164,69 @@ na detail, kvalitu a individuální přístup.
 #galleryPrev { left: 20px; }
 #galleryNext { right: 20px; }
 
+@media(max-width:768px){
+
+  /* Hamburger button */
+  .hamburger{
+    display:flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width:30px;
+    height:25px;
+    background:none;
+    border:none;
+    cursor:pointer;
+    padding:0;
+    margin-left:10px;
+    z-index:200;
+  }
+
+  .hamburger span{
+    display:block;
+    height:3px;
+    width:100%;
+    background: linear-gradient(135deg,#d48b9c,#f3c1cc);
+    border-radius:2px;
+    transition: all 0.4s ease;
+  }
+
+  /* Skryj menu na mobilu, bude otevřené jen po kliknutí */
+  nav ul{
+    display:none;
+    flex-direction: column;
+    width:100%;
+    background: rgba(255,255,255,0.95);
+    position:absolute;
+    top:60px; /* pod nav */
+    left:0;
+    padding:10px 0;
+    text-align:center;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+    backdrop-filter: blur(12px);
+  }
+
+  nav ul.show{
+    display:flex;
+  }
+
+  nav li{
+    margin:10px 0;
+  }
+
+  nav a{
+    padding:10px 0;
+    font-size:16px;
+    display:block;
+    border-radius:30px;
+    transition: background 0.3s, color 0.3s;
+  }
+
+  nav a:hover{
+    background: linear-gradient(135deg,#d48b9c,#f3c1cc);
+    color:white;
+  }
+}
+    
 </style>
 
 <!-- JavaScript -->
@@ -1435,6 +1505,27 @@ window.addEventListener("load", () => {
     window.scrollTo(0, 0);
 });
 
+// Hamburger toggle pro mobil
+const hamburger = document.querySelector(".hamburger");
+const navMenu = document.querySelector("nav ul");
+
+hamburger.addEventListener("click", () => {
+    navMenu.classList.toggle("show");
+    hamburger.classList.toggle("open");
+
+    // animace čárek
+    const spans = hamburger.querySelectorAll("span");
+    if(hamburger.classList.contains("open")){
+        spans[0].style.transform = "rotate(45deg) translate(5px, 5px)";
+        spans[1].style.opacity = "0";
+        spans[2].style.transform = "rotate(-45deg) translate(5px, -5px)";
+    } else {
+        spans[0].style.transform = "rotate(0) translate(0,0)";
+        spans[1].style.opacity = "1";
+        spans[2].style.transform = "rotate(0) translate(0,0)";
+    }
+});
+    
 </script>
 
 <!-- Lightbox Studio -->
@@ -1456,3 +1547,4 @@ window.addEventListener("load", () => {
 </body>
 
 </html>
+
