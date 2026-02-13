@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="cs">
 <head>
@@ -1167,132 +1168,123 @@ na detail, kvalitu a individuální přístup.
 @media(max-width:768px){
 
     body{
-        padding-top:60px;
-    }
+    padding-top:60px;
+}
 
     /* NAV pruh – zachovat výšku a zarovnání */
-    nav{
-        height:60px;
-        display:flex;
-        align-items:center;
-        justify-content:center;
+nav{
+    height:60px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
 
-        position:fixed;
-        top:0;
-        left:0;
-        width:100%;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
 
-        background:white;
-        z-index:9999;
-    }
+    background:white;
+    z-index:9999;
+}
+  /* FB tlačítko zůstává vlevo */
+  .fb-btn{
+    position:absolute;
+    left:20px;
+    top:50%;
+    transform:translateY(-50%);
+    z-index:200;
+  }
 
-    /* FB tlačítko zůstává vlevo */
-    .fb-btn{
-        position:absolute;
-        left:20px;
-        top:50%;
-        transform:translateY(-50%);
-        z-index:200;
-    }
+  /* Hamburger doprava */
+  .hamburger{
+    display:flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width:30px;
+    height:25px;
+    background:none;
+    border:none;
+    cursor:pointer;
+    padding:0;
+    position:absolute;
+    right:20px;
+    top:50%;
+    transform: translateY(-50%);
+    z-index:200;
+  }
 
-    /* Hamburger doprava */
-    .hamburger{
-        display:flex;
-        flex-direction: column;
-        justify-content: space-around;
-        width:30px;
-        height:25px;
-        background:none;
-        border:none;
-        cursor:pointer;
-        padding:0;
-        position:absolute;
-        right:20px;
-        top:50%;
-        transform: translateY(-50%);
-        z-index:200;
-    }
+  .hamburger span{
+    display:block;
+    height:3px;
+    width:100%;
+    background: linear-gradient(135deg,#d48b9c,#f3c1cc);
+    border-radius:2px;
+    transition: all 0.4s ease;
+  }
 
-    .hamburger span{
-        display:block;
-        height:3px;
-        width:100%;
-        background: linear-gradient(135deg,#d48b9c,#f3c1cc);
-        border-radius:2px;
-        transition: all 0.4s ease;
-    }
+  /* Menu skryté, bude se rozbalovat po kliknutí */
+  nav ul{
+    opacity: 0;
+    transform: translateY(-10px); /* mírně posunout nahoru při skrytí */
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    pointer-events: none; /* aby se nedalo klikat, když je skryté */
+    flex-direction: column;
+    width:100%;
+    background: rgba(255,255,255,0.95);
+    position:absolute;
+    top:60px;
+    left:0;
+    padding:10px 0;
+    text-align:center;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+    backdrop-filter: blur(12px);
+    z-index:150;
+}
 
-    /* Menu skryté, bude se rozbalovat po kliknutí */
-    nav ul{
-        opacity: 0;
-        transform: translateY(-10px); /* mírně posunout nahoru při skrytí */
-        transition: opacity 0.4s ease, transform 0.4s ease;
-        pointer-events: none; /* aby se nedalo klikat, když je skryté */
-        flex-direction: column;
-        width:100%;
-        background: rgba(255,255,255,0.95);
-        position:absolute;
-        top:60px;
-        left:0;
-        padding:10px 0;
-        text-align:center;
-        box-shadow:0 5px 15px rgba(0,0,0,0.1);
-        backdrop-filter: blur(12px);
-        z-index:150;
-    }
+nav ul.show{
+    opacity: 1;
+    transform: translateY(0); /* vrátit na místo */
+    pointer-events: auto; /* aktivní při zobrazení */
+}
 
-    nav ul.show{
-        opacity: 1;
-        transform: translateY(0); /* vrátit na místo */
-        pointer-events: auto; /* aktivní při zobrazení */
-    }
+  nav li{
+    margin:10px 0;
+  }
 
-    nav li{
-        margin:10px 0;
-    }
+  nav a{
+    padding:10px 0;
+    font-size:16px;
+    display:block;
+    border-radius:30px;
+    transition: background 0.3s, color 0.3s;
+  }
 
-    nav a{
-        padding:10px 0;
-        font-size:16px;
-        display:block;
-        border-radius:30px;
-        transition: background 0.3s, color 0.3s;
-    }
-
-    nav a:hover{
-        background: linear-gradient(135deg,#d48b9c,#f3c1cc);
-        color:white;
-    }
+  nav a:hover{
+    background: linear-gradient(135deg,#d48b9c,#f3c1cc);
+    color:white;
+  }
 
     /* Zvýraznění aktivní položky menu na mobilu */
-    nav a.active {
-        background: linear-gradient(135deg,#d48b9c,#f3c1cc);
-        color: white;
-    }
+nav a.active {
+    background: linear-gradient(135deg,#d48b9c,#f3c1cc);
+    color: white;
+}
+    /* Zvýraznění aktivní položky menu na mobilu */
+nav a.active {
+    background: linear-gradient(135deg,#d48b9c,#f3c1cc);
+    color: white;
+}
 
     body.no-scroll {
-        overflow: hidden;
-        touch-action: none;       
-    }
-
-    @media(max-width:768px){
-    /* Mobilní menu bubliny – užší a přes celou výšku položky */
-    nav a::before {
-        width: 60px;             /* šířka bubliny */
-        height: 100%;            /* celá výška položky */
-        top: 0;                  /* začátek nahoře */
-        left: 50%;               /* horizontálně vycentrované */
-        transform: translateX(-50%); /* jen horizontální posun */
-        opacity: 0;              /* výchozí neviditelné */
-        transition: opacity 0.2s ease;
-        border-radius: 30px;     /* jemné zaoblení rohů */
-        background: linear-gradient(135deg,#d48b9c,#f3c1cc);
-    }
-
-    nav a:hover::before,
-    nav a.active::before {
-        opacity: 1;              /* při hoveru nebo aktivní položce se zobrazí */
-    }
+    overflow: hidden;
+    touch-action: none;       
+}
+    /* Skrýt bubble efekt na mobilu */
+nav a::before {
+    display: none;       /* už je */
+    opacity: 0 !important;
+    transition: none !important;   /* ← toto přidat */
+}
 }
     
 </style>
@@ -1766,38 +1758,4 @@ updateActiveMenuOnScroll(); // inicializace
 </body>
 
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
