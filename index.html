@@ -679,6 +679,132 @@ nav{
     fill: url(#gradient-contact); /* gradient */
 }
 
+    @media(max-width:768px){
+
+    /* HEADER / HERO */
+    header.banner{
+        height:60vh;           /* vyšší banner, více prostoru pro hero-box */
+        min-height:350px;      /* alespoň polovina původní PC výšky */
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        padding:0 15px;        /* menší okraje pro mobil */
+    }
+
+    .hero-box{
+        padding:40px 20px;     /* menší padding, stále dost místa pro text */
+        border-radius:30px;    /* mírně menší radius pro mobil */
+        max-width:90%;         /* aby se nevešel mimo obrazovku */
+        box-shadow:0 10px 25px rgba(0,0,0,0.08);
+    }
+
+    header h1{
+        font-size:32px;        /* zmenšení, aby se vešel na obrazovku */
+        line-height:1.2;
+        text-align:center;
+    }
+
+    header p{
+        font-size:16px;
+        margin:15px 0 25px;
+        text-align:center;
+    }
+
+    /* NAV */
+    nav ul{
+        flex-wrap:wrap;         /* menu se přizpůsobí šířce mobilu */
+    }
+
+    nav li{
+        margin:5px 4px;
+    }
+
+    nav a{
+        padding:12px 10px;     /* menší touch area */
+        font-size:14px;
+    }
+
+    /* SERVICES */
+    .services{
+        grid-template-columns:1fr;  /* 1 sloupec na mobil */
+        gap:20px;
+        padding:0 10px;
+    }
+
+    .service{
+        padding:25px 20px;
+        border-radius:25px;
+    }
+
+    .service h3{
+        font-size:22px;
+    }
+
+    .service p{
+        font-size:15px;
+    }
+
+    /* STUDIO */
+    #studio .gallery{
+        gap:15px;
+        grid-template-columns:1fr;  /* obrázky jeden pod druhým */
+    }
+
+    #studio .gallery img{
+        width:100%;
+        height:auto;
+    }
+
+    /* HORIZONTÁLNÍ GALERIE */
+    #gallery .gallery-wrapper{
+        padding:0 10px;
+    }
+
+    #gallery .gallery{
+        gap:15px;
+    }
+
+    #gallery .gallery img{
+        width:200px;
+        height:200px;
+        border-radius:20px;
+    }
+
+    .scroll-btn{
+        width:35px;
+        height:35px;
+        font-size:20px;
+    }
+
+    /* CONTACT */
+    .contact{
+        padding:20px;
+        max-width:95%;
+    }
+
+    .contact-item h3{
+        font-size:18px;
+    }
+
+    .contact-item p{
+        font-size:14px;
+    }
+
+    /* FOOTER */
+    footer{
+        font-size:14px;
+        padding:25px 15px;
+    }
+
+    /* FACEBOOK BUTTON */
+    .fb-btn{
+        display:flex;       /* lze nechat viditelné i na mobilu */
+        width:36px;
+        height:36px;
+        font-size:16px;
+        left:15px;
+    }
+}
 </style>
 </head>
 
@@ -1328,4 +1454,5 @@ window.addEventListener("load", () => {
 </div>
 
 </body>
+
 </html>
