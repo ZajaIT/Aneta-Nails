@@ -1701,14 +1701,6 @@ function updateActiveMenuOnScroll() {
     });
 }
 
-    mobileLinks.forEach(link => {
-        link.classList.remove("active");
-        if(link.getAttribute("href") === "#" + currentSectionId){
-            link.classList.add("active");
-        }
-    });
-}
-
 window.addEventListener("scroll", updateActiveMenuOnScroll);
 window.addEventListener("resize", updateActiveMenuOnScroll);
 updateActiveMenuOnScroll(); // inicializace
@@ -1734,6 +1726,7 @@ updateActiveMenuOnScroll(); // inicializace
 </body>
 
 </html>
+
 
 
 
