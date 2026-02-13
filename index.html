@@ -1285,6 +1285,18 @@ nav a::before {
     transition: none !important;   /* ← toto přidat */
     width: 70%;   /* jen na mobilu */
 }
+    /* Zmenšit bublinu na mobilu */
+@media(max-width:768px){
+  nav a::before {
+      width: 70%;          /* užší než menu */
+      height: 100%;        /* zachovat výšku */
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.7); /* stejné jako hover */
+      opacity: 0;          /* default neviditelné */
+      transition: 0.1s ease;
+  }
+}
 }
     
 </style>
@@ -1758,6 +1770,7 @@ updateActiveMenuOnScroll(); // inicializace
 </body>
 
 </html>
+
 
 
 
