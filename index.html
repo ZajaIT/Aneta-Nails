@@ -1557,6 +1557,15 @@ hamburger.addEventListener("click", () => {
         spans[2].style.transform = "rotate(0) translate(0,0)";
     }
 });
+
+    // zablokování scrollu při otevřeném menu
+    if(navMenu.classList.contains("show")){
+        document.body.style.overflow = "hidden";
+    } else {
+        document.body.style.overflow = "";
+    }
+});
+    
     let touchStartX = 0;
 let touchEndX = 0;
 
@@ -1632,6 +1641,7 @@ navMenu.querySelectorAll("a").forEach(link => {
 </body>
 
 </html>
+
 
 
 
