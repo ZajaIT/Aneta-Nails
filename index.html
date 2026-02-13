@@ -1569,23 +1569,30 @@ const hamburger = document.querySelector(".hamburger");
 const navMenu = document.querySelector("nav ul");
 
 hamburger.addEventListener("click", () => {
-    navMenu.classList.toggle("show");
-    hamburger.classList.toggle("open");
-    
-    // animace čárek
     const spans = hamburger.querySelectorAll("span");
-    if(hamburger.classList.contains("open")){
+
+    if (!hamburger.classList.contains("open")) {
+        // OTEVÍRÁNÍ → stejné tempo a efekt jako zavírání
+        navMenu.classList.add("show");
+        hamburger.classList.add("open");
+
+        // animace čárek
         spans[0].style.transform = "rotate(45deg) translate(5px, 5px)";
         spans[1].style.opacity = "0";
         spans[2].style.transform = "rotate(-45deg) translate(5px, -5px)";
-        
-        document.body.classList.add("no-scroll"); // ← tady scroll zablokujeme
+
+        document.body.classList.add("no-scroll");
+
     } else {
+        // ZAVÍRÁNÍ → necháme jak je
+        navMenu.classList.remove("show");
+        hamburger.classList.remove("open");
+
         spans[0].style.transform = "rotate(0) translate(0,0)";
         spans[1].style.opacity = "1";
         spans[2].style.transform = "rotate(0) translate(0,0)";
-        
-        document.body.classList.remove("no-scroll"); // ← tady scroll povolíme
+
+        document.body.classList.remove("no-scroll");
     }
 });
     
@@ -1694,6 +1701,7 @@ navMenu.querySelectorAll("a").forEach(link => {
 </body>
 
 </html>
+
 
 
 
