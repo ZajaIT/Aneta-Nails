@@ -1167,136 +1167,131 @@ na detail, kvalitu a individuální přístup.
 @media(max-width:768px){
 
     body{
-    padding-top:60px;
-}
+        padding-top:60px;
+    }
 
     /* NAV pruh – zachovat výšku a zarovnání */
-nav{
-    height:60px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
+    nav{
+        height:60px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
 
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
+        position:fixed;
+        top:0;
+        left:0;
+        width:100%;
 
-    background:white;
-    z-index:9999;
-}
-  /* FB tlačítko zůstává vlevo */
-  .fb-btn{
-    position:absolute;
-    left:20px;
-    top:50%;
-    transform:translateY(-50%);
-    z-index:200;
-  }
+        background:white;
+        z-index:9999;
+    }
 
-  /* Hamburger doprava */
-  .hamburger{
-    display:flex;
-    flex-direction: column;
-    justify-content: space-around;
-    width:30px;
-    height:25px;
-    background:none;
-    border:none;
-    cursor:pointer;
-    padding:0;
-    position:absolute;
-    right:20px;
-    top:50%;
-    transform: translateY(-50%);
-    z-index:200;
-  }
+    /* FB tlačítko zůstává vlevo */
+    .fb-btn{
+        position:absolute;
+        left:20px;
+        top:50%;
+        transform:translateY(-50%);
+        z-index:200;
+    }
 
-  .hamburger span{
-    display:block;
-    height:3px;
-    width:100%;
-    background: linear-gradient(135deg,#d48b9c,#f3c1cc);
-    border-radius:2px;
-    transition: all 0.4s ease;
-  }
+    /* Hamburger doprava */
+    .hamburger{
+        display:flex;
+        flex-direction: column;
+        justify-content: space-around;
+        width:30px;
+        height:25px;
+        background:none;
+        border:none;
+        cursor:pointer;
+        padding:0;
+        position:absolute;
+        right:20px;
+        top:50%;
+        transform: translateY(-50%);
+        z-index:200;
+    }
 
-  /* Menu skryté, bude se rozbalovat po kliknutí */
-  nav ul{
-    opacity: 0;
-    transform: translateY(-10px); /* mírně posunout nahoru při skrytí */
-    transition: opacity 0.4s ease, transform 0.4s ease;
-    pointer-events: none; /* aby se nedalo klikat, když je skryté */
-    flex-direction: column;
-    width:100%;
-    background: rgba(255,255,255,0.95);
-    position:absolute;
-    top:60px;
-    left:0;
-    padding:10px 0;
-    text-align:center;
-    box-shadow:0 5px 15px rgba(0,0,0,0.1);
-    backdrop-filter: blur(12px);
-    z-index:150;
-}
+    .hamburger span{
+        display:block;
+        height:3px;
+        width:100%;
+        background: linear-gradient(135deg,#d48b9c,#f3c1cc);
+        border-radius:2px;
+        transition: all 0.4s ease;
+    }
 
-nav ul.show{
-    opacity: 1;
-    transform: translateY(0); /* vrátit na místo */
-    pointer-events: auto; /* aktivní při zobrazení */
-}
+    /* Menu skryté, bude se rozbalovat po kliknutí */
+    nav ul{
+        opacity: 0;
+        transform: translateY(-10px); /* mírně posunout nahoru při skrytí */
+        transition: opacity 0.4s ease, transform 0.4s ease;
+        pointer-events: none; /* aby se nedalo klikat, když je skryté */
+        flex-direction: column;
+        width:100%;
+        background: rgba(255,255,255,0.95);
+        position:absolute;
+        top:60px;
+        left:0;
+        padding:10px 0;
+        text-align:center;
+        box-shadow:0 5px 15px rgba(0,0,0,0.1);
+        backdrop-filter: blur(12px);
+        z-index:150;
+    }
 
-  nav li{
-    margin:10px 0;
-  }
+    nav ul.show{
+        opacity: 1;
+        transform: translateY(0); /* vrátit na místo */
+        pointer-events: auto; /* aktivní při zobrazení */
+    }
 
-  nav a{
-    padding:10px 0;
-    font-size:16px;
-    display:block;
-    border-radius:30px;
-    transition: background 0.3s, color 0.3s;
-  }
+    nav li{
+        margin:10px 0;
+    }
 
-  nav a:hover{
-    background: linear-gradient(135deg,#d48b9c,#f3c1cc);
-    color:white;
-  }
+    nav a{
+        padding:10px 0;
+        font-size:16px;
+        display:block;
+        border-radius:30px;
+        transition: background 0.3s, color 0.3s;
+    }
+
+    nav a:hover{
+        background: linear-gradient(135deg,#d48b9c,#f3c1cc);
+        color:white;
+    }
 
     /* Zvýraznění aktivní položky menu na mobilu */
-nav a.active {
-    background: linear-gradient(135deg,#d48b9c,#f3c1cc);
-    color: white;
-}
-    /* Zvýraznění aktivní položky menu na mobilu */
-nav a.active {
-    background: linear-gradient(135deg,#d48b9c,#f3c1cc);
-    color: white;
-}
+    nav a.active {
+        background: linear-gradient(135deg,#d48b9c,#f3c1cc);
+        color: white;
+    }
 
     body.no-scroll {
-    overflow: hidden;
-    touch-action: none;       
-}
-    /* Skrýt bubble efekt na mobilu */
-nav a::before {
-    display: none;       /* už je */
-    opacity: 0 !important;
-    transition: none !important;   /* ← toto přidat */
-    width: 70%;   /* jen na mobilu */
-}
-    /* Zmenšit bublinu na mobilu */
-@media(max-width:768px){
-  nav a::before {
-      width: 70%;          /* užší než menu */
-      height: 100%;        /* zachovat výšku */
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) scale(0.7); /* stejné jako hover */
-      opacity: 0;          /* default neviditelné */
-      transition: 0.1s ease;
-  }
-}
+        overflow: hidden;
+        touch-action: none;       
+    }
+
+    /* --- Mobilní bubliny menu --- */
+    nav a::before {
+        width: 70%;                     /* užší než menu */
+        height: 100%;                   /* zachovat výšku */
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0.7); /* stejné jako hover */
+        opacity: 0;                     /* defaultně neviditelné */
+        transition: 0.1s ease;
+    }
+
+    /* Bublina při hoveru / aktivní položce */
+    nav a:hover::before,
+    nav a.active::before {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);  /* efekt zvětšení */
+    }
 }
     
 </style>
@@ -1770,6 +1765,7 @@ updateActiveMenuOnScroll(); // inicializace
 </body>
 
 </html>
+
 
 
 
