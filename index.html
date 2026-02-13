@@ -1275,22 +1275,23 @@ na detail, kvalitu a individuální přístup.
         touch-action: none;       
     }
 
-    /* --- Mobilní bubliny menu --- */
+    @media(max-width:768px){
+    /* Mobilní menu bubliny – užší a přes celou výšku položky */
     nav a::before {
-        width: 70%;                     /* užší než menu */
-        height: 100%;                   /* zachovat výšku */
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%) scale(0.7); /* stejné jako hover */
-        opacity: 0;                     /* defaultně neviditelné */
-        transition: 0.1s ease;
+        width: 60px;             /* šířka bubliny */
+        height: 100%;            /* celá výška položky */
+        top: 0;                  /* začátek nahoře */
+        left: 50%;               /* horizontálně vycentrované */
+        transform: translateX(-50%); /* jen horizontální posun */
+        opacity: 0;              /* výchozí neviditelné */
+        transition: opacity 0.2s ease;
+        border-radius: 30px;     /* jemné zaoblení rohů */
+        background: linear-gradient(135deg,#d48b9c,#f3c1cc);
     }
 
-    /* Bublina při hoveru / aktivní položce */
     nav a:hover::before,
     nav a.active::before {
-        opacity: 1;
-        transform: translate(-50%, -50%) scale(1);  /* efekt zvětšení */
+        opacity: 1;              /* při hoveru nebo aktivní položce se zobrazí */
     }
 }
     
@@ -1765,6 +1766,7 @@ updateActiveMenuOnScroll(); // inicializace
 </body>
 
 </html>
+
 
 
 
