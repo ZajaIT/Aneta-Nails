@@ -1263,9 +1263,22 @@ nav ul.show{
     color:white;
   }
 
+    /* Zvýraznění aktivní položky menu na mobilu */
+nav a.active {
+    background: linear-gradient(135deg,#d48b9c,#f3c1cc);
+    color: white;
+}
+    /* Zvýraznění aktivní položky menu na mobilu */
+nav a.active {
+    background: linear-gradient(135deg,#d48b9c,#f3c1cc);
+    color: white;
+}
+
     body.no-scroll {
     overflow: hidden;
     touch-action: none;
+
+        
 }
 }
     
@@ -1639,6 +1652,11 @@ document.addEventListener("click", (e) => {
     // Zavření menu po kliknutí na odkaz
 navMenu.querySelectorAll("a").forEach(link => {
     link.addEventListener("click", () => {
+        // Zvýraznění aktivní položky
+        navMenu.querySelectorAll("a").forEach(l => l.classList.remove("active"));
+        link.classList.add("active");
+
+        // Zavření menu
         navMenu.classList.remove("show");
         hamburger.classList.remove("open");
 
@@ -1672,6 +1690,7 @@ navMenu.querySelectorAll("a").forEach(link => {
 </body>
 
 </html>
+
 
 
 
