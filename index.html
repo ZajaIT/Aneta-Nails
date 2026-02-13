@@ -1172,7 +1172,14 @@ nav{
     display:flex;
     align-items:center;
     justify-content:center;
-    position:relative;
+
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+
+    background:white;
+    z-index:9999;
 }
   /* FB tlačítko zůstává vlevo */
   .fb-btn{
@@ -1568,6 +1575,7 @@ hamburger.addEventListener("click", () => {
 </body>
 
 </html>
+
 
 
 
