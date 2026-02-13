@@ -1257,6 +1257,11 @@ nav{
     background: linear-gradient(135deg,#d48b9c,#f3c1cc);
     color:white;
   }
+
+    body.no-scroll {
+    overflow: hidden;
+    touch-action: none;
+}
 }
     
 </style>
@@ -1544,17 +1549,21 @@ const navMenu = document.querySelector("nav ul");
 hamburger.addEventListener("click", () => {
     navMenu.classList.toggle("show");
     hamburger.classList.toggle("open");
-
+    
     // animace čárek
     const spans = hamburger.querySelectorAll("span");
     if(hamburger.classList.contains("open")){
         spans[0].style.transform = "rotate(45deg) translate(5px, 5px)";
         spans[1].style.opacity = "0";
         spans[2].style.transform = "rotate(-45deg) translate(5px, -5px)";
+        
+        document.body.classList.add("no-scroll"); // ← tady scroll zablokujeme
     } else {
         spans[0].style.transform = "rotate(0) translate(0,0)";
         spans[1].style.opacity = "1";
         spans[2].style.transform = "rotate(0) translate(0,0)";
+        
+        document.body.classList.remove("no-scroll"); // ← tady scroll povolíme
     }
 });
     
@@ -1633,6 +1642,7 @@ navMenu.querySelectorAll("a").forEach(link => {
 </body>
 
 </html>
+
 
 
 
