@@ -1166,7 +1166,16 @@ na detail, kvalitu a individuální přístup.
 
 @media(max-width:768px){
 
-  /* Hamburger button */
+  /* FB tlačítko zůstává vlevo */
+  .fb-btn{
+    position:absolute;
+    left:20px;
+    top:50%;
+    transform:translateY(-50%);
+    z-index:200;
+  }
+
+  /* Hamburger doprava */
   .hamburger{
     display:flex;
     flex-direction: column;
@@ -1182,7 +1191,8 @@ na detail, kvalitu a individuální přístup.
     top:50%;
     transform: translateY(-50%);
     z-index:200;
-}
+  }
+
   .hamburger span{
     display:block;
     height:3px;
@@ -1192,7 +1202,7 @@ na detail, kvalitu a individuální přístup.
     transition: all 0.4s ease;
   }
 
-  /* Skryj menu na mobilu, bude otevřené jen po kliknutí */
+  /* Menu skryté, bude se rozbalovat po kliknutí */
   nav ul{
     display:none;
     flex-direction: column;
@@ -1205,6 +1215,7 @@ na detail, kvalitu a individuální přístup.
     text-align:center;
     box-shadow:0 5px 15px rgba(0,0,0,0.1);
     backdrop-filter: blur(12px);
+    z-index:150;
   }
 
   nav ul.show{
@@ -1549,5 +1560,6 @@ hamburger.addEventListener("click", () => {
 </body>
 
 </html>
+
 
 
