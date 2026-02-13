@@ -1177,10 +1177,12 @@ na detail, kvalitu a individuální přístup.
     border:none;
     cursor:pointer;
     padding:0;
-    margin-left:10px;
+    position:absolute;
+    right:20px;
+    top:50%;
+    transform: translateY(-50%);
     z-index:200;
-  }
-
+}
   .hamburger span{
     display:block;
     height:3px;
@@ -1547,4 +1549,5 @@ hamburger.addEventListener("click", () => {
 </body>
 
 </html>
+
 
