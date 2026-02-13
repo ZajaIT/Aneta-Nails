@@ -1570,7 +1570,7 @@ navMenu.addEventListener("touchend", (e) => {
 });
 
 function handleSwipeGesture() {
-    if (touchStartX - touchEndX > 50) {  // táhnutí z prava doleva
+    if (touchEndX - touchStartX > 50) {  
         navMenu.classList.remove("show");
         hamburger.classList.remove("open");
 
@@ -1632,6 +1632,7 @@ navMenu.querySelectorAll("a").forEach(link => {
 </body>
 
 </html>
+
 
 
 
