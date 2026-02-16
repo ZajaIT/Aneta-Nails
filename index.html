@@ -1291,7 +1291,10 @@ nav a::before {
     transition: none !important;   /* ← toto přidat */
 }
 }
-    
+    body.no-scroll {
+    overflow: hidden;   /* zakáže posuvník i kolečko myši */
+    height: 100vh;      /* zajistí, že viewport se nebude posouvat */
+}
 </style>
 
 <!-- JavaScript -->
@@ -1807,6 +1810,7 @@ updateActiveMenuOnScroll(); // inicializace
 </body>
 
 </html>
+
 
 
 
