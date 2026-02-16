@@ -1502,6 +1502,34 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    // --- Swipe pro galerii Lightbox ---
+let startX = 0;
+let endX = 0;
+
+galleryLightbox.addEventListener("touchstart", (e) => {
+    startX = e.touches[0].clientX;
+});
+
+galleryLightbox.addEventListener("touchend", (e) => {
+    endX = e.changedTouches[0].clientX;
+    handleSwipe();
+});
+
+function handleSwipe() {
+    const threshold = 50; // minimální vzdálenost pro swipe
+    const diffX = endX - startX;
+
+    if (Math.abs(diffX) > threshold) {
+        if (diffX > 0) {
+            // swipe doprava → předchozí fotka
+            changeGalleryImage(currentGalleryIndex - 1);
+        } else {
+            // swipe doleva → další fotka
+            changeGalleryImage(currentGalleryIndex + 1);
+        }
+    }
+}
+    
     // --- otevření Lightboxu ---
     galleryImages.forEach((img, index) => {
         img.addEventListener("click", () => {
@@ -1763,6 +1791,7 @@ updateActiveMenuOnScroll(); // inicializace
 </body>
 
 </html>
+
 
 
 
