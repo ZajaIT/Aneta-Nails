@@ -1767,7 +1767,7 @@ function initMobileServiceCards() {
         clearTimeout(scrollTimeout);
         scrollTimeout = setTimeout(() => {
             freshCards.forEach(c => c.classList.remove("active-touch"));
-        }, 200);
+        }, 0);
     });
 
     // Klik mimo karty
@@ -1803,6 +1803,7 @@ window.addEventListener("resize", initMobileServiceCards);
 </body>
 
 </html>
+
 
 
 
