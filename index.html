@@ -1742,27 +1742,30 @@ updateActiveMenuOnScroll(); // inicializace
 if (window.innerWidth <= 768) {
     const cards = document.querySelectorAll(".service");
 
-    // --- Toggle efekt při tapu ---
+    // Toggle efekt při tapu
     cards.forEach(card => {
-        card.addEventListener("click", e => {
+        card.addEventListener("click", () => {
             if (card.classList.contains("active-touch")) {
+                // pokud už je aktivní, vypni efekt
                 card.classList.remove("active-touch");
             } else {
                 // nejprve vypnout všechny ostatní
                 cards.forEach(c => c.classList.remove("active-touch"));
+                // aktivuj kliknutou
                 card.classList.add("active-touch");
             }
         });
     });
 
-    // --- Vypnutí efektu při scrollu ---
+    // Vypnutí efektu při scrollu (pokud chceš)
     let scrollTimeout;
     window.addEventListener("scroll", () => {
         clearTimeout(scrollTimeout);
         scrollTimeout = setTimeout(() => {
             cards.forEach(c => c.classList.remove("active-touch"));
-        }, 50); // malý timeout, aby se efekt vyresetoval po dokončení scrollu
+        }, 200); // 200ms po scrollu se efekt vypne
     });
+}
 
     // --- Klik mimo karty (doporučeno) ---
     document.addEventListener("click", e => {
@@ -1793,6 +1796,7 @@ if (window.innerWidth <= 768) {
 </body>
 
 </html>
+
 
 
 
