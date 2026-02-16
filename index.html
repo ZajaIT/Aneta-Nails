@@ -1740,15 +1740,12 @@ updateActiveMenuOnScroll(); // inicializace
 
 // ===== Mobilní interakce pro cihličky Služby =====
 if (window.innerWidth <= 768) {
-
     const cards = document.querySelectorAll(".service");
-    let startY = 0;
 
-    // Tap na kartu
+    // --- Toggle efekt při tapu ---
     cards.forEach(card => {
         card.addEventListener("click", e => {
-            // toggle efekt
-            if(card.classList.contains("active-touch")){
+            if (card.classList.contains("active-touch")) {
                 card.classList.remove("active-touch");
             } else {
                 // nejprve vypnout všechny ostatní
@@ -1758,27 +1755,23 @@ if (window.innerWidth <= 768) {
         });
     });
 
-    // Detekce scroll gesta
-    document.addEventListener("touchstart", e => {
-        startY = e.touches[0].clientY;
-    });
-
-    document.addEventListener("touchmove", e => {
-        const diff = Math.abs(e.touches[0].clientY - startY);
-        if(diff > 10){
-            // při scrollu rovnou zruš všechny efekty
+    // --- Vypnutí efektu při scrollu ---
+    let scrollTimeout;
+    window.addEventListener("scroll", () => {
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => {
             cards.forEach(c => c.classList.remove("active-touch"));
-        }
+        }, 50); // malý timeout, aby se efekt vyresetoval po dokončení scrollu
     });
 
-    // Tap mimo karty = vypnout všechny efekty
+    // --- Klik mimo karty (doporučeno) ---
     document.addEventListener("click", e => {
-        if(!e.target.closest(".service")){
+        if (!e.target.closest(".service")) {
             cards.forEach(c => c.classList.remove("active-touch"));
         }
     });
-
 }
+    
 </script>
 
 <!-- Lightbox Studio -->
@@ -1800,6 +1793,7 @@ if (window.innerWidth <= 768) {
 </body>
 
 </html>
+
 
 
 
