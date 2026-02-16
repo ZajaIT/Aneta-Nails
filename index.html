@@ -1761,10 +1761,18 @@ function initMobileServiceCards() {
         });
     });
 
-    // Vypnutí efektu při scrollu
-window.addEventListener("scroll", () => {
-    cards.forEach(c => c.classList.remove("active-touch")); // okamžité
-});
+    // Vypnutí efektu při scrollu jen pokud karta není vidět
+    function handleScroll() {
+        freshCards.forEach(card => {
+            const rect = card.getBoundingClientRect();
+            // pokud karta není alespoň z poloviny vidět ve viewportu, vypni efekt
+            if (rect.bottom < 0 || rect.top > window.innerHeight) {
+                card.classList.remove("active-touch");
+            }
+        });
+    }
+
+    window.addEventListener("scroll", handleScroll);
 
     // Klik mimo karty
     document.addEventListener("click", e => {
@@ -1799,6 +1807,7 @@ window.addEventListener("resize", initMobileServiceCards);
 </body>
 
 </html>
+
 
 
 
