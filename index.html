@@ -1415,6 +1415,7 @@ function updateLightboxArrowStates() {
         currentIndex = index;
         lightboxImg.src = studioImages[currentIndex].src;
         lightbox.style.display = "flex";
+        document.body.classList.add("no-scroll");
         setTimeout(() => {
             lightbox.classList.add("show");
             updateLightboxArrowStates(); // ← přidáno
@@ -1425,6 +1426,7 @@ function updateLightboxArrowStates() {
     // --- zavření Lightboxu ---
     const closeLightbox = () => {
         lightbox.style.display = "none";
+        document.body.classList.remove("no-scroll");
     };
 
     closeBtn.addEventListener("click", ()=>{
@@ -1793,6 +1795,7 @@ updateActiveMenuOnScroll(); // inicializace
 </body>
 
 </html>
+
 
 
 
