@@ -1764,11 +1764,8 @@ function initMobileServiceCards() {
     // Vypnutí efektu při scrollu
     let scrollTimeout;
     window.addEventListener("scroll", () => {
-        clearTimeout(scrollTimeout);
-        scrollTimeout = setTimeout(() => {
-            freshCards.forEach(c => c.classList.remove("active-touch"));
-        }, 0);
-    });
+    cards.forEach(c => c.classList.remove("active-touch")); // okamžité
+});
 
     // Klik mimo karty
     document.addEventListener("click", e => {
@@ -1803,6 +1800,7 @@ window.addEventListener("resize", initMobileServiceCards);
 </body>
 
 </html>
+
 
 
 
