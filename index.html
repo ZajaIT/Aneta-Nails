@@ -1737,19 +1737,16 @@ window.addEventListener("scroll", updateActiveMenuOnScroll);
 window.addEventListener("resize", updateActiveMenuOnScroll);
 updateActiveMenuOnScroll(); // inicializace
 
+
 // ===== Mobilní interakce pro cihličky Služby =====
 if (window.innerWidth <= 768) {
 
     const cards = document.querySelectorAll(".service");
     let startY = 0;
-    let isScrolling = false;
 
     // Tap na kartu
     cards.forEach(card => {
         card.addEventListener("click", e => {
-
-            if (isScrolling) return; // pokud scrolluješ, ignoruj klik
-
             // toggle efekt
             if(card.classList.contains("active-touch")){
                 card.classList.remove("active-touch");
@@ -1761,17 +1758,15 @@ if (window.innerWidth <= 768) {
         });
     });
 
-    // Detekce scroll gesta (touch)
+    // Detekce scroll gesta
     document.addEventListener("touchstart", e => {
         startY = e.touches[0].clientY;
-        isScrolling = false;
     });
 
     document.addEventListener("touchmove", e => {
         const diff = Math.abs(e.touches[0].clientY - startY);
         if(diff > 10){
-            isScrolling = true;
-            // scroll = vypnout všechny efekty
+            // při scrollu rovnou zruš všechny efekty
             cards.forEach(c => c.classList.remove("active-touch"));
         }
     });
@@ -1805,6 +1800,7 @@ if (window.innerWidth <= 768) {
 </body>
 
 </html>
+
 
 
 
