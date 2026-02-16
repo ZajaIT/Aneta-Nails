@@ -807,6 +807,19 @@ nav{
         left:15px;
     }
 }
+    @media(max-width:768px){
+
+    /* --- Mobil: efekt služeb při tapu --- */
+    .service.active {
+        transform: scale(1.05);
+    }
+
+    .service.active h3 {
+        color: #d48b9c;
+    }
+
+}
+    
 </style>
 </head>
 
@@ -1737,6 +1750,26 @@ function updateActiveMenuOnScroll() {
 window.addEventListener("scroll", updateActiveMenuOnScroll);
 window.addEventListener("resize", updateActiveMenuOnScroll);
 updateActiveMenuOnScroll(); // inicializace
+
+    // --- Mobil: toggle efekt služeb ---
+if (window.innerWidth <= 768) { // jen mobil
+    const serviceBoxes = document.querySelectorAll(".service");
+
+    serviceBoxes.forEach(box => {
+        box.addEventListener("click", (e) => {
+            // jestli je už aktivní
+            const isActive = box.classList.contains("active");
+
+            // nejdřív všechny odznačit
+            serviceBoxes.forEach(b => b.classList.remove("active"));
+
+            // pokud nebyla aktivní, zapni efekt
+            if (!isActive) {
+                box.classList.add("active");
+            }
+        });
+    });
+}
     
 </script>
 
@@ -1759,5 +1792,6 @@ updateActiveMenuOnScroll(); // inicializace
 </body>
 
 </html>
+
 
 
