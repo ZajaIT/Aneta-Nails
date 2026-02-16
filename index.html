@@ -751,15 +751,36 @@ nav{
     }
 
     /* STUDIO */
-    #studio .gallery{
-        gap:15px;
-        grid-template-columns:1fr;  /* obrázky jeden pod druhým */
+    #studio .gallery {
+        display: flex;            /* řádek fotek */
+        gap: 15px;
+        overflow-x: auto;         /* horizontální scroll */
+        scroll-behavior: smooth;  /* plynulý scroll */
+        padding: 10px 0;
+        cursor: grab;             /* ukáže, že jde táhnout */
     }
 
-    #studio .gallery img{
-        width:100%;
-        height:auto;
+    #studio .gallery img {
+        flex: 0 0 auto;           /* žádné zmenšování/roztažení */
+        width: 200px;             /* stejná velikost jako galerie */
+        height: 200px;
+        border-radius: 20px;
+        object-fit: cover;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        cursor: pointer;
+        user-select: none;
     }
+
+    /* skrýt scroll bar */
+    #studio .gallery::-webkit-scrollbar {
+        display: none;
+    }
+    #studio .gallery {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+}
 
     /* HORIZONTÁLNÍ GALERIE */
     #gallery .gallery-wrapper{
@@ -1303,6 +1324,39 @@ const gallery = document.querySelector("#gallery .gallery");
 const btnLeft = document.querySelector(".scroll-btn.left");
 const btnRight = document.querySelector(".scroll-btn.right");
 
+    const studioGallery = document.querySelector("#studio .gallery");
+
+// --- Drag prstem / myší pro Studio ---
+let isStudioDown = false;
+let studioStartX;
+let studioScrollLeft;
+
+studioGallery.addEventListener("mousedown", (e) => {
+    if(window.innerWidth > 768) return; // jen mobil
+    isStudioDown = true;
+    studioStartX = e.clientX;
+    studioScrollLeft = studioGallery.scrollLeft;
+    studioGallery.style.cursor = "grabbing";
+    e.preventDefault();
+});
+
+studioGallery.addEventListener("mouseup", () => {
+    isStudioDown = false;
+    studioGallery.style.cursor = "grab";
+});
+
+studioGallery.addEventListener("mouseleave", () => {
+    isStudioDown = false;
+    studioGallery.style.cursor = "grab";
+});
+
+studioGallery.addEventListener("mousemove", (e) => {
+    if (!isStudioDown) return;
+    e.preventDefault();
+    const deltaX = e.clientX - studioStartX;
+    studioGallery.scrollLeft = studioScrollLeft - deltaX;
+});
+
 // --- Šipky ---
 btnLeft.addEventListener("click", () => {
     gallery.scrollBy({ left: -300, behavior: "smooth" });
@@ -1839,6 +1893,7 @@ updateActiveMenuOnScroll(); // inicializace
 </body>
 
 </html>
+
 
 
 
