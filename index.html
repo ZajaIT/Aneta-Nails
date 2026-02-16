@@ -1741,9 +1741,25 @@ updateActiveMenuOnScroll(); // inicializace
 if (window.innerWidth <= 768) {
 
     const cards = document.querySelectorAll(".service");
-
+    
     let startY = 0;
     let isScrolling = false;
+    cards.forEach(card => {
+    card.addEventListener("click", () => {
+        // Pokud je už tato cihlička aktivní → vypneme efekt
+        if (activeCard === card) {
+            card.classList.remove("active");
+            activeCard = null;
+        } else {
+            // Pokud je jiná cihlička aktivní → vypneme ji
+            if (activeCard) activeCard.classList.remove("active");
+            
+            // Zapneme tuto cihličku
+            card.classList.add("active");
+            activeCard = card;
+        }
+    });
+});
 
     // Detekce scroll gesta
     document.addEventListener("touchstart", e => {
@@ -1811,6 +1827,7 @@ if (window.innerWidth <= 768) {
 </body>
 
 </html>
+
 
 
 
