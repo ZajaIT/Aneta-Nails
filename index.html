@@ -1424,14 +1424,26 @@ function updateLightboxArrowStates() {
 });;
 
     // --- zavření Lightboxu ---
-    const closeLightbox = () => {
-        lightbox.style.display = "none";
-        document.body.classList.remove("no-scroll");
-    };
+    // --- zavření Lightboxu ---
+const closeLightbox = () => {
+    lightbox.classList.remove("show");          // fade efekt
+    setTimeout(() => {
+        lightbox.style.display = "none";       // schovat po animaci
+        // Odstraníme no-scroll jen pokud není otevřené mobilní menu
+        if(!navMenu.classList.contains("show")){
+            document.body.classList.remove("no-scroll");
+        }
+    }, 300);
+};
 
-    closeBtn.addEventListener("click", ()=>{
-    lightbox.classList.remove("show");
-    setTimeout(()=>{ lightbox.style.display="none"; }, 300);
+// klik na křížek
+closeBtn.addEventListener("click", closeLightbox);
+
+// klik mimo obrázek
+lightbox.addEventListener("click", e => {
+    if(e.target === lightbox){
+        closeLightbox();
+    }
 });
 
 lightbox.addEventListener("click", e=>{
@@ -1795,6 +1807,7 @@ updateActiveMenuOnScroll(); // inicializace
 </body>
 
 </html>
+
 
 
 
