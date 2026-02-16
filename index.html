@@ -906,13 +906,6 @@ na detail, kvalitu a individuální přístup.
 
 <!-- GALLERY -->
 <section id="gallery">
-    <!-- Lightbox pro Galerie -->
-<div id="galleryLightbox">
-  <span id="galleryClose">&times;</span>
-  <img id="galleryLightboxImg" src="" alt="Galerie">
-  <button id="galleryPrev" class="scroll-btn left">&#10094;</button>
-  <button id="galleryNext" class="scroll-btn right">&#10095;</button>
-</div>
   <h2>Galerie</h2>
 
   <div class="gallery-wrapper">
@@ -1287,10 +1280,9 @@ nav a.active {
     color: white;
 }
 
-    html.no-scroll, 
     body.no-scroll {
     overflow: hidden;
-    touch-action: none; /* zabrání i swipe na mobilu */
+    touch-action: none;       
 }
     /* Skrýt bubble efekt na mobilu */
 nav a::before {
@@ -1547,7 +1539,6 @@ function handleSwipe() {
             galleryLightboxImg.src = galleryImages[currentGalleryIndex].src;
             galleryLightbox.style.display = "flex";
             document.body.classList.add("no-scroll");
-            document.documentElement.classList.add("no-scroll");
             setTimeout(() => {
                 galleryLightbox.classList.add("show");
                 updateGalleryLightboxArrowStates(); // ← přidáno
@@ -1561,7 +1552,6 @@ function handleSwipe() {
     setTimeout(() => {
         galleryLightbox.style.display = "none";
         document.body.classList.remove("no-scroll"); // obnoví scroll
-        document.documentElement.classList.remove("no-scroll");
     }, 300);
 };
 
@@ -1805,7 +1795,6 @@ updateActiveMenuOnScroll(); // inicializace
 </body>
 
 </html>
-
 
 
 
