@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="cs">
 <head>
@@ -1736,42 +1737,6 @@ function updateActiveMenuOnScroll() {
 window.addEventListener("scroll", updateActiveMenuOnScroll);
 window.addEventListener("resize", updateActiveMenuOnScroll);
 updateActiveMenuOnScroll(); // inicializace
-
-
-// ===== Mobilní interakce pro cihličky Služby =====
-function initMobileServiceCards() {
-    if (window.innerWidth > 768) return; // jen mobil
-
-    const cards = document.querySelectorAll(".service");
-
-    // odeber všechny staré posluchače, aby se nenasčítávaly při resize
-    cards.forEach(card => card.replaceWith(card.cloneNode(true)));
-
-    const freshCards = document.querySelectorAll(".service");
-
-    // Toggle efekt při tapu
-    freshCards.forEach(card => {
-        card.addEventListener("click", () => {
-            if (card.classList.contains("active-touch")) {
-                card.classList.remove("active-touch");
-            } else {
-                freshCards.forEach(c => c.classList.remove("active-touch"));
-                card.classList.add("active-touch");
-            }
-        });
-    });
-
-    // Klik mimo karty
-    document.addEventListener("click", e => {
-        if (!e.target.closest(".service")) {
-            freshCards.forEach(c => c.classList.remove("active-touch"));
-        }
-    });
-}
-
-// inicializace při načtení a resize
-window.addEventListener("DOMContentLoaded", initMobileServiceCards);
-window.addEventListener("resize", initMobileServiceCards);
     
 </script>
 
@@ -1794,18 +1759,5 @@ window.addEventListener("resize", initMobileServiceCards);
 </body>
 
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
