@@ -1739,40 +1739,48 @@ updateActiveMenuOnScroll(); // inicializace
 
 
 // ===== Mobilní interakce pro cihličky Služby =====
-if (window.innerWidth <= 768) {
+function initMobileServiceCards() {
+    if (window.innerWidth > 768) return; // jen mobil
+
     const cards = document.querySelectorAll(".service");
 
+    // odeber všechny staré posluchače, aby se nenasčítávaly při resize
+    cards.forEach(card => card.replaceWith(card.cloneNode(true)));
+
+    const freshCards = document.querySelectorAll(".service");
+
     // Toggle efekt při tapu
-    cards.forEach(card => {
+    freshCards.forEach(card => {
         card.addEventListener("click", () => {
             if (card.classList.contains("active-touch")) {
-                // pokud už je aktivní, vypni efekt
                 card.classList.remove("active-touch");
             } else {
-                // nejprve vypnout všechny ostatní
-                cards.forEach(c => c.classList.remove("active-touch"));
-                // aktivuj kliknutou
+                freshCards.forEach(c => c.classList.remove("active-touch"));
                 card.classList.add("active-touch");
             }
         });
     });
 
-    // Vypnutí efektu při scrollu (pokud chceš)
+    // Vypnutí efektu při scrollu
     let scrollTimeout;
     window.addEventListener("scroll", () => {
         clearTimeout(scrollTimeout);
         scrollTimeout = setTimeout(() => {
-            cards.forEach(c => c.classList.remove("active-touch"));
-        }, 200); // 200ms po scrollu se efekt vypne
+            freshCards.forEach(c => c.classList.remove("active-touch"));
+        }, 200);
     });
 
-    // --- Klik mimo karty (doporučeno) ---
+    // Klik mimo karty
     document.addEventListener("click", e => {
         if (!e.target.closest(".service")) {
-            cards.forEach(c => c.classList.remove("active-touch"));
+            freshCards.forEach(c => c.classList.remove("active-touch"));
         }
     });
-} // <-- tady je správně uzavřen if
+}
+
+// inicializace při načtení a resize
+window.addEventListener("DOMContentLoaded", initMobileServiceCards);
+window.addEventListener("resize", initMobileServiceCards);
     
 </script>
 
@@ -1795,6 +1803,7 @@ if (window.innerWidth <= 768) {
 </body>
 
 </html>
+
 
 
 
