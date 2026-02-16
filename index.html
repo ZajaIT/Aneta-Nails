@@ -1536,6 +1536,7 @@ function handleSwipe() {
             currentGalleryIndex = index;
             galleryLightboxImg.src = galleryImages[currentGalleryIndex].src;
             galleryLightbox.style.display = "flex";
+            document.body.style.overflow = "hidden"; // zablokuje scroll stránky
             setTimeout(() => {
                 galleryLightbox.classList.add("show");
                 updateGalleryLightboxArrowStates(); // ← přidáno
@@ -1548,6 +1549,7 @@ function handleSwipe() {
         galleryLightbox.classList.remove("show");
         setTimeout(() => {
             galleryLightbox.style.display = "none";
+            document.body.style.overflow = ""; // obnoví scroll
         }, 300);
     };
 
@@ -1791,6 +1793,7 @@ updateActiveMenuOnScroll(); // inicializace
 </body>
 
 </html>
+
 
 
 
