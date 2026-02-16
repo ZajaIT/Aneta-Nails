@@ -1394,6 +1394,35 @@ document.addEventListener("DOMContentLoaded", () => {
     const nextBtn = document.getElementById("studioNext");
 
     let currentIndex = 0;
+    // --- SWIPE PRO MOBIL (Studio Lightbox) ---
+let studioTouchStartX = 0;
+let studioTouchEndX = 0;
+
+lightbox.addEventListener("touchstart", (e) => {
+    if(window.innerWidth > 768) return; // jen mobil
+    studioTouchStartX = e.touches[0].clientX;
+});
+
+lightbox.addEventListener("touchend", (e) => {
+    if(window.innerWidth > 768) return; // jen mobil
+    studioTouchEndX = e.changedTouches[0].clientX;
+    handleStudioSwipe();
+});
+
+function handleStudioSwipe() {
+    const threshold = 50; // minimální vzdálenost pro swipe
+    const diffX = studioTouchEndX - studioTouchStartX;
+
+    if(Math.abs(diffX) > threshold){
+        if(diffX > 0){
+            // swipe doprava → předchozí fotka
+            changeImage(currentIndex - 1);
+        } else {
+            // swipe doleva → další fotka
+            changeImage(currentIndex + 1);
+        }
+    }
+}
 
     // --- otevření Lightboxu ---
     
@@ -1810,6 +1839,7 @@ updateActiveMenuOnScroll(); // inicializace
 </body>
 
 </html>
+
 
 
 
