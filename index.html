@@ -1765,7 +1765,6 @@ if (window.innerWidth <= 768) {
             cards.forEach(c => c.classList.remove("active-touch"));
         }, 200); // 200ms po scrollu se efekt vypne
     });
-}
 
     // --- Klik mimo karty (doporučeno) ---
     document.addEventListener("click", e => {
@@ -1773,7 +1772,7 @@ if (window.innerWidth <= 768) {
             cards.forEach(c => c.classList.remove("active-touch"));
         }
     });
-}
+} // <-- tady je správně uzavřen if
     
 </script>
 
@@ -1796,6 +1795,7 @@ if (window.innerWidth <= 768) {
 </body>
 
 </html>
+
 
 
 
