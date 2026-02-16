@@ -570,9 +570,12 @@ nav{
 
 /* prostor před první a za poslední fotkou */
 #gallery .gallery::before,
+    content: "";
+    flex: 0 0 0;
+    
 #gallery .gallery::after {
     content: "";
-    flex: 0 0 20px;
+    flex: 0 0 10px;
 }
 
 /* Skrýt scroll bar */
@@ -1759,5 +1762,6 @@ updateActiveMenuOnScroll(); // inicializace
 </body>
 
 </html>
+
 
 
