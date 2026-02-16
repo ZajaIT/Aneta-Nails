@@ -1287,9 +1287,10 @@ nav a.active {
     color: white;
 }
 
+    html.no-scroll, 
     body.no-scroll {
     overflow: hidden;
-    touch-action: none;       
+    touch-action: none; /* zabrání i swipe na mobilu */
 }
     /* Skrýt bubble efekt na mobilu */
 nav a::before {
@@ -1546,6 +1547,7 @@ function handleSwipe() {
             galleryLightboxImg.src = galleryImages[currentGalleryIndex].src;
             galleryLightbox.style.display = "flex";
             document.body.classList.add("no-scroll");
+            document.documentElement.classList.add("no-scroll");
             setTimeout(() => {
                 galleryLightbox.classList.add("show");
                 updateGalleryLightboxArrowStates(); // ← přidáno
@@ -1559,6 +1561,7 @@ function handleSwipe() {
     setTimeout(() => {
         galleryLightbox.style.display = "none";
         document.body.classList.remove("no-scroll"); // obnoví scroll
+        document.documentElement.classList.remove("no-scroll");
     }, 300);
 };
 
@@ -1802,6 +1805,7 @@ updateActiveMenuOnScroll(); // inicializace
 </body>
 
 </html>
+
 
 
 
