@@ -748,7 +748,9 @@ nav{
         font-size:15px;
     }
 
-    /* STUDIO */
+    @media(max-width:768px){
+
+    /* --- STUDIO --- */
     #studio .gallery {
         display: flex;            
         gap: 15px;
@@ -792,17 +794,17 @@ nav{
         user-select: none;       
     }
 
-    /* --- Symetrické mezery před první a za poslední fotkou --- */
+    /* --- Mezera jen za poslední fotkou --- */
     #studio .gallery::before,
     #gallery .gallery::before {
         content: "";
-        flex: 0 0 10px; /* mezera před první fotkou */
+        flex: 0 0 0; /* úplně vlevo žádná mezera */
     }
 
     #studio .gallery::after,
     #gallery .gallery::after {
         content: "";
-        flex: 0 0 10px; /* mezera za poslední fotkou */
+        flex: 0 0 10px; /* mezera jen za poslední fotkou */
     }
 
     /* Skrýt scroll bar */
@@ -1928,6 +1930,7 @@ updateActiveMenuOnScroll(); // inicializace
 </body>
 
 </html>
+
 
 
 
