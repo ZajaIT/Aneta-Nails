@@ -1434,118 +1434,12 @@ studioGallery.addEventListener("mousemove", (e) => {
 });
 
 // --- Šipky ---
-const galleryImages = gallery.querySelectorAll("img");
-const galleryGap = 15; // nastav stejný jako v CSS gap: 15px
-const galleryImageWidth = galleryImages[0].offsetWidth;
-
-function scrollToNext() {
-    const galleryWidth = gallery.clientWidth;
-    const scrollLeft = gallery.scrollLeft;
-    const imgs = Array.from(gallery.querySelectorAll("img"));
-
-    const nextImg = imgs.find(img => img.offsetLeft + img.offsetWidth/2 > scrollLeft + galleryWidth/2);
-    if(nextImg){
-        const targetScroll = nextImg.offsetLeft + nextImg.offsetWidth/2 - galleryWidth/2;
-        gallery.scrollTo({ left: targetScroll, behavior: "smooth" });
-    }
-}
-
-function scrollToPrev() {
-    const galleryWidth = gallery.clientWidth;
-    const scrollLeft = gallery.scrollLeft;
-    const imgs = Array.from(gallery.querySelectorAll("img"));
-
-    const prevImgs = imgs.filter(img => img.offsetLeft + img.offsetWidth/2 < scrollLeft + galleryWidth/2);
-    const prevImg = prevImgs[prevImgs.length-1];
-    if(prevImg){
-        const targetScroll = prevImg.offsetLeft + prevImg.offsetWidth/2 - galleryWidth/2;
-        gallery.scrollTo({ left: targetScroll, behavior: "smooth" });
-    }
-}
-
-// --- ŠIPKY jen pro mobil (≤768px) ---
 btnLeft.addEventListener("click", () => {
-    if(window.innerWidth > 768) return; // desktop necháme beze změny
-
-    const galleryRect = gallery.getBoundingClientRect();
-    const leftArrowRect = btnLeft.getBoundingClientRect();
-    const rightArrowRect = btnRight.getBoundingClientRect();
-    const galleryCenter = (leftArrowRect.right + rightArrowRect.left) / 2 - galleryRect.left;
-
-    let closestIndex = 0;
-    let minDiff = Infinity;
-
-    galleryImages.forEach((img, i) => {
-        const imgRect = img.getBoundingClientRect();
-        const imgCenter = imgRect.left + imgRect.width/2 - galleryRect.left;
-        const diff = Math.abs(imgCenter - galleryCenter);
-        if(diff < minDiff){
-            minDiff = diff;
-            closestIndex = i;
-        }
-    });
-
-    const targetImg = galleryImages[Math.max(0, closestIndex - 1)];
-    gallery.scrollTo({
-        left: targetImg.offsetLeft - gallery.clientWidth/2 + targetImg.offsetWidth/2,
-        behavior: "smooth"
-    });
+    gallery.scrollBy({ left: -300, behavior: "smooth" });
     setTimeout(updateArrowStates, 310);
 });
-
 btnRight.addEventListener("click", () => {
-    if(window.innerWidth > 768) return; // desktop necháme beze změny
-
-    const galleryRect = gallery.getBoundingClientRect();
-    const leftArrowRect = btnLeft.getBoundingClientRect();
-    const rightArrowRect = btnRight.getBoundingClientRect();
-    const galleryCenter = (leftArrowRect.right + rightArrowRect.left) / 2 - galleryRect.left;
-
-    let closestIndex = 0;
-    let minDiff = Infinity;
-
-    galleryImages.forEach((img, i) => {
-        const imgRect = img.getBoundingClientRect();
-        const imgCenter = imgRect.left + imgRect.width/2 - galleryRect.left;
-        const diff = Math.abs(imgCenter - galleryCenter);
-        if(diff < minDiff){
-            minDiff = diff;
-            closestIndex = i;
-        }
-    });
-
-    const targetImg = galleryImages[Math.min(galleryImages.length - 1, closestIndex + 1)];
-    gallery.scrollTo({
-        left: targetImg.offsetLeft - gallery.clientWidth/2 + targetImg.offsetWidth/2,
-        behavior: "smooth"
-    });
-    setTimeout(updateArrowStates, 310);
-});
-
-btnRight.addEventListener("click", () => {
-    if(window.innerWidth > 768) return; // desktop necháme beze změny
-
-    const galleryRect = gallery.getBoundingClientRect();
-    const galleryCenter = galleryRect.width / 2;
-
-    let closestIndex = 0;
-    let minDiff = Infinity;
-
-    galleryImages.forEach((img, i) => {
-        const imgRect = img.getBoundingClientRect();
-        const imgCenter = imgRect.left + imgRect.width/2 - galleryRect.left;
-        const diff = Math.abs(imgCenter - galleryCenter);
-        if(diff < minDiff){
-            minDiff = diff;
-            closestIndex = i;
-        }
-    });
-
-    const targetImg = galleryImages[Math.min(galleryImages.length - 1, closestIndex + 1)];
-    gallery.scrollTo({
-        left: targetImg.offsetLeft - gallery.clientWidth/2 + targetImg.offsetWidth/2,
-        behavior: "smooth"
-    });
+    gallery.scrollBy({ left: 300, behavior: "smooth" });
     setTimeout(updateArrowStates, 310);
 });
 
@@ -2123,7 +2017,5 @@ document.addEventListener("DOMContentLoaded", () => {
 </body>
 
 </html>
-
-
 
 
