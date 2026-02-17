@@ -872,10 +872,7 @@ nav{
 }
     @media(max-width:768px){
     /* Šipky pro Studio sekci */
-        #studio .gallery-wrapper {
-    position: relative;  /* aby šipky mohly být absolutně uvnitř */
-}
-    #studio .gallery-wrapper .scroll-btn {
+    #studio .scroll-btn {
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
@@ -898,11 +895,11 @@ nav{
         background: rgba(212,139,156,0.6);
     }
 
-    #studio .gallery-wrapper .scroll-btn.left {
+    #studio .scroll-btn.left {
         left: 10px;
     }
 
-    #studio .gallery-wrapper .scroll-btn.right {
+    #studio .scroll-btn.right {
         right: 10px;
     }
 }
@@ -989,14 +986,12 @@ na detail, kvalitu a individuální přístup.
 
 <h2>Studio</h2>
 
-<div class="gallery-wrapper">
-  <button class="scroll-btn left">&#10094;</button>
-  <div class="gallery">
-    <img src="studio2.jpg" alt="Studio">
-    <img src="studio1.jpg" alt="Studio">
-    <img src="studio3.jpg" alt="Studio">
-  </div>
-  <button class="scroll-btn right">&#10095;</button>
+<div class="gallery">
+
+<img src="studio2.jpg" alt="Studio">
+<img src="studio1.jpg" alt="Studio">
+<img src="studio3.jpg" alt="Studio">
+
 </div>
 
 </section>
@@ -2018,7 +2013,6 @@ document.addEventListener("DOMContentLoaded", () => {
 </body>
 
 </html>
-
 
 
 
