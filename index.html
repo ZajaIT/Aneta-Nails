@@ -769,6 +769,16 @@ nav{
         cursor: pointer;
         user-select: none;
     }
+        /* pseudo-elementy pro přesné odsazení fotek */
+#studio .gallery::before {
+    content: "";
+    flex: 0 0 0;       /* první fotka sedí úplně vlevo */
+}
+
+#studio .gallery::after {
+    content: "";
+    flex: 0 0 10px;    /* malá mezera za poslední fotkou */
+}
 
     /* skrýt scroll bar */
     #studio .gallery::-webkit-scrollbar {
@@ -1891,6 +1901,7 @@ updateActiveMenuOnScroll(); // inicializace
 </body>
 
 </html>
+
 
 
 
