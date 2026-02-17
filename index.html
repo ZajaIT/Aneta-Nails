@@ -8,13 +8,26 @@
 <link rel="icon" type="image/png" href="favicon.png?v=1">
 
 <!-- Preload fontů -->
-<link rel="preload" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Montserrat:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<link rel="preload" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<!-- Google Fonts s fallback fonty a display=swap -->
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+<link rel="preload" href="banner.png" as="image">
 
 <!-- Preload banneru -->
 <link rel="preload" href="banner.png" as="image">
 
 <style>
+/* --- Fallback fonty pro rychlé vykreslení textu --- */
+body {
+  font-family: 'Montserrat', Arial, sans-serif; /* fallback pro běžný text */
+}
+
+h1, h2, h3 {
+  font-family: 'Playfair Display', Georgia, serif; /* fallback pro nadpisy */
+}
+    
 /* --- Poladěný header pro rychlé vykreslení --- */
 header.banner {
     min-height: 89vh;
@@ -2028,6 +2041,7 @@ document.addEventListener("DOMContentLoaded", () => {
 </body>
 
 </html>
+
 
 
 
