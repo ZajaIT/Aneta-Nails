@@ -952,12 +952,14 @@ na detail, kvalitu a individuální přístup.
 
 <h2>Studio</h2>
 
-<div class="gallery">
-
-<img src="studio2.jpg" alt="Studio">
-<img src="studio1.jpg" alt="Studio">
-<img src="studio3.jpg" alt="Studio">
-
+<div class="gallery-wrapper">
+    <button class="scroll-btn left">&#10094;</button>
+    <div class="gallery">
+        <img src="studio2.jpg" alt="Studio">
+        <img src="studio1.jpg" alt="Studio">
+        <img src="studio3.jpg" alt="Studio">
+    </div>
+    <button class="scroll-btn right">&#10095;</button>
 </div>
 
 </section>
@@ -1966,6 +1968,16 @@ updateActiveMenuOnScroll(); // inicializace
     // scroll listener
     studioGallery.addEventListener("scroll", updateStudioArrowStates);
 }
+    const studioBtnLeft = document.querySelector("#studio .scroll-btn.left");
+const studioBtnRight = document.querySelector("#studio .scroll-btn.right");
+
+// Šipky pro Studio
+studioBtnLeft.addEventListener("click", () => {
+    studioGallery.scrollBy({ left: -300, behavior: "smooth" });
+});
+studioBtnRight.addEventListener("click", () => {
+    studioGallery.scrollBy({ left: 300, behavior: "smooth" });
+});
 </script>
 
 <!-- Lightbox Studio -->
@@ -1987,6 +1999,7 @@ updateActiveMenuOnScroll(); // inicializace
 </body>
 
 </html>
+
 
 
 
