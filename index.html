@@ -1436,12 +1436,17 @@ studioGallery.addEventListener("mousemove", (e) => {
 });
 
 // --- Šipky ---
+const galleryImages = gallery.querySelectorAll("img");
+const galleryGap = 15; // nastav stejný jako v CSS gap: 15px
+const galleryImageWidth = galleryImages[0].offsetWidth;
+
 btnLeft.addEventListener("click", () => {
-    gallery.scrollBy({ left: -300, behavior: "smooth" });
+    gallery.scrollBy({ left: -(galleryImageWidth + galleryGap), behavior: "smooth" });
     setTimeout(updateArrowStates, 310);
 });
+
 btnRight.addEventListener("click", () => {
-    gallery.scrollBy({ left: 300, behavior: "smooth" });
+    gallery.scrollBy({ left: galleryImageWidth + galleryGap, behavior: "smooth" });
     setTimeout(updateArrowStates, 310);
 });
 
@@ -2019,6 +2024,7 @@ document.addEventListener("DOMContentLoaded", () => {
 </body>
 
 </html>
+
 
 
 
