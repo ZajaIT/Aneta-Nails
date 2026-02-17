@@ -758,36 +758,51 @@ nav{
         cursor: grab;             /* ukáže, že jde táhnout */
     }
 
-    #studio .gallery img {
-        flex: 0 0 auto;           /* žádné zmenšování/roztažení */
-        width: 250px;             /* stejná velikost jako galerie */
-        height: 250px;
-        border-radius: 20px;
-        object-fit: cover;
-        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        cursor: pointer;
-        user-select: none;
-    }
-        /* pseudo-elementy pro přesné odsazení fotek */
-#studio .gallery::before {
-    content: "";
-    flex: 0 0 0;       /* první fotka sedí úplně vlevo */
-}
+    #studio .gallery-wrapper{
+      padding:0;            /* žádný padding nahoře/dole ani horizontálně */
+      overflow: hidden;     /* schová extra scroll */
+  }
 
-#studio .gallery::after {
-    content: "";
-    flex: 0 0 10px;    /* malá mezera za poslední fotkou */
-}
+  #studio .gallery{
+      display: flex;        /* horizontální řádek fotek */
+      gap: 15px;
+      overflow-x: auto;     /* scroll fotek */
+      scroll-behavior: smooth;
+      cursor: grab;
+  }
 
-    /* skrýt scroll bar */
-    #studio .gallery::-webkit-scrollbar {
-        display: none;
-    }
-    #studio .gallery {
-        -ms-overflow-style: none;
-        scrollbar-width: none;
-    }
+  #studio .gallery img{
+      flex: 0 0 auto;       /* fixní velikost */
+      width: 250px;         /* stejně jako Galerie */
+      height: 250px;
+      border-radius: 20px;
+      object-fit: cover;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      user-select: none;
+  }
+
+  /* pseudo-elementy přesně pro odsazení prvního a posledního obrázku */
+  #studio .gallery::before{
+      content: "";
+      flex: 0 0 0;       /* první fotka sedí vlevo */
+  }
+
+  #studio .gallery::after{
+      content: "";
+      flex: 0 0 10px;    /* malá mezera za poslední fotkou */
+  }
+
+  /* skrýt scrollbar */
+  #studio .gallery::-webkit-scrollbar {
+      display: none;
+  }
+
+  #studio .gallery {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+  }
 }
 
     /* HORIZONTÁLNÍ GALERIE */
@@ -1901,6 +1916,7 @@ updateActiveMenuOnScroll(); // inicializace
 </body>
 
 </html>
+
 
 
 
