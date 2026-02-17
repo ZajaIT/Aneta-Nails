@@ -1433,69 +1433,16 @@ studioGallery.addEventListener("mousemove", (e) => {
     studioGallery.scrollLeft = studioScrollLeft - deltaX;
 });
 
-// --- Šipky pro mobilní galerii: posun do středu ---
-const wrapper = document.querySelector("#gallery .gallery-wrapper");
-const gallery = document.querySelector("#gallery .gallery");
-const galleryImages = document.querySelectorAll("#gallery .gallery img");
-const btnLeft = document.querySelector(".scroll-btn.left");
-const btnRight = document.querySelector(".scroll-btn.right");
+// --- Šipky ---
+btnLeft.addEventListener("click", () => {
+    gallery.scrollBy({ left: -300, behavior: "smooth" });
+    setTimeout(updateArrowStates, 310);
+});
+btnRight.addEventListener("click", () => {
+    gallery.scrollBy({ left: 300, behavior: "smooth" });
+    setTimeout(updateArrowStates, 310);
+});
 
-// --- Desktop šipky necháme beze změny ---
-if(window.innerWidth > 768){
-    btnLeft.addEventListener("click", () => {
-        gallery.scrollBy({ left: -200, behavior: "smooth" });
-    });
-    btnRight.addEventListener("click", () => {
-        gallery.scrollBy({ left: 200, behavior: "smooth" });
-    });
-}
-
-// --- Mobilní tap logika ---
-if(window.innerWidth <= 768){
-    let currentIndex = 0;
-
-    function scrollToIndex(index) {
-        if(index < 0) index = 0;
-        if(index >= galleryImages.length) index = galleryImages.length - 1;
-        currentIndex = index;
-
-        const wrapperWidth = wrapper.clientWidth;
-        const leftArrowWidth = btnLeft.offsetWidth + 12;
-        const rightArrowWidth = btnRight.offsetWidth + 12;
-        const availableWidth = wrapperWidth - leftArrowWidth - rightArrowWidth;
-
-        const img = galleryImages[currentIndex];
-        const imgRect = img.getBoundingClientRect();
-        const wrapperRect = wrapper.getBoundingClientRect();
-        const imgLeftRelative = imgRect.left - wrapperRect.left;
-
-        const scrollPosition = gallery.scrollLeft + imgLeftRelative - leftArrowWidth - (availableWidth / 2) + (imgRect.width / 2);
-        gallery.scrollTo({ left: scrollPosition, behavior: "smooth" });
-
-        // šipky
-        btnLeft.style.display = currentIndex > 0 ? "flex" : "none";
-        btnRight.style.display = currentIndex < galleryImages.length - 1 ? "flex" : "none";
-    }
-
-    btnLeft.addEventListener("click", () => scrollToIndex(currentIndex - 1));
-    btnRight.addEventListener("click", () => scrollToIndex(currentIndex + 1));
-
-    // počkej až se načtou všechny obrázky
-    const imgsLoaded = Array.from(galleryImages).every(img => img.complete);
-    if(imgsLoaded){
-        scrollToIndex(0);
-    } else {
-        let loadedCount = 0;
-        galleryImages.forEach(img => {
-            img.addEventListener("load", () => {
-                loadedCount++;
-                if(loadedCount === galleryImages.length){
-                    scrollToIndex(0);
-                }
-            });
-        });
-    }
-}
 // --- Drag podle myši ---
 let isDown = false;
 let startX;
@@ -2070,8 +2017,5 @@ document.addEventListener("DOMContentLoaded", () => {
 </body>
 
 </html>
-
-
-
 
 
