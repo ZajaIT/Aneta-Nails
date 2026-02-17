@@ -621,12 +621,12 @@ nav{
 }
 
 /* pozice levé a pravé šipky */
-.scroll-btn.left {
+.scroll-btn.studio-left {
     left: 10px;
     display: none; /* levá šipka skrytá na startu */
 }
 
-.scroll-btn.right {
+.scroll-btn.studio-right {
     right: 10px;
     display: flex; /* pravá šipka vidět na startu */
 }
@@ -1340,7 +1340,17 @@ const gallery = document.querySelector("#gallery .gallery");
 const btnLeft = document.querySelector(".scroll-btn.left");
 const btnRight = document.querySelector(".scroll-btn.right");
 
-    const studioGallery = document.querySelector("#studio .gallery");
+const studioGallery = document.querySelector("#studio .gallery");
+const btnStudioLeft = document.querySelector(".scroll-btn.studio-left");  // OPRAVA
+const btnStudioRight = document.querySelector(".scroll-btn.studio-right"); // OPRAVA
+
+    // --- Šipky Studio ---
+btnStudioLeft.addEventListener("click", () => {
+    studioGallery.scrollBy({ left: -300, behavior: "smooth" });
+});
+btnStudioRight.addEventListener("click", () => {
+    studioGallery.scrollBy({ left: 300, behavior: "smooth" });
+});
 
 // --- Drag prstem / myší pro Studio ---
 let isStudioDown = false;
@@ -1441,24 +1451,26 @@ updateArrowStates();
 // --- Animace nadpisů při scrollu ---
 const headings = document.querySelectorAll("section h2");
 
-const observer = new IntersectionObserver((entries, obs) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add("animate-h2");
-            obs.unobserve(entry.target);
-        }
+if (headings.length > 0) {  // OPRAVA
+    const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("animate-h2");
+                obs.unobserve(entry.target);
+            }
+        });
+    },{
+        threshold:0.35
     });
-},{
-    threshold:0.35
-});
 
-headings.forEach(h => observer.observe(h));
+    headings.forEach(h => observer.observe(h));
+}
 
 document.addEventListener("DOMContentLoaded", () => {
 
     const studioImages = document.querySelectorAll("#studio .gallery img");
     const lightbox = document.getElementById("studioLightbox");
-    const lightboxImg = document.getElementById("studioLightboxImg");
+    const lightboxImg = lightbox ? lightbox.querySelector("img") : null; // OPRAVA
     const closeBtn = document.getElementById("studioClose");
     const prevBtn = document.getElementById("studioPrev");
     const nextBtn = document.getElementById("studioNext");
@@ -1596,7 +1608,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const galleryImages = document.querySelectorAll("#gallery .gallery img");
     const galleryLightbox = document.getElementById("galleryLightbox");
-    const galleryLightboxImg = document.getElementById("galleryLightboxImg");
+    const galleryLightboxImg = galleryLightbox ? galleryLightbox.querySelector("img") : null; // OPRAVA
     const galleryCloseBtn = document.getElementById("galleryClose");
     const galleryPrevBtn = document.getElementById("galleryPrev");
     const galleryNextBtn = document.getElementById("galleryNext");
@@ -1975,6 +1987,7 @@ updateStudioArrowStates();
 </body>
 
 </html>
+
 
 
 
