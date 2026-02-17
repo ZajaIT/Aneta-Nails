@@ -7,11 +7,22 @@
 <title>Aneta Nails</title>
 <link rel="icon" type="image/png" href="favicon.png?v=1">
 
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+<!-- Preload fontů -->
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Montserrat:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+
+<!-- Preload banneru -->
+<link rel="preload" href="banner.png" as="image">
 
 <style>
-
+/* --- Poladěný header pro rychlé vykreslení --- */
+header.banner {
+    min-height: 89vh;
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    animation: fadeUp 1.2s ease-out 0.15s forwards;
+}
+    
 /* RESET */
 *{
     margin:0;
@@ -2017,5 +2028,6 @@ document.addEventListener("DOMContentLoaded", () => {
 </body>
 
 </html>
+
 
 
