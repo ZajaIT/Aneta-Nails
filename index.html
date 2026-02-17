@@ -750,62 +750,71 @@ nav{
 
     /* STUDIO */
     #studio .gallery {
-        display: flex;            /* řádek fotek */
+        display: flex;            
         gap: 15px;
-        overflow-x: auto;         /* horizontální scroll */
-        scroll-behavior: smooth;  /* plynulý scroll */
+        overflow-x: auto;         
+        scroll-behavior: smooth;  
         padding: 10px 0;
-        cursor: grab;             /* ukáže, že jde táhnout */
+        cursor: grab;             
     }
 
-    #studio {
-      padding-left:0;
-      padding-right:0;
-  }
+    #studio .gallery img {
+        flex: 0 0 auto;           
+        width: 250px;             
+        height: 250px;
+        border-radius: 20px;
+        object-fit: cover;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        cursor: pointer;
+        user-select: none;
+    }
 
-  /* Wrapper pro scroll */
-  #studio .gallery-wrapper{
-      padding:0;         /* žádný padding */
-      overflow:hidden;
-  }
+    /* --- GALERIE --- */
+    #gallery .gallery {
+        display: flex;           
+        gap: 15px;
+        overflow-x: auto;        
+        scroll-behavior: smooth; 
+        padding: 10px 0;
+        cursor: grab;            
+    }
 
-  #studio .gallery{
-      display:flex;
-      gap:15px;
-      overflow-x:auto;
-      scroll-behavior: smooth;
-      cursor: grab;
-      padding:0;         /* přesně odstraníme padding */
-  }
+    #gallery .gallery img {
+        flex: 0 0 auto;          
+        width: 250px;            
+        height: 250px;
+        border-radius: 20px;
+        object-fit: cover;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        cursor: pointer;
+        user-select: none;       
+    }
 
-  #studio .gallery img{
-      flex:0 0 auto;
-      width:250px;
-      height:250px;
-      border-radius:20px;
-      object-fit:cover;
-      box-shadow:0 8px 20px rgba(0,0,0,0.1);
-  }
+    /* --- Symetrické mezery před první a za poslední fotkou --- */
+    #studio .gallery::before,
+    #gallery .gallery::before {
+        content: "";
+        flex: 0 0 10px; /* mezera před první fotkou */
+    }
 
-  /* pseudo-elementy */
-  #studio .gallery::before{
-      content:"";
-      flex:0 0 0;
-  }
-  #studio .gallery::after{
-      content:"";
-      flex:0 0 10px;
-  }
+    #studio .gallery::after,
+    #gallery .gallery::after {
+        content: "";
+        flex: 0 0 10px; /* mezera za poslední fotkou */
+    }
 
-  /* skrýt scrollbar */
-  #studio .gallery::-webkit-scrollbar{
-      display:none;
-  }
-  #studio .gallery{
-      -ms-overflow-style:none;
-      scrollbar-width:none;
-  }
-
+    /* Skrýt scroll bar */
+    #studio .gallery::-webkit-scrollbar,
+    #gallery .gallery::-webkit-scrollbar {
+        display: none;
+    }
+    #studio .gallery,
+    #gallery .gallery {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
 }
 
     /* HORIZONTÁLNÍ GALERIE */
@@ -1919,6 +1928,7 @@ updateActiveMenuOnScroll(); // inicializace
 </body>
 
 </html>
+
 
 
 
