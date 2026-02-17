@@ -1354,587 +1354,108 @@ nav a::before {
 
 <!-- JavaScript -->
 <script>
-const gallery = document.querySelector("#gallery .gallery");
-const btnLeft = document.querySelector(".scroll-btn.left");
-const btnRight = document.querySelector(".scroll-btn.right");
+// ===== GALERIE & STUDIO =====
 
-    const studioGallery = document.querySelector("#studio .gallery");
+// Galerie sekce
+const gallerySection = document.querySelector("#gallery .gallery");
+const galleryLeftBtn = document.querySelector("#gallery .scroll-btn.left");
+const galleryRightBtn = document.querySelector("#gallery .scroll-btn.right");
 
-// --- Drag prstem / myší pro Studio ---
-let isStudioDown = false;
-let studioStartX;
-let studioScrollLeft;
+// Studio sekce
+const studioSection = document.querySelector("#studio .gallery");
+const studioLeftBtn = document.querySelector("#studio .scroll-btn.left");
+const studioRightBtn = document.querySelector("#studio .scroll-btn.right");
 
-studioGallery.addEventListener("mousedown", (e) => {
-    if(window.innerWidth > 768) return; // jen mobil
-    isStudioDown = true;
-    studioStartX = e.clientX;
-    studioScrollLeft = studioGallery.scrollLeft;
-    studioGallery.style.cursor = "grabbing";
-    e.preventDefault();
-});
+// ===== FUNKCE PRO ŠIPKY A DRAG =====
 
-studioGallery.addEventListener("mouseup", () => {
-    isStudioDown = false;
-    studioGallery.style.cursor = "grab";
-});
+// --- Obecná funkce pro horizontální scroll ---
+function setupHorizontalScroll(section, leftBtn, rightBtn, scrollAmount = 300) {
 
-studioGallery.addEventListener("mouseleave", () => {
-    isStudioDown = false;
-    studioGallery.style.cursor = "grab";
-});
+    // --- Drag prstem / myší ---
+    let isDown = false;
+    let startX;
+    let scrollLeft;
 
-studioGallery.addEventListener("mousemove", (e) => {
-    if (!isStudioDown) return;
-    e.preventDefault();
-    const deltaX = e.clientX - studioStartX;
-    studioGallery.scrollLeft = studioScrollLeft - deltaX;
-});
+    section.addEventListener("mousedown", (e) => {
+        if(window.innerWidth > 768) return; // jen mobil
+        isDown = true;
+        startX = e.clientX;
+        scrollLeft = section.scrollLeft;
+        section.style.cursor = "grabbing";
+        e.preventDefault();
+    });
 
-// --- Šipky ---
-btnLeft.addEventListener("click", () => {
-    gallery.scrollBy({ left: -300, behavior: "smooth" });
-    setTimeout(updateArrowStates, 310);
-});
-btnRight.addEventListener("click", () => {
-    gallery.scrollBy({ left: 300, behavior: "smooth" });
-    setTimeout(updateArrowStates, 310);
-});
+    section.addEventListener("mouseup", () => {
+        isDown = false;
+        section.style.cursor = "grab";
+    });
 
-// --- Drag podle myši ---
-let isDown = false;
-let startX;
-let scrollLeft;
+    section.addEventListener("mouseleave", () => {
+        isDown = false;
+        section.style.cursor = "grab";
+    });
 
-gallery.addEventListener("mousedown", (e) => {
-    isDown = true;
-    startX = e.clientX;
-    scrollLeft = gallery.scrollLeft;
-    gallery.style.cursor = "grabbing";
-    e.preventDefault();
-});
+    section.addEventListener("mousemove", (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const deltaX = e.clientX - startX;
+        section.scrollLeft = scrollLeft - deltaX;
+        updateArrowStates();
+    });
 
-gallery.addEventListener("mouseup", () => {
-    isDown = false;
-    gallery.style.cursor = "grab";
-});
+    section.addEventListener("touchstart", (e) => {
+        if(window.innerWidth > 768) return;
+        isDown = true;
+        startX = e.touches[0].clientX;
+        scrollLeft = section.scrollLeft;
+    });
 
-gallery.addEventListener("mouseleave", () => {
-    isDown = false;
-    gallery.style.cursor = "grab";
-});
+    section.addEventListener("touchend", () => {
+        isDown = false;
+    });
 
-gallery.addEventListener("mousemove", (e) => {
-    if (!isDown) return;
-    e.preventDefault();
-    const deltaX = e.clientX - startX;
-    gallery.scrollLeft = scrollLeft - deltaX;
+    section.addEventListener("touchmove", (e) => {
+        if (!isDown) return;
+        const deltaX = e.touches[0].clientX - startX;
+        section.scrollLeft = scrollLeft - deltaX;
+    });
+
+    // --- Šipky ---
+    leftBtn.addEventListener("click", () => {
+        section.scrollBy({ left: -scrollAmount, behavior: "smooth" });
+        setTimeout(updateArrowStates, 310);
+    });
+
+    rightBtn.addEventListener("click", () => {
+        section.scrollBy({ left: scrollAmount, behavior: "smooth" });
+        setTimeout(updateArrowStates, 310);
+    });
+
+    // --- Indikace začátku / konce ---
+    function updateArrowStates() {
+        if(section.scrollLeft > 0){
+            leftBtn.style.display = "flex";
+        } else {
+            leftBtn.style.display = "none";
+        }
+
+        if(section.scrollLeft + section.clientWidth >= section.scrollWidth - 1){
+            rightBtn.style.display = "none";
+        } else {
+            rightBtn.style.display = "flex";
+        }
+    }
+
+    section.addEventListener("scroll", updateArrowStates);
+
+    // inicializace
+    section.scrollLeft = 0;
     updateArrowStates();
-});
-
-// --- Indikace začátku / konce galerie ---
-function updateArrowStates() {
-    // levá šipka
-    if (gallery.scrollLeft > 0) {
-        btnLeft.style.display = "flex"; // levá šipka vidět
-    } else {
-        btnLeft.style.display = "none"; // levá šipka skrytá
-    }
-
-    // pravá šipka
-    if (gallery.scrollLeft + gallery.clientWidth >= gallery.scrollWidth - 1) {
-        btnRight.style.display = "none"; // pravá šipka skrytá na konci
-    } else {
-        btnRight.style.display = "flex"; // pravá šipka vidět
-    }
 }
 
-// zavolat při scrollu
-gallery.addEventListener("scroll", updateArrowStates);
-
-// inicializace
-gallery.scrollLeft = 0;   // ← přidat tento řádek
-updateArrowStates();
-
-// --- Animace nadpisů při scrollu ---
-const headings = document.querySelectorAll("section h2");
-
-const observer = new IntersectionObserver((entries, obs) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add("animate-h2");
-            obs.unobserve(entry.target);
-        }
-    });
-},{
-    threshold:0.35
-});
-
-headings.forEach(h => observer.observe(h));
-
-document.addEventListener("DOMContentLoaded", () => {
-
-    const studioImages = document.querySelectorAll("#studio .gallery img");
-    const lightbox = document.getElementById("studioLightbox");
-    const lightboxImg = document.getElementById("studioLightboxImg");
-    const closeBtn = document.getElementById("studioClose");
-    const prevBtn = document.getElementById("studioPrev");
-    const nextBtn = document.getElementById("studioNext");
-
-    let currentIndex = 0;
-    // --- SWIPE PRO MOBIL (Studio Lightbox) ---
-let studioTouchStartX = 0;
-let studioTouchEndX = 0;
-
-lightbox.addEventListener("touchstart", (e) => {
-    if(window.innerWidth > 768) return; // jen mobil
-    studioTouchStartX = e.touches[0].clientX;
-});
-
-lightbox.addEventListener("touchend", (e) => {
-    if(window.innerWidth > 768) return; // jen mobil
-    studioTouchEndX = e.changedTouches[0].clientX;
-    handleStudioSwipe();
-});
-
-function handleStudioSwipe() {
-    const threshold = 50; // minimální vzdálenost pro swipe
-    const diffX = studioTouchEndX - studioTouchStartX;
-
-    if(Math.abs(diffX) > threshold){
-        if(diffX > 0){
-            // swipe doprava → předchozí fotka
-            changeImage(currentIndex - 1);
-        } else {
-            // swipe doleva → další fotka
-            changeImage(currentIndex + 1);
-        }
-    }
-}
-
-    // --- otevření Lightboxu ---
-    
-function updateLightboxArrowStates() {
-    // levá šipka
-    if(currentIndex > 0){
-        prevBtn.style.display = "flex";
-    } else {
-        prevBtn.style.display = "none";
-    }
-
-    // pravá šipka
-    if(currentIndex < studioImages.length - 1){
-        nextBtn.style.display = "flex";
-    } else {
-        nextBtn.style.display = "none";
-    }
-}
-
-    studioImages.forEach((img, index)=>{
-    img.addEventListener("click", ()=>{
-        currentIndex = index;
-        lightboxImg.src = studioImages[currentIndex].src;
-        lightbox.style.display = "flex";
-        document.body.classList.add("no-scroll");
-        setTimeout(() => {
-            lightbox.classList.add("show");
-            updateLightboxArrowStates(); // ← přidáno
-        }, 20);
-    });
-});;
-
-    // --- zavření Lightboxu ---
-    // --- zavření Lightboxu ---
-const closeLightbox = () => {
-    lightbox.classList.remove("show");          // fade efekt
-    setTimeout(() => {
-        lightbox.style.display = "none";       // schovat po animaci
-        // Odstraníme no-scroll jen pokud není otevřené mobilní menu
-        if(!navMenu.classList.contains("show")){
-            document.body.classList.remove("no-scroll");
-        }
-    }, 300);
-};
-
-// klik na křížek
-closeBtn.addEventListener("click", closeLightbox);
-
-// klik mimo obrázek
-lightbox.addEventListener("click", e => {
-    if(e.target === lightbox){
-        closeLightbox();
-    }
-});
-
-lightbox.addEventListener("click", e=>{
-    if(e.target === lightbox){
-        lightbox.classList.remove("show");
-        setTimeout(()=>{ lightbox.style.display="none"; }, 300);
-    }
-});
-
-    // --- fade efekt při změně obrázku ---
-    const changeImage = (newIndex) => {
-    if(newIndex < 0 || newIndex >= studioImages.length) return;
-    lightboxImg.style.opacity = 0;
-    setTimeout(() => {
-        currentIndex = newIndex;
-        lightboxImg.src = studioImages[currentIndex].src;
-        lightboxImg.style.opacity = 1;
-        updateLightboxArrowStates(); // ← přidáno
-    }, 200);
-};
-
-    // --- šipky Lightbox ---
-    const showPrev = () => changeImage(currentIndex - 1);
-    const showNext = () => changeImage(currentIndex + 1);
-
-    prevBtn.addEventListener("click", e=>{
-        e.stopPropagation();
-        showPrev();
-    });
-
-    nextBtn.addEventListener("click", e=>{
-        e.stopPropagation();
-        showNext();
-    });
-
-    // --- klávesnice ---
-    document.addEventListener("keydown", (e) => {
-        if(lightbox.style.display === "flex"){
-            if(e.key === "Escape") closeLightbox();
-            if(e.key === "ArrowLeft") showPrev();
-            if(e.key === "ArrowRight") showNext();
-        }
-    });
-
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-
-    const galleryImages = document.querySelectorAll("#gallery .gallery img");
-    const galleryLightbox = document.getElementById("galleryLightbox");
-    const galleryLightboxImg = document.getElementById("galleryLightboxImg");
-    const galleryCloseBtn = document.getElementById("galleryClose");
-    const galleryPrevBtn = document.getElementById("galleryPrev");
-    const galleryNextBtn = document.getElementById("galleryNext");
-
-    let currentGalleryIndex = 0;
-
-    // --- funkce pro indikaci začátku/konce ---
-    function updateGalleryLightboxArrowStates() {
-        if(currentGalleryIndex > 0){
-            galleryPrevBtn.style.display = "flex";
-        } else {
-            galleryPrevBtn.style.display = "none";
-        }
-
-        if(currentGalleryIndex < galleryImages.length - 1){
-            galleryNextBtn.style.display = "flex";
-        } else {
-            galleryNextBtn.style.display = "none";
-        }
-    }
-
-    // --- Swipe pro galerii Lightbox ---
-let startX = 0;
-let endX = 0;
-
-galleryLightbox.addEventListener("touchstart", (e) => {
-    startX = e.touches[0].clientX;
-});
-
-galleryLightbox.addEventListener("touchend", (e) => {
-    endX = e.changedTouches[0].clientX;
-    handleSwipe();
-});
-
-function handleSwipe() {
-    const threshold = 50; // minimální vzdálenost pro swipe
-    const diffX = endX - startX;
-
-    if (Math.abs(diffX) > threshold) {
-        if (diffX > 0) {
-            // swipe doprava → předchozí fotka
-            changeGalleryImage(currentGalleryIndex - 1);
-        } else {
-            // swipe doleva → další fotka
-            changeGalleryImage(currentGalleryIndex + 1);
-        }
-    }
-}
-    
-    // --- otevření Lightboxu ---
-    galleryImages.forEach((img, index) => {
-        img.addEventListener("click", () => {
-            currentGalleryIndex = index;
-            galleryLightboxImg.src = galleryImages[currentGalleryIndex].src;
-            galleryLightbox.style.display = "flex";
-            document.body.classList.add("no-scroll");
-            setTimeout(() => {
-                galleryLightbox.classList.add("show");
-                updateGalleryLightboxArrowStates(); // ← přidáno
-            }, 20);
-        });
-    });
-
-    // --- zavření Lightboxu ---
-    const closeGalleryLightbox = () => {
-    galleryLightbox.classList.remove("show");
-    setTimeout(() => {
-        galleryLightbox.style.display = "none";
-        document.body.classList.remove("no-scroll"); // obnoví scroll
-    }, 300);
-};
-
-    galleryCloseBtn.addEventListener("click", closeGalleryLightbox);
-    galleryLightbox.addEventListener("click", e => {
-        if (e.target === galleryLightbox) closeGalleryLightbox();
-    });
-
-    // --- fade efekt při změně obrázku ---
-    const changeGalleryImage = (newIndex) => {
-        if (newIndex < 0 || newIndex >= galleryImages.length) return;
-        galleryLightboxImg.style.opacity = 0;
-        setTimeout(() => {
-            currentGalleryIndex = newIndex;
-            galleryLightboxImg.src = galleryImages[currentGalleryIndex].src;
-            galleryLightboxImg.style.opacity = 1;
-            updateGalleryLightboxArrowStates(); // ← přidáno
-        }, 200);
-    };
-
-    // --- šipky Lightbox ---
-    galleryPrevBtn.addEventListener("click", e => {
-        e.stopPropagation();
-        changeGalleryImage(currentGalleryIndex - 1);
-    });
-    galleryNextBtn.addEventListener("click", e => {
-        e.stopPropagation();
-        changeGalleryImage(currentGalleryIndex + 1);
-    });
-
-    // --- klávesnice ---
-    document.addEventListener("keydown", e => {
-        if (galleryLightbox.style.display === "flex") {
-            if (e.key === "Escape") closeGalleryLightbox();
-            if (e.key === "ArrowLeft") changeGalleryImage(currentGalleryIndex - 1);
-            if (e.key === "ArrowRight") changeGalleryImage(currentGalleryIndex + 1);
-        }
-    });
-
-});
-
-// vždy po reloadu začni nahoře
-if ("scrollRestoration" in history) {
-    history.scrollRestoration = "manual";
-}
-
-window.addEventListener("load", () => {
-    window.scrollTo(0, 0);
-});
-
-// Hamburger toggle pro mobil
-const hamburger = document.querySelector(".hamburger");
-const navMenu = document.querySelector("nav ul");
-
-hamburger.addEventListener("click", () => {
-    const spans = hamburger.querySelectorAll("span");
-
-    if (!hamburger.classList.contains("open")) {
-        // OTEVÍRÁNÍ → stejné tempo a efekt jako zavírání
-        navMenu.classList.add("show");
-        hamburger.classList.add("open");
-
-        // animace čárek
-        spans[0].style.transform = "rotate(45deg) translate(5px, 5px)";
-        spans[1].style.opacity = "0";
-        spans[2].style.transform = "rotate(-45deg) translate(5px, -5px)";
-
-        document.body.classList.add("no-scroll");
-
-    } else {
-        // ZAVÍRÁNÍ → necháme jak je
-        navMenu.classList.remove("show");
-        hamburger.classList.remove("open");
-
-        spans[0].style.transform = "rotate(0) translate(0,0)";
-        spans[1].style.opacity = "1";
-        spans[2].style.transform = "rotate(0) translate(0,0)";
-
-        document.body.classList.remove("no-scroll");
-        if(window.scrollY === 0){
-    mobileLinks.forEach(link => {
-        if(link.getAttribute("href") === "#"){
-            link.classList.remove("active");
-        }
-    });
-}
-    }
-});
-    
-    let touchStartX = 0;
-    let touchEndX = 0;
-
-    let touchStartY = 0;
-    let touchEndY = 0;
-
-navMenu.addEventListener("touchstart", (e) => {
-    touchStartX = e.changedTouches[0].screenX;
-    touchStartY = e.changedTouches[0].screenY; // ← nově
-});
-
-navMenu.addEventListener("touchend", (e) => {
-    touchEndX = e.changedTouches[0].screenX;
-    touchEndY = e.changedTouches[0].screenY; // ← nově
-    handleSwipeGesture();
-});
-
-function handleSwipeGesture() {
-    // horizontální swipe (pokud chceš zachovat)
-    if (touchEndX - touchStartX > 50) {  
-        navMenu.classList.remove("show");
-        hamburger.classList.remove("open");
-
-        const spans = hamburger.querySelectorAll("span");
-        spans[0].style.transform = "rotate(0) translate(0,0)";
-        spans[1].style.opacity = "1";
-        spans[2].style.transform = "rotate(0) translate(0,0)";
-        
-        document.body.classList.remove("no-scroll"); // obnovíme scroll
-    }
-
-    // vertikální swipe zespodu nahoru
-    if (touchStartY - touchEndY > 50) {
-        navMenu.classList.remove("show");
-        hamburger.classList.remove("open");
-
-        const spans = hamburger.querySelectorAll("span");
-        spans[0].style.transform = "rotate(0) translate(0,0)";
-        spans[1].style.opacity = "1";
-        spans[2].style.transform = "rotate(0) translate(0,0)";
-
-        document.body.classList.remove("no-scroll"); // obnovíme scroll
-    }
-}
-
-    // Zavření menu kliknutím mimo něj
-document.addEventListener("click", (e) => {
-
-    const clickedInsideMenu = navMenu.contains(e.target);
-    const clickedHamburger = hamburger.contains(e.target);
-
-    if(!clickedInsideMenu && !clickedHamburger && navMenu.classList.contains("show")){
-        navMenu.classList.remove("show");
-        hamburger.classList.remove("open");
-
-        const spans = hamburger.querySelectorAll("span");
-        spans[0].style.transform = "rotate(0) translate(0,0)";
-        spans[1].style.opacity = "1";
-        spans[2].style.transform = "rotate(0) translate(0,0)";
-
-        document.body.classList.remove("no-scroll");
-        if(window.scrollY === 0){
-    mobileLinks.forEach(link => {
-        if(link.getAttribute("href") === "#"){
-            link.classList.remove("active");
-        }
-    });
-}
-    }
-});
-
-    // --- Mobilní menu: klik i scroll ---
-const mobileLinks = navMenu.querySelectorAll("a");
-
-// Kliknutí na odkaz
-mobileLinks.forEach(link => {
-    link.addEventListener("click", () => {
-        // Zavření menu
-        navMenu.classList.remove("show");
-        hamburger.classList.remove("open");
-
-        const spans = hamburger.querySelectorAll("span");
-        spans[0].style.transform = "rotate(0) translate(0,0)";
-        spans[1].style.opacity = "1";
-        spans[2].style.transform = "rotate(0) translate(0,0)";
-
-        document.body.classList.remove("no-scroll");
-        if(window.scrollY === 0){
-    mobileLinks.forEach(link => {
-        if(link.getAttribute("href") === "#"){
-            link.classList.remove("active");
-        }
-    });
-}
-    });
-});
-
-// Aktivní položka podle scrollu (mobil)
-function updateActiveMenuOnScroll() {
-    if(window.innerWidth > 768) return; // jen mobil
-
-    let currentSectionId = "";
-
-    // pokud jsme úplně nahoře, nic nezvýrazňovat
-    if(window.scrollY < 50) {
-        currentSectionId = "";
-    } else {
-        document.querySelectorAll("section").forEach(sec => {
-            const rect = sec.getBoundingClientRect();
-            if(rect.top <= window.innerHeight/2 && rect.bottom >= window.innerHeight/2){
-                currentSectionId = sec.id;
-            }
-        });
-
-        // DOMŮ (#home) se nezvýrazní
-        if(currentSectionId === "home") currentSectionId = ""; 
-    }
-
-    mobileLinks.forEach(link => {
-    // nikdy neaktivovat DOMŮ
-    if(link.getAttribute("href") === "#") return;
-
-    link.classList.remove("active");
-    if(link.getAttribute("href") === "#" + currentSectionId){
-        link.classList.add("active");
-    }
-});
-}
-
-window.addEventListener("scroll", updateActiveMenuOnScroll);
-window.addEventListener("resize", updateActiveMenuOnScroll);
-updateActiveMenuOnScroll(); // inicializace
-
-    if(window.innerWidth <= 768){ // jen mobil
-  const studioWrapper = document.querySelector("#studio .gallery-wrapper");
-  const studioGallery = studioWrapper.querySelector(".gallery");
-  const studioBtnLeft = studioWrapper.querySelector(".scroll-btn.left");
-  const studioBtnRight = studioWrapper.querySelector(".scroll-btn.right");
-
-  function updateStudioArrowStates() {
-    studioBtnLeft.style.display = studioGallery.scrollLeft > 0 ? "flex" : "none";
-    studioBtnRight.style.display = (studioGallery.scrollLeft + studioGallery.clientWidth >= studioGallery.scrollWidth - 1) ? "none" : "flex";
-  }
-
-  // Inicializace
-  studioGallery.scrollLeft = 0;
-  updateStudioArrowStates();
-
-  // Click šipky
-  studioBtnLeft.addEventListener("click", () => {
-    studioGallery.scrollBy({ left: -250, behavior: "smooth" });
-    setTimeout(updateStudioArrowStates, 300);
-  });
-
-  studioBtnRight.addEventListener("click", () => {
-    studioGallery.scrollBy({ left: 250, behavior: "smooth" });
-    setTimeout(updateStudioArrowStates, 300);
-  });
-
-  // Aktualizace při scrollu
-  studioGallery.addEventListener("scroll", updateStudioArrowStates);
-}
+// --- Inicializace pro obě galerie ---
+setupHorizontalScroll(gallerySection, galleryLeftBtn, galleryRightBtn, 300);
+setupHorizontalScroll(studioSection, studioLeftBtn, studioRightBtn, 200); // menší fotky ve Studio
 </script>
 
 <!-- Lightbox Studio -->
@@ -1956,6 +1477,7 @@ updateActiveMenuOnScroll(); // inicializace
 </body>
 
 </html>
+
 
 
 
