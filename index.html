@@ -1433,15 +1433,39 @@ studioGallery.addEventListener("mousemove", (e) => {
     studioGallery.scrollLeft = studioScrollLeft - deltaX;
 });
 
-// --- Šipky ---
-btnLeft.addEventListener("click", () => {
-    gallery.scrollBy({ left: -300, behavior: "smooth" });
-    setTimeout(updateArrowStates, 310);
-});
-btnRight.addEventListener("click", () => {
-    gallery.scrollBy({ left: 300, behavior: "smooth" });
-    setTimeout(updateArrowStates, 310);
-});
+// --- Šipky pro mobilní galerii: posun do středu ---
+const wrapper = document.querySelector("#gallery .gallery-wrapper");
+const galleryImages = document.querySelectorAll("#gallery .gallery img");
+let currentIndex = 0;
+
+function scrollToIndex(index) {
+    if (index < 0) index = 0;
+    if (index >= galleryImages.length) index = galleryImages.length - 1;
+    currentIndex = index;
+
+    const wrapperWidth = wrapper.clientWidth;
+    const img = galleryImages[currentIndex];
+    const imgWidth = img.offsetWidth;
+    const imgLeft = img.offsetLeft;
+
+    const scrollPosition = imgLeft - (wrapperWidth / 2) + (imgWidth / 2);
+
+    gallery.scrollTo({ left: scrollPosition, behavior: "smooth" });
+
+    updateArrowStates();
+}
+
+function updateArrowStates() {
+    btnLeft.style.display = currentIndex > 0 ? "flex" : "none";
+    btnRight.style.display = currentIndex < galleryImages.length - 1 ? "flex" : "none";
+}
+
+// Šipky
+btnLeft.addEventListener("click", () => scrollToIndex(currentIndex - 1));
+btnRight.addEventListener("click", () => scrollToIndex(currentIndex + 1));
+
+// Inicializace
+scrollToIndex(0);
 
 // --- Drag podle myši ---
 let isDown = false;
@@ -2017,5 +2041,6 @@ document.addEventListener("DOMContentLoaded", () => {
 </body>
 
 </html>
+
 
 
