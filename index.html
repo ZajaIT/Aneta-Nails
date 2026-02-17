@@ -758,51 +758,54 @@ nav{
         cursor: grab;             /* ukáže, že jde táhnout */
     }
 
-    #studio .gallery-wrapper{
-      padding:0;            /* žádný padding nahoře/dole ani horizontálně */
-      overflow: hidden;     /* schová extra scroll */
+    #studio {
+      padding-left:0;
+      padding-right:0;
+  }
+
+  /* Wrapper pro scroll */
+  #studio .gallery-wrapper{
+      padding:0;         /* žádný padding */
+      overflow:hidden;
   }
 
   #studio .gallery{
-      display: flex;        /* horizontální řádek fotek */
-      gap: 15px;
-      overflow-x: auto;     /* scroll fotek */
+      display:flex;
+      gap:15px;
+      overflow-x:auto;
       scroll-behavior: smooth;
       cursor: grab;
+      padding:0;         /* přesně odstraníme padding */
   }
 
   #studio .gallery img{
-      flex: 0 0 auto;       /* fixní velikost */
-      width: 250px;         /* stejně jako Galerie */
-      height: 250px;
-      border-radius: 20px;
-      object-fit: cover;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      cursor: pointer;
-      user-select: none;
+      flex:0 0 auto;
+      width:250px;
+      height:250px;
+      border-radius:20px;
+      object-fit:cover;
+      box-shadow:0 8px 20px rgba(0,0,0,0.1);
   }
 
-  /* pseudo-elementy přesně pro odsazení prvního a posledního obrázku */
+  /* pseudo-elementy */
   #studio .gallery::before{
-      content: "";
-      flex: 0 0 0;       /* první fotka sedí vlevo */
+      content:"";
+      flex:0 0 0;
   }
-
   #studio .gallery::after{
-      content: "";
-      flex: 0 0 10px;    /* malá mezera za poslední fotkou */
+      content:"";
+      flex:0 0 10px;
   }
 
   /* skrýt scrollbar */
-  #studio .gallery::-webkit-scrollbar {
-      display: none;
+  #studio .gallery::-webkit-scrollbar{
+      display:none;
+  }
+  #studio .gallery{
+      -ms-overflow-style:none;
+      scrollbar-width:none;
   }
 
-  #studio .gallery {
-      -ms-overflow-style: none;
-      scrollbar-width: none;
-  }
 }
 
     /* HORIZONTÁLNÍ GALERIE */
@@ -1916,6 +1919,7 @@ updateActiveMenuOnScroll(); // inicializace
 </body>
 
 </html>
+
 
 
 
