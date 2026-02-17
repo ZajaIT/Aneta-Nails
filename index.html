@@ -1401,14 +1401,22 @@ studioGallery.addEventListener("mousemove", (e) => {
     studioGallery.scrollLeft = studioScrollLeft - deltaX;
 });
 
-// --- Šipky ---
-btnLeft.addEventListener("click", () => {
+// Šipky Galerie
+galleryBtnLeft.addEventListener("click", () => {
     gallery.scrollBy({ left: -300, behavior: "smooth" });
     setTimeout(updateArrowStates, 310);
 });
-btnRight.addEventListener("click", () => {
+galleryBtnRight.addEventListener("click", () => {
     gallery.scrollBy({ left: 300, behavior: "smooth" });
     setTimeout(updateArrowStates, 310);
+});
+
+// Šipky Studio
+studioBtnLeft.addEventListener("click", () => {
+    studioGallery.scrollBy({ left: -300, behavior: "smooth" });
+});
+studioBtnRight.addEventListener("click", () => {
+    studioGallery.scrollBy({ left: 300, behavior: "smooth" });
 });
 
 // --- Drag podle myši ---
@@ -2003,6 +2011,7 @@ studioBtnRight.addEventListener("click", () => {
 </body>
 
 </html>
+
 
 
 
