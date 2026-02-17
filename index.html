@@ -868,6 +868,66 @@ nav{
         font-size:16px;
         left:15px;
     }
+        /* --- Mobilní šipky pro Studio --- */
+#studio .gallery-wrapper {
+    position: relative;      /* aby šipky mohly být absolutně */
+    overflow: hidden;        /* skrýt přetečení obrázků */
+}
+
+#studio .gallery {
+    display: flex;           
+    gap: 15px;               /* mezera mezi fotkami */
+    overflow-x: auto;        
+    scroll-behavior: smooth; 
+    padding: 10px 0;
+    cursor: grab;            
+}
+
+#studio .gallery img {
+    flex: 0 0 auto;          
+    width: 250px;            
+    height: 250px;
+    border-radius: 20px;
+    object-fit: cover;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    user-select: none;
+}
+
+/* šipky */
+#studio .scroll-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--rose);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    font-size: 24px;
+    color: white;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+#studio .scroll-btn:hover {
+    background: rgba(212,139,156,0.6);
+}
+
+#studio .scroll-btn.left {
+    left: 10px;
+    display: none; /* levá šipka skrytá na startu */
+}
+
+#studio .scroll-btn.right {
+        right: 10px;
+        display: flex;
+    }
 }
 </style>
 </head>
@@ -948,17 +1008,16 @@ na detail, kvalitu a individuální přístup.
 
 <!-- STUDIO -->
 <section id="studio">
-
-<h2>Studio</h2>
-
-<div class="gallery">
-
-<img src="studio2.jpg" alt="Studio">
-<img src="studio1.jpg" alt="Studio">
-<img src="studio3.jpg" alt="Studio">
-
-</div>
-
+    <h2>Studio</h2>
+    <div class="gallery-wrapper">
+        <button class="scroll-btn left">&#10094;</button>
+        <div class="gallery">
+            <img src="studio1.jpg" alt="Studio">
+            <img src="studio2.jpg" alt="Studio">
+            <img src="studio3.jpg" alt="Studio">
+        </div>
+        <button class="scroll-btn right">&#10095;</button>
+    </div>
 </section>
 
 
@@ -1908,6 +1967,82 @@ function updateActiveMenuOnScroll() {
 window.addEventListener("scroll", updateActiveMenuOnScroll);
 window.addEventListener("resize", updateActiveMenuOnScroll);
 updateActiveMenuOnScroll(); // inicializace
+
+    // --- Mobilní šipky pro Studio ---
+const studioGalleryWrapper = document.querySelector("#studio .gallery-wrapper");
+const studioGallery = document.querySelector("#studio .gallery");
+const studioBtnLeft = document.createElement("button");
+const studioBtnRight = document.createElement("button");
+
+studioBtnLeft.className = "scroll-btn left";
+studioBtnLeft.innerHTML = "&#10094;"; // levá šipka
+studioBtnRight.className = "scroll-btn right";
+studioBtnRight.innerHTML = "&#10095;"; // pravá šipka
+
+studioGalleryWrapper.appendChild(studioBtnLeft);
+studioGalleryWrapper.appendChild(studioBtnRight);
+
+// funkce pro aktualizaci viditelnosti šipek
+function updateStudioArrowStates() {
+    if (studioGallery.scrollLeft > 0) {
+        studioBtnLeft.style.display = "flex";
+    } else {
+        studioBtnLeft.style.display = "none";
+    }
+
+    if (studioGallery.scrollLeft + studioGallery.clientWidth >= studioGallery.scrollWidth - 1) {
+        studioBtnRight.style.display = "none";
+    } else {
+        studioBtnRight.style.display = "flex";
+    }
+}
+
+// klik na šipky
+studioBtnLeft.addEventListener("click", () => {
+    studioGallery.scrollBy({ left: -300, behavior: "smooth" });
+    setTimeout(updateStudioArrowStates, 310);
+});
+
+studioBtnRight.addEventListener("click", () => {
+    studioGallery.scrollBy({ left: 300, behavior: "smooth" });
+    setTimeout(updateStudioArrowStates, 310);
+});
+
+// drag podle myši / prstu
+let isStudioDown = false;
+let startXStudio;
+let scrollLeftStudio;
+
+studioGallery.addEventListener("mousedown", (e) => {
+    isStudioDown = true;
+    startXStudio = e.clientX;
+    scrollLeftStudio = studioGallery.scrollLeft;
+    studioGallery.style.cursor = "grabbing";
+});
+
+studioGallery.addEventListener("mouseleave", () => {
+    isStudioDown = false;
+    studioGallery.style.cursor = "grab";
+});
+
+studioGallery.addEventListener("mouseup", () => {
+    isStudioDown = false;
+    studioGallery.style.cursor = "grab";
+});
+
+studioGallery.addEventListener("mousemove", (e) => {
+    if (!isStudioDown) return;
+    const deltaX = e.clientX - startXStudio;
+    studioGallery.scrollLeft = scrollLeftStudio - deltaX;
+    updateStudioArrowStates();
+});
+
+// zavolat při scrollu
+studioGallery.addEventListener("scroll", updateStudioArrowStates);
+
+// inicializace
+studioGallery.scrollLeft = 0;
+updateStudioArrowStates();
     
 </script>
 
@@ -1930,6 +2065,7 @@ updateActiveMenuOnScroll(); // inicializace
 </body>
 
 </html>
+
 
 
 
