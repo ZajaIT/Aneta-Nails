@@ -749,13 +749,24 @@ nav{
 
     /* STUDIO */
     #studio .gallery {
-        display: flex;            /* řádek fotek */
-        gap: 15px;
-        overflow-x: auto;         /* horizontální scroll */
-        scroll-behavior: smooth;  /* plynulý scroll */
-        padding: 0;
-        cursor: grab;             /* ukáže, že jde táhnout */
-    }
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding: 0;       /* žádný padding nahoře ani dole */
+    cursor: grab;
+}
+
+/* pseudo-elementy pro přesný posun fotek */
+#studio .gallery::before{
+    content:"";
+    flex:0 0 0;       /* první fotka sedí úplně vlevo */
+}
+
+#studio .gallery::after{
+    content:"";
+    flex:0 0 10px;    /* malá mezera za poslední fotkou */
+}
 
     #studio .gallery img {
         flex: 0 0 auto;           /* žádné zmenšování/roztažení */
@@ -1890,6 +1901,7 @@ updateActiveMenuOnScroll(); // inicializace
 </body>
 
 </html>
+
 
 
 
