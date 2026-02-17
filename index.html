@@ -952,14 +952,12 @@ na detail, kvalitu a individuální přístup.
 
 <h2>Studio</h2>
 
-<div class="gallery-wrapper">
-    <button class="scroll-btn left">&#10094;</button>
-    <div class="gallery">
-        <img src="studio2.jpg" alt="Studio">
-        <img src="studio1.jpg" alt="Studio">
-        <img src="studio3.jpg" alt="Studio">
-    </div>
-    <button class="scroll-btn right">&#10095;</button>
+<div class="gallery">
+
+<img src="studio2.jpg" alt="Studio">
+<img src="studio1.jpg" alt="Studio">
+<img src="studio3.jpg" alt="Studio">
+
 </div>
 
 </section>
@@ -1360,15 +1358,11 @@ nav a::before {
 
 <!-- JavaScript -->
 <script>
-// Galerie
 const gallery = document.querySelector("#gallery .gallery");
-const galleryBtnLeft = document.querySelector("#gallery .scroll-btn.left");
-const galleryBtnRight = document.querySelector("#gallery .scroll-btn.right");
+const btnLeft = document.querySelector(".scroll-btn.left");
+const btnRight = document.querySelector(".scroll-btn.right");
 
-// Studio
-const studioGallery = document.querySelector("#studio .gallery");
-const studioBtnLeft = document.querySelector("#studio .scroll-btn.left");
-const studioBtnRight = document.querySelector("#studio .scroll-btn.right");
+    const studioGallery = document.querySelector("#studio .gallery");
 
 // --- Drag prstem / myší pro Studio ---
 let isStudioDown = false;
@@ -1401,22 +1395,14 @@ studioGallery.addEventListener("mousemove", (e) => {
     studioGallery.scrollLeft = studioScrollLeft - deltaX;
 });
 
-// Šipky Galerie
-galleryBtnLeft.addEventListener("click", () => {
+// --- Šipky ---
+btnLeft.addEventListener("click", () => {
     gallery.scrollBy({ left: -300, behavior: "smooth" });
     setTimeout(updateArrowStates, 310);
 });
-galleryBtnRight.addEventListener("click", () => {
+btnRight.addEventListener("click", () => {
     gallery.scrollBy({ left: 300, behavior: "smooth" });
     setTimeout(updateArrowStates, 310);
-});
-
-// Šipky Studio
-studioBtnLeft.addEventListener("click", () => {
-    studioGallery.scrollBy({ left: -300, behavior: "smooth" });
-});
-studioBtnRight.addEventListener("click", () => {
-    studioGallery.scrollBy({ left: 300, behavior: "smooth" });
 });
 
 // --- Drag podle myši ---
@@ -1923,73 +1909,7 @@ function updateActiveMenuOnScroll() {
 window.addEventListener("scroll", updateActiveMenuOnScroll);
 window.addEventListener("resize", updateActiveMenuOnScroll);
 updateActiveMenuOnScroll(); // inicializace
-
-    if (window.innerWidth <= 768) { // jen mobil
-    const studioGallery = document.querySelector("#studio .gallery");
-    const btnLeftStudio = document.querySelector("#studio .scroll-btn.left");
-    const btnRightStudio = document.querySelector("#studio .scroll-btn.right");
-
-    // Drag prstem
-    let isDown = false;
-    let startX, scrollLeft;
-
-    studioGallery.addEventListener("mousedown", e => {
-        isDown = true;
-        startX = e.clientX;
-        scrollLeft = studioGallery.scrollLeft;
-        studioGallery.style.cursor = "grabbing";
-        e.preventDefault();
-    });
-    studioGallery.addEventListener("mouseup", () => {
-        isDown = false;
-        studioGallery.style.cursor = "grab";
-    });
-    studioGallery.addEventListener("mouseleave", () => {
-        isDown = false;
-        studioGallery.style.cursor = "grab";
-    });
-    studioGallery.addEventListener("mousemove", e => {
-        if (!isDown) return;
-        e.preventDefault();
-        const deltaX = e.clientX - startX;
-        studioGallery.scrollLeft = scrollLeft - deltaX;
-        updateStudioArrowStates();
-    });
-
-    // Šipky
-    btnLeftStudio.addEventListener("click", () => {
-        studioGallery.scrollBy({ left: -300, behavior: "smooth" });
-        setTimeout(updateStudioArrowStates, 310);
-    });
-    btnRightStudio.addEventListener("click", () => {
-        studioGallery.scrollBy({ left: 300, behavior: "smooth" });
-        setTimeout(updateStudioArrowStates, 310);
-    });
-
-    function updateStudioArrowStates() {
-        // levá šipka
-        btnLeftStudio.style.display = studioGallery.scrollLeft > 0 ? "flex" : "none";
-        // pravá šipka
-        btnRightStudio.style.display = (studioGallery.scrollLeft + studioGallery.clientWidth >= studioGallery.scrollWidth - 1) ? "none" : "flex";
-    }
-
-    // inicializace
-    studioGallery.scrollLeft = 0;
-    updateStudioArrowStates();
-
-    // scroll listener
-    studioGallery.addEventListener("scroll", updateStudioArrowStates);
-}
-    const studioBtnLeft = document.querySelector("#studio .scroll-btn.left");
-const studioBtnRight = document.querySelector("#studio .scroll-btn.right");
-
-// Šipky pro Studio
-studioBtnLeft.addEventListener("click", () => {
-    studioGallery.scrollBy({ left: -300, behavior: "smooth" });
-});
-studioBtnRight.addEventListener("click", () => {
-    studioGallery.scrollBy({ left: 300, behavior: "smooth" });
-});
+    
 </script>
 
 <!-- Lightbox Studio -->
@@ -2011,9 +1931,6 @@ studioBtnRight.addEventListener("click", () => {
 </body>
 
 </html>
-
-
-
 
 
 
