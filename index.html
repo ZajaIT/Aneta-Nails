@@ -1434,38 +1434,46 @@ studioGallery.addEventListener("mousemove", (e) => {
 });
 
 // --- Šipky pro mobilní galerii: posun do středu ---
-const wrapper = document.querySelector("#gallery .gallery-wrapper");
-const galleryImages = document.querySelectorAll("#gallery .gallery img");
-let currentIndex = 0;
+if(window.innerWidth <= 768){   // jen mobil
+    const wrapper = document.querySelector("#gallery .gallery-wrapper");
+    const gallery = document.querySelector("#gallery .gallery");
+    const galleryImages = document.querySelectorAll("#gallery .gallery img");
+    const btnLeft = document.querySelector(".scroll-btn.left");
+    const btnRight = document.querySelector(".scroll-btn.right");
+    let currentIndex = 0;
 
-function scrollToIndex(index) {
-    if (index < 0) index = 0;
-    if (index >= galleryImages.length) index = galleryImages.length - 1;
-    currentIndex = index;
+    function scrollToIndex(index) {
+        if(index < 0) index = 0;
+        if(index >= galleryImages.length) index = galleryImages.length - 1;
+        currentIndex = index;
 
-    const wrapperWidth = wrapper.clientWidth;
-    const img = galleryImages[currentIndex];
-    const imgWidth = img.offsetWidth;
-    const imgLeft = img.offsetLeft;
+        const wrapperWidth = wrapper.clientWidth;
 
-    const scrollPosition = imgLeft - (wrapperWidth / 2) + (imgWidth / 2);
+        // vzdálenost šipek od okrajů wrapperu
+        const leftArrowWidth = btnLeft.offsetWidth + 12;   // 12px margin-left
+        const rightArrowWidth = btnRight.offsetWidth + 12; // 12px margin-right
 
-    gallery.scrollTo({ left: scrollPosition, behavior: "smooth" });
+        const availableWidth = wrapperWidth - leftArrowWidth - rightArrowWidth;
 
-    updateArrowStates();
+        const img = galleryImages[currentIndex];
+        const imgWidth = img.offsetWidth;
+        const imgLeft = img.offsetLeft;
+
+        // střed fotky mezi šipkami
+        const scrollPosition = imgLeft - leftArrowWidth - (availableWidth / 2) + (imgWidth / 2);
+
+        gallery.scrollTo({ left: scrollPosition, behavior: "smooth" });
+
+        // šipky
+        btnLeft.style.display = currentIndex > 0 ? "flex" : "none";
+        btnRight.style.display = currentIndex < galleryImages.length - 1 ? "flex" : "none";
+    }
+
+    btnLeft.addEventListener("click", () => scrollToIndex(currentIndex - 1));
+    btnRight.addEventListener("click", () => scrollToIndex(currentIndex + 1));
+
+    scrollToIndex(0);
 }
-
-function updateArrowStates() {
-    btnLeft.style.display = currentIndex > 0 ? "flex" : "none";
-    btnRight.style.display = currentIndex < galleryImages.length - 1 ? "flex" : "none";
-}
-
-// Šipky
-btnLeft.addEventListener("click", () => scrollToIndex(currentIndex - 1));
-btnRight.addEventListener("click", () => scrollToIndex(currentIndex + 1));
-
-// Inicializace
-scrollToIndex(0);
 
 // --- Drag podle myši ---
 let isDown = false;
@@ -2041,6 +2049,7 @@ document.addEventListener("DOMContentLoaded", () => {
 </body>
 
 </html>
+
 
 
 
