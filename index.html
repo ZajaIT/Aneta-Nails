@@ -870,6 +870,39 @@ nav{
         left:15px;
     }
 }
+    @media(max-width:768px){
+    /* Šipky pro Studio sekci */
+    #studio .scroll-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: var(--rose);
+        border: none;
+        border-radius: 50%;
+        width: 35px;
+        height: 35px;
+        font-size: 20px;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 10;
+        transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    #studio .scroll-btn:hover {
+        background: rgba(212,139,156,0.6);
+    }
+
+    #studio .scroll-btn.left {
+        left: 10px;
+    }
+
+    #studio .scroll-btn.right {
+        right: 10px;
+    }
+}
 </style>
 </head>
 
@@ -1909,7 +1942,8 @@ function updateActiveMenuOnScroll() {
 window.addEventListener("scroll", updateActiveMenuOnScroll);
 window.addEventListener("resize", updateActiveMenuOnScroll);
 updateActiveMenuOnScroll(); // inicializace
-    
+
+        
 </script>
 
 <!-- Lightbox Studio -->
@@ -1928,9 +1962,57 @@ updateActiveMenuOnScroll(); // inicializace
   <button id="galleryNext" class="scroll-btn right">&#10095;</button>
 </div>
 
+    <script>
+document.addEventListener("DOMContentLoaded", () => {
+    if(window.innerWidth > 768) return; // jen mobil
+
+    const studioGallery = document.querySelector("#studio .gallery");
+
+    const leftBtn = document.createElement("button");
+    leftBtn.className = "scroll-btn left";
+    leftBtn.innerHTML = "&#10094;"; // ←
+
+    const rightBtn = document.createElement("button");
+    rightBtn.className = "scroll-btn right";
+    rightBtn.innerHTML = "&#10095;"; // →
+
+    const studioSection = document.getElementById("studio");
+    studioSection.appendChild(leftBtn);
+    studioSection.appendChild(rightBtn);
+
+    const scrollAmount = 260;
+
+    leftBtn.addEventListener("click", () => {
+        studioGallery.scrollBy({ left: -scrollAmount, behavior: "smooth" });
+    });
+
+    rightBtn.addEventListener("click", () => {
+        studioGallery.scrollBy({ left: scrollAmount, behavior: "smooth" });
+    });
+
+    const updateArrowStates = () => {
+        if(studioGallery.scrollLeft <= 0){
+            leftBtn.style.display = "none";
+        } else {
+            leftBtn.style.display = "flex";
+        }
+
+        if(studioGallery.scrollLeft + studioGallery.clientWidth >= studioGallery.scrollWidth - 1){
+            rightBtn.style.display = "none";
+        } else {
+            rightBtn.style.display = "flex";
+        }
+    }
+
+    studioGallery.addEventListener("scroll", updateArrowStates);
+    updateArrowStates();
+});
+</script>
+    
 </body>
 
 </html>
+
 
 
 
