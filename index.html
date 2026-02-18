@@ -796,45 +796,6 @@ nav{
         cursor: pointer;
         user-select: none;
     }
-      /* --- Mobilní wrapper pro Studio sekci --- */
-/* jen pro mobil */
-@media (max-width: 768px) {
-  #studio .gallery-wrapper {
-    position: relative;  /* aby šipky byly nad fotkami */
-    overflow: hidden;    /* scroll bude uvnitř wrapperu */
-  }
-
-  #studio .scroll-btn {
-    display: flex;       /* šipky se zobrazí pouze na mobilu */
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 40px;
-    height: 40px;
-    background: rgba(0,0,0,0.5);
-    color: #fff;
-    border-radius: 50%;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    z-index: 10;
-  }
-
-  #studio .scroll-btn.left {
-    left: 10px;
-  }
-
-  #studio .scroll-btn.right {
-    right: 10px;
-  }
-}
-
-/* desktop: šipky schované */
-@media (min-width: 769px) {
-  #studio .scroll-btn {
-    display: none !important;
-  }
-}
 
     /* --- GALERIE --- */
     #gallery .gallery {
@@ -1052,21 +1013,17 @@ na detail, kvalitu a individuální přístup.
 
 <!-- STUDIO -->
 <section id="studio">
-  <h2>Studio</h2>
 
-  <div class="gallery-wrapper"> <!-- ← wrapper začíná -->
+<h2>Studio</h2>
 
-    <button class="scroll-btn left">&#10094;</button>
-    
-    <div class="gallery">
-        <img src="studio1.jpg" alt="Studio">    
-        <img src="studio2.jpg" alt="Studio">
-        <img src="studio3.jpg" alt="Studio">
-    </div>
-    
-    <button class="scroll-btn right">&#10095;</button>
+<div class="gallery">
 
-  </div> <!-- ← wrapper končí -->
+<img src="studio1.jpg" alt="Studio">    
+<img src="studio2.jpg" alt="Studio">
+<img src="studio3.jpg" alt="Studio">
+
+</div>
+
 </section>
 
 
@@ -1469,54 +1426,7 @@ const gallery = document.querySelector("#gallery .gallery");
 const btnLeft = document.querySelector(".scroll-btn.left");
 const btnRight = document.querySelector(".scroll-btn.right");
 
-const studioGallery = document.querySelector("#studio .gallery");
-const studioBtnLeft = document.querySelector("#studio .scroll-btn.left");
-const studioBtnRight = document.querySelector("#studio .scroll-btn.right");
-
-function isMobile() {
-    return window.innerWidth <= 768; // breakpoint pro mobil
-}
-
-// Funkce pro posun na střed obrázku
-function scrollStudioToImage(direction) {
-    if (!isMobile()) return; // desktop ignorujeme
-
-    const images = Array.from(studioGallery.querySelectorAll("img"));
-    const galleryRect = studioGallery.getBoundingClientRect();
-    const galleryCenter = galleryRect.left + galleryRect.width / 2;
-
-    // najdeme obrázek nejblíž středu
-    let currentIndex = 0;
-    let minDistance = Infinity;
-
-    images.forEach((img, i) => {
-        const imgRect = img.getBoundingClientRect();
-        const imgCenter = imgRect.left + imgRect.width / 2;
-        const distance = Math.abs(imgCenter - galleryCenter);
-        if (distance < minDistance) {
-            minDistance = distance;
-            currentIndex = i;
-        }
-    });
-
-    // nový index podle směru
-    let targetIndex = Math.min(Math.max(0, currentIndex + direction), images.length - 1);
-    const target = images[targetIndex];
-    const targetRect = target.getBoundingClientRect();
-
-    // scroll tak, aby fotka byla uprostřed
-    const targetScroll =
-        studioGallery.scrollLeft + (targetRect.left - galleryRect.left) + targetRect.width / 2 - galleryRect.width / 2;
-
-    studioGallery.scrollTo({
-        left: targetScroll,
-        behavior: "smooth"
-    });
-}
-
-// kliknutí na šipky
-studioBtnLeft.addEventListener("click", () => scrollStudioToImage(-1));
-studioBtnRight.addEventListener("click", () => scrollStudioToImage(1));
+    const studioGallery = document.querySelector("#studio .gallery");
 
 // --- Drag prstem / myší pro Studio ---
 let isStudioDown = false;
@@ -2179,9 +2089,6 @@ bannerImg.decode().then(() => {
 </body>
 
 </html>
-
-
-
 
 
 
