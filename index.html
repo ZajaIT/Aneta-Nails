@@ -797,41 +797,43 @@ nav{
         user-select: none;
     }
       /* --- Mobilní wrapper pro Studio sekci --- */
-#studio .gallery-wrapper {
-    position: relative;
-    overflow: hidden;  /* přetečení skryto */
-}
+/* jen pro mobil */
+@media (max-width: 768px) {
+  #studio .gallery-wrapper {
+    position: relative;  /* aby šipky byly nad fotkami */
+    overflow: hidden;    /* scroll bude uvnitř wrapperu */
+  }
 
-/* Šipky pro Studio mobil */
-#studio .scroll-btn {
+  #studio .scroll-btn {
+    display: flex;       /* šipky se zobrazí pouze na mobilu */
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: var(--rose);
-    border: none;
+    width: 40px;
+    height: 40px;
+    background: rgba(0,0,0,0.5);
+    color: #fff;
     border-radius: 50%;
-    width: 35px;
-    height: 35px;
-    font-size: 20px;
-    color: white;
-    display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     cursor: pointer;
     z-index: 10;
-    transition: background 0.3s ease, color 0.3s ease;
+  }
+
+  #studio .scroll-btn.left {
+    left: 10px;
+  }
+
+  #studio .scroll-btn.right {
+    right: 10px;
+  }
 }
 
-#studio .scroll-btn.left {
-    left: 12px;
-}
-
-#studio .scroll-btn.right {
-    right: 12px;
-}
-
-#studio .scroll-btn:hover {
-    background: rgba(212,139,156,0.6);
+/* desktop: šipky schované */
+@media (min-width: 769px) {
+  #studio .scroll-btn {
+    display: none !important;
+  }
 }
 
     /* --- GALERIE --- */
@@ -1050,10 +1052,9 @@ na detail, kvalitu a individuální přístup.
 
 <!-- STUDIO -->
 <section id="studio">
+  <h2>Studio</h2>
 
-<h2>Studio</h2>
-
-<div class="gallery-wrapper"> <!-- ← nový wrapper začíná -->
+  <div class="gallery-wrapper"> <!-- ← wrapper začíná -->
 
     <button class="scroll-btn left">&#10094;</button>
     
@@ -1065,8 +1066,7 @@ na detail, kvalitu a individuální přístup.
     
     <button class="scroll-btn right">&#10095;</button>
 
-</div> <!-- ← wrapper končí -->
-
+  </div> <!-- ← wrapper končí -->
 </section>
 
 
@@ -1469,9 +1469,7 @@ const gallery = document.querySelector("#gallery .gallery");
 const btnLeft = document.querySelector(".scroll-btn.left");
 const btnRight = document.querySelector(".scroll-btn.right");
 
-    const studioGallery = document.querySelector("#studio .gallery");
-
-  // --- Šipky pro Studio (jen mobil) ---
+const studioGallery = document.querySelector("#studio .gallery");
 const studioBtnLeft = document.querySelector("#studio .scroll-btn.left");
 const studioBtnRight = document.querySelector("#studio .scroll-btn.right");
 
@@ -1479,6 +1477,7 @@ function isMobile() {
     return window.innerWidth <= 768; // breakpoint pro mobil
 }
 
+// Funkce pro posun na střed obrázku
 function scrollStudioToImage(direction) {
     if (!isMobile()) return; // desktop ignorujeme
 
@@ -1486,9 +1485,10 @@ function scrollStudioToImage(direction) {
     const galleryRect = studioGallery.getBoundingClientRect();
     const galleryCenter = galleryRect.left + galleryRect.width / 2;
 
-    // najdeme aktuální obrázek nejblíž středu
+    // najdeme obrázek nejblíž středu
     let currentIndex = 0;
     let minDistance = Infinity;
+
     images.forEach((img, i) => {
         const imgRect = img.getBoundingClientRect();
         const imgCenter = imgRect.left + imgRect.width / 2;
@@ -1504,7 +1504,7 @@ function scrollStudioToImage(direction) {
     const target = images[targetIndex];
     const targetRect = target.getBoundingClientRect();
 
-    // scroll tak, aby byla fotka přesně uprostřed
+    // scroll tak, aby fotka byla uprostřed
     const targetScroll =
         studioGallery.scrollLeft + (targetRect.left - galleryRect.left) + targetRect.width / 2 - galleryRect.width / 2;
 
@@ -1514,7 +1514,7 @@ function scrollStudioToImage(direction) {
     });
 }
 
-// --- click/tap na šipky ---
+// kliknutí na šipky
 studioBtnLeft.addEventListener("click", () => scrollStudioToImage(-1));
 studioBtnRight.addEventListener("click", () => scrollStudioToImage(1));
 
@@ -2179,6 +2179,7 @@ bannerImg.decode().then(() => {
 </body>
 
 </html>
+
 
 
 
