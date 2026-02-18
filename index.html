@@ -1466,15 +1466,20 @@ function scrollToImage(direction) {
     }
 
     const images = gallery.querySelectorAll("img");
-    const galleryRect = gallery.getBoundingClientRect();
-    const galleryCenter = (btnLeft.getBoundingClientRect().right + btnRight.getBoundingClientRect().left) / 2;
 
-    // najdeme nejbližší fotku ke středu
+    // střed mezi šipkami
+    const galleryRect = gallery.getBoundingClientRect();
+    const leftEdge = btnLeft.getBoundingClientRect().right;
+    const rightEdge = btnRight.getBoundingClientRect().left;
+    const centerBetweenArrows = leftEdge + (rightEdge - leftEdge) / 2;
+
+    // najdeme nejbližší fotku ke středu mezi šipkami
     let closestIndex = 0;
     let minDistance = Infinity;
     images.forEach((img, i) => {
-        const imgCenter = img.offsetLeft + img.clientWidth / 2 - gallery.scrollLeft;
-        const distance = Math.abs(imgCenter - galleryCenter);
+        const imgRect = img.getBoundingClientRect();
+        const imgCenter = imgRect.left + imgRect.width / 2;
+        const distance = Math.abs(imgCenter - centerBetweenArrows);
         if (distance < minDistance) {
             minDistance = distance;
             closestIndex = i;
@@ -1487,10 +1492,11 @@ function scrollToImage(direction) {
     if (targetIndex >= images.length) targetIndex = images.length - 1;
 
     const target = images[targetIndex];
-    const targetScroll = target.offsetLeft - (gallery.clientWidth / 2 - target.clientWidth / 2);
+    const targetRect = target.getBoundingClientRect();
+    const scrollDelta = targetRect.left + targetRect.width / 2 - centerBetweenArrows;
 
-    gallery.scrollTo({
-        left: targetScroll,
+    gallery.scrollBy({
+        left: scrollDelta,
         behavior: "smooth"
     });
 
@@ -2083,6 +2089,7 @@ bannerImg.decode().then(() => {
 </body>
 
 </html>
+
 
 
 
