@@ -13,10 +13,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
 
-<link rel="preload" href="banner.png" as="image">
-
-<!-- Preload banneru -->
-<link rel="preload" href="banner.png" as="image">
+<link rel="preload" href="banner.png" as="image" fetchpriority="high">
 
 <style>
 /* --- Fallback fonty pro rychlé vykreslení textu --- */
@@ -31,9 +28,13 @@ h1, h2, h3 {
 /* --- Poladěný header pro rychlé vykreslení --- */
 header.banner {
     min-height: 89vh;
-    opacity: 1 !important;
-    transform: translateY(0) !important;
-    animation: fadeUp 1.2s ease-out 0.15s forwards;
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+/* aktivace až po načtení obrázku */
+header.banner.banner-ready {
+    animation: fadeUp 1.2s ease-out forwards;
 }
     
 /* RESET */
@@ -2037,10 +2038,20 @@ document.addEventListener("DOMContentLoaded", () => {
     updateArrowStates();
 });
 </script>
-    
+    <script>
+const bannerImg = new Image();
+bannerImg.src = "banner.png";
+
+bannerImg.decode().then(() => {
+  document.querySelector("header.banner")
+    .classList.add("banner-ready");
+});
+</script>
+  
 </body>
 
 </html>
+
 
 
 
