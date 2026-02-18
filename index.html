@@ -1467,32 +1467,34 @@ function scrollToImage(direction) {
 
     const images = gallery.querySelectorAll("img");
 
-    // střed galerie relativně k scrollu
-    const galleryCenter = gallery.scrollLeft + gallery.clientWidth / 2;
+    // vizuální střed mezi šipkami
+    const leftRect = btnLeft.getBoundingClientRect();
+    const rightRect = btnRight.getBoundingClientRect();
+    const visualCenter = leftRect.right + (rightRect.left - leftRect.right) / 2;
 
     // najdeme nejbližší fotku ke středu
     let closestIndex = 0;
     let minDistance = Infinity;
 
     images.forEach((img, i) => {
-        const imgCenter = img.offsetLeft + img.clientWidth / 2;
-        const distance = Math.abs(imgCenter - galleryCenter);
+        const imgRect = img.getBoundingClientRect();
+        const imgCenter = imgRect.left + imgRect.width / 2;
+        const distance = Math.abs(imgCenter - visualCenter);
         if (distance < minDistance) {
             minDistance = distance;
             closestIndex = i;
         }
     });
 
-    // posuneme o jeden index podle šipky
+    // posuneme o jeden index podle směru šipky
     let targetIndex = closestIndex + direction;
     if (targetIndex < 0) targetIndex = 0;
     if (targetIndex >= images.length) targetIndex = images.length - 1;
 
     const target = images[targetIndex];
 
-    // scroll tak, aby byla fotka uprostřed galerie
-    const targetScroll =
-        target.offsetLeft - (gallery.clientWidth / 2 - target.clientWidth / 2);
+    // scroll tak, aby střed fotky byl přesně ve středu mezi šipkami
+    const targetScroll = gallery.scrollLeft + (target.offsetLeft + target.clientWidth / 2 - visualCenter);
 
     gallery.scrollTo({
         left: targetScroll,
@@ -2088,6 +2090,7 @@ bannerImg.decode().then(() => {
 </body>
 
 </html>
+
 
 
 
