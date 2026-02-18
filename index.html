@@ -1460,7 +1460,6 @@ studioGallery.addEventListener("mousemove", (e) => {
 
 // --- Šipky ---
 function scrollToImage(direction) {
-    // jen mobil — desktop necháme beze změny
     if (window.innerWidth > 768) {
         gallery.scrollBy({ left: direction * 300, behavior: "smooth" });
         return;
@@ -1468,12 +1467,10 @@ function scrollToImage(direction) {
 
     const images = gallery.querySelectorAll("img");
 
-    // střed mezi šipkami
     const leftArrowRect = btnLeft.getBoundingClientRect();
     const rightArrowRect = btnRight.getBoundingClientRect();
     const centerBetweenArrows = (leftArrowRect.right + rightArrowRect.left) / 2;
 
-    // najdeme cílový obrázek
     let targetIndex = 0;
     let minDistance = Infinity;
 
@@ -1482,7 +1479,6 @@ function scrollToImage(direction) {
         const imgCenter = (imgRect.left + imgRect.right) / 2;
         const distance = Math.abs(imgCenter - centerBetweenArrows);
 
-        // vybíráme obrázek nejblíže středu mezi šipkami v daném směru
         if (
             (direction > 0 && imgCenter > centerBetweenArrows && distance < minDistance) ||
             (direction < 0 && imgCenter < centerBetweenArrows && distance < minDistance)
@@ -1491,6 +1487,10 @@ function scrollToImage(direction) {
             minDistance = distance;
         }
     });
+
+    // ošetření první a poslední fotky
+    if (direction > 0 && targetIndex === 0) targetIndex = 1;
+    if (direction < 0 && targetIndex === images.length - 1) targetIndex = images.length - 2;
 
     const target = images[targetIndex];
     const targetScroll =
@@ -2090,6 +2090,7 @@ bannerImg.decode().then(() => {
 </body>
 
 </html>
+
 
 
 
