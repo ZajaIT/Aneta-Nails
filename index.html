@@ -1460,7 +1460,7 @@ studioGallery.addEventListener("mousemove", (e) => {
 
 // --- Šipky ---
 function scrollToImage(direction) {
-    // jen mobil — desktop necháme absolutně beze změny
+    // jen mobil — desktop necháme beze změny
     if (window.innerWidth > 768) {
         gallery.scrollBy({ left: direction * 300, behavior: "smooth" });
         return;
@@ -1468,13 +1468,16 @@ function scrollToImage(direction) {
 
     const images = Array.from(gallery.querySelectorAll("img"));
 
-    // Najdeme index fotky, která je aktuálně nejblíže středu mezi šipkami
-    const galleryCenter = gallery.scrollLeft + gallery.clientWidth / 2;
-    let currentIndex = 0;
+    // najdeme index fotky, která je aktuálně nejblíže středu mezi šipkami
+    const galleryRect = gallery.getBoundingClientRect();
+    const galleryCenter = galleryRect.left + galleryRect.width / 2;
 
+    let currentIndex = 0;
     let minDistance = Infinity;
+
     images.forEach((img, i) => {
-        const imgCenter = img.offsetLeft + img.clientWidth / 2;
+        const imgRect = img.getBoundingClientRect();
+        const imgCenter = imgRect.left + imgRect.width / 2;
         const distance = Math.abs(imgCenter - galleryCenter);
         if (distance < minDistance) {
             minDistance = distance;
@@ -1482,13 +1485,14 @@ function scrollToImage(direction) {
         }
     });
 
-    // Nový index podle směru, omezíme na hranice galerie
+    // nový index podle směru, omezíme na hranice galerie
     let targetIndex = Math.min(Math.max(0, currentIndex + direction), images.length - 1);
-
     const target = images[targetIndex];
+    const targetRect = target.getBoundingClientRect();
 
-    // Scroll tak, aby byla fotka přesně uprostřed mezi šipkami
-    const targetScroll = target.offsetLeft + target.clientWidth / 2 - gallery.clientWidth / 2;
+    // scroll tak, aby byla fotka přesně uprostřed mezi šipkami
+    const targetScroll =
+        gallery.scrollLeft + (targetRect.left - galleryRect.left) + targetRect.width / 2 - galleryRect.width / 2;
 
     gallery.scrollTo({
         left: targetScroll,
@@ -2084,6 +2088,7 @@ bannerImg.decode().then(() => {
 </body>
 
 </html>
+
 
 
 
