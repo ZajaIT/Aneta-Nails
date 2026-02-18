@@ -1428,6 +1428,53 @@ const btnRight = document.querySelector(".scroll-btn.right");
 
     const studioGallery = document.querySelector("#studio .gallery");
 
+  // --- Šipky pro Studio (jen mobil) ---
+const studioBtnLeft = document.querySelector("#studio .scroll-btn.left");
+const studioBtnRight = document.querySelector("#studio .scroll-btn.right");
+
+function isMobile() {
+    return window.innerWidth <= 768; // breakpoint pro mobil
+}
+
+function scrollStudioToImage(direction) {
+    if (!isMobile()) return; // desktop ignorujeme
+
+    const images = Array.from(studioGallery.querySelectorAll("img"));
+    const galleryRect = studioGallery.getBoundingClientRect();
+    const galleryCenter = galleryRect.left + galleryRect.width / 2;
+
+    // najdeme aktuální obrázek nejblíž středu
+    let currentIndex = 0;
+    let minDistance = Infinity;
+    images.forEach((img, i) => {
+        const imgRect = img.getBoundingClientRect();
+        const imgCenter = imgRect.left + imgRect.width / 2;
+        const distance = Math.abs(imgCenter - galleryCenter);
+        if (distance < minDistance) {
+            minDistance = distance;
+            currentIndex = i;
+        }
+    });
+
+    // nový index podle směru
+    let targetIndex = Math.min(Math.max(0, currentIndex + direction), images.length - 1);
+    const target = images[targetIndex];
+    const targetRect = target.getBoundingClientRect();
+
+    // scroll tak, aby byla fotka přesně uprostřed
+    const targetScroll =
+        studioGallery.scrollLeft + (targetRect.left - galleryRect.left) + targetRect.width / 2 - galleryRect.width / 2;
+
+    studioGallery.scrollTo({
+        left: targetScroll,
+        behavior: "smooth"
+    });
+}
+
+// --- click/tap na šipky ---
+studioBtnLeft.addEventListener("click", () => scrollStudioToImage(-1));
+studioBtnRight.addEventListener("click", () => scrollStudioToImage(1));
+
 // --- Drag prstem / myší pro Studio ---
 let isStudioDown = false;
 let studioStartX;
@@ -2089,6 +2136,7 @@ bannerImg.decode().then(() => {
 </body>
 
 </html>
+
 
 
 
