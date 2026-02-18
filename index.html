@@ -1459,14 +1459,48 @@ studioGallery.addEventListener("mousemove", (e) => {
 });
 
 // --- Šipky ---
-btnLeft.addEventListener("click", () => {
-    gallery.scrollBy({ left: -300, behavior: "smooth" });
-    setTimeout(updateArrowStates, 310);
-});
-btnRight.addEventListener("click", () => {
-    gallery.scrollBy({ left: 300, behavior: "smooth" });
-    setTimeout(updateArrowStates, 310);
-});
+function scrollToImage(direction) {
+
+    // jen mobil — desktop necháme absolutně beze změny
+    if (window.innerWidth > 768) {
+        gallery.scrollBy({ left: direction * 300, behavior: "smooth" });
+        return;
+    }
+
+    const images = gallery.querySelectorAll("img");
+    const galleryCenter = gallery.scrollLeft + gallery.clientWidth / 2;
+
+    let targetIndex = 0;
+
+    images.forEach((img, i) => {
+        const imgCenter = img.offsetLeft + img.clientWidth / 2;
+
+        if (direction > 0 && imgCenter > galleryCenter) {
+            targetIndex = i;
+            return;
+        }
+
+        if (direction < 0 && imgCenter >= galleryCenter) {
+            targetIndex = Math.max(0, i - 1);
+            return;
+        }
+    });
+
+    const target = images[targetIndex];
+    const targetScroll =
+        target.offsetLeft -
+        (gallery.clientWidth / 2 - target.clientWidth / 2);
+
+    gallery.scrollTo({
+        left: targetScroll,
+        behavior: "smooth"
+    });
+
+    setTimeout(updateArrowStates, 350);
+}
+
+btnLeft.addEventListener("click", () => scrollToImage(-1));
+btnRight.addEventListener("click", () => scrollToImage(1));
 
 // --- Drag podle myši ---
 let isDown = false;
@@ -2051,6 +2085,7 @@ bannerImg.decode().then(() => {
 </body>
 
 </html>
+
 
 
 
