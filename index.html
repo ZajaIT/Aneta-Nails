@@ -1460,39 +1460,41 @@ studioGallery.addEventListener("mousemove", (e) => {
 
 // --- Šipky ---
 function scrollToImage(direction) {
-
-    // desktop necháme úplně beze změny
+    // jen mobil — desktop necháme beze změny
     if (window.innerWidth > 768) {
         gallery.scrollBy({ left: direction * 300, behavior: "smooth" });
         return;
     }
 
     const images = gallery.querySelectorAll("img");
-    const galleryCenter = gallery.scrollLeft + gallery.clientWidth / 2;
 
+    // střed mezi šipkami
+    const leftArrowRect = btnLeft.getBoundingClientRect();
+    const rightArrowRect = btnRight.getBoundingClientRect();
+    const centerBetweenArrows = (leftArrowRect.right + rightArrowRect.left) / 2;
+
+    // najdeme cílový obrázek
     let targetIndex = 0;
+    let minDistance = Infinity;
 
-    // místo forEach použijeme klasický for (ten jde přerušit)
-    for (let i = 0; i < images.length; i++) {
+    images.forEach((img, i) => {
+        const imgRect = img.getBoundingClientRect();
+        const imgCenter = (imgRect.left + imgRect.right) / 2;
+        const distance = Math.abs(imgCenter - centerBetweenArrows);
 
-        const img = images[i];
-        const imgCenter = img.offsetLeft + img.clientWidth / 2;
-
-        if (direction > 0 && imgCenter > galleryCenter) {
+        // vybíráme obrázek nejblíže středu mezi šipkami v daném směru
+        if (
+            (direction > 0 && imgCenter > centerBetweenArrows && distance < minDistance) ||
+            (direction < 0 && imgCenter < centerBetweenArrows && distance < minDistance)
+        ) {
             targetIndex = i;
-            break;
+            minDistance = distance;
         }
-
-        if (direction < 0 && imgCenter >= galleryCenter) {
-            targetIndex = Math.max(0, i - 1);
-            break;
-        }
-    }
+    });
 
     const target = images[targetIndex];
     const targetScroll =
-        target.offsetLeft -
-        (gallery.clientWidth / 2 - target.clientWidth / 2);
+        gallery.scrollLeft + (target.offsetLeft + target.clientWidth / 2 - gallery.scrollLeft - centerBetweenArrows);
 
     gallery.scrollTo({
         left: targetScroll,
@@ -2088,6 +2090,7 @@ bannerImg.decode().then(() => {
 </body>
 
 </html>
+
 
 
 
