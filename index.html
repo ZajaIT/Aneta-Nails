@@ -1461,7 +1461,7 @@ studioGallery.addEventListener("mousemove", (e) => {
 // --- Šipky ---
 function scrollToImage(direction) {
 
-    // jen mobil — desktop necháme absolutně beze změny
+    // desktop necháme úplně beze změny
     if (window.innerWidth > 768) {
         gallery.scrollBy({ left: direction * 300, behavior: "smooth" });
         return;
@@ -1472,19 +1472,22 @@ function scrollToImage(direction) {
 
     let targetIndex = 0;
 
-    images.forEach((img, i) => {
+    // místo forEach použijeme klasický for (ten jde přerušit)
+    for (let i = 0; i < images.length; i++) {
+
+        const img = images[i];
         const imgCenter = img.offsetLeft + img.clientWidth / 2;
 
         if (direction > 0 && imgCenter > galleryCenter) {
             targetIndex = i;
-            return;
+            break;
         }
 
         if (direction < 0 && imgCenter >= galleryCenter) {
             targetIndex = Math.max(0, i - 1);
-            return;
+            break;
         }
-    });
+    }
 
     const target = images[targetIndex];
     const targetScroll =
@@ -2085,6 +2088,7 @@ bannerImg.decode().then(() => {
 </body>
 
 </html>
+
 
 
 
