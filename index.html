@@ -666,6 +666,15 @@ nav{
     display: none; /* pravá šipka se skryje, když je na konci */
 }
 
+  /* --- Ceník --- */
+#pricing .pricing{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
+    gap: 40px;
+    max-width: 1100px;
+    margin: auto;
+}
+
 /* --- Kontakt: hover efekt pro text a ikonky --- */
 .contact-line {
     display: inline-flex;
@@ -959,6 +968,7 @@ nav{
     <li><a href="#services">SLUŽBY</a></li>
     <li><a href="#studio">STUDIO</a></li>
     <li><a href="#gallery">GALERIE</a></li>
+    <li><a href="#pricing">CENÍK</a></li>
     <li><a href="#contact">KONTAKT</a></li>
 </ul>
 </nav>
@@ -1050,6 +1060,28 @@ na detail, kvalitu a individuální přístup.
 
 </section>
 
+  <!-- CENÍK -->
+<section id="pricing">
+  <h2>Ceník</h2>
+
+  <div class="services">
+    <div class="service">
+      <h3>Modeláž</h3>
+      <p>800 Kč – 1200 Kč dle délky a typu</p>
+    </div>
+
+    <div class="service">
+      <h3>Manikúra</h3>
+      <p>400 Kč – 600 Kč</p>
+    </div>
+
+    <div class="service">
+      <h3>Gel lak</h3>
+      <p>350 Kč – 500 Kč</p>
+    </div>
+  </div>
+</section>
+  
 <!-- CONTACT -->
 <section id="contact">
 
@@ -2117,6 +2149,7 @@ bannerImg.decode().then(() => {
 </body>
 
 </html>
+
 
 
 
