@@ -2050,13 +2050,41 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const scrollAmount = 260;
 
-    leftBtn.addEventListener("click", () => {
-        studioGallery.scrollBy({ left: -scrollAmount, behavior: "smooth" });
+    const images = Array.from(studioGallery.querySelectorAll("img"));
+
+function scrollToStudioImage(direction) {
+    const galleryRect = studioGallery.getBoundingClientRect();
+    const galleryCenter = galleryRect.left + galleryRect.width / 2;
+
+    let currentIndex = 0;
+    let minDistance = Infinity;
+
+    images.forEach((img, i) => {
+        const imgRect = img.getBoundingClientRect();
+        const imgCenter = imgRect.left + imgRect.width / 2;
+        const distance = Math.abs(imgCenter - galleryCenter);
+        if (distance < minDistance) {
+            minDistance = distance;
+            currentIndex = i;
+        }
     });
 
-    rightBtn.addEventListener("click", () => {
-        studioGallery.scrollBy({ left: scrollAmount, behavior: "smooth" });
+    let targetIndex = Math.min(Math.max(0, currentIndex + direction), images.length - 1);
+    const target = images[targetIndex];
+    const targetRect = target.getBoundingClientRect();
+
+    const targetScroll =
+        studioGallery.scrollLeft + (targetRect.left - galleryRect.left) + targetRect.width / 2 - galleryRect.width / 2;
+
+    studioGallery.scrollTo({
+        left: targetScroll,
+        behavior: "smooth"
     });
+}
+
+// --- nahrazení původních listenerů ---
+leftBtn.addEventListener("click", () => scrollToStudioImage(-1));
+rightBtn.addEventListener("click", () => scrollToStudioImage(1));
 
     const updateArrowStates = () => {
         if(studioGallery.scrollLeft <= 0){
@@ -2089,6 +2117,7 @@ bannerImg.decode().then(() => {
 </body>
 
 </html>
+
 
 
 
