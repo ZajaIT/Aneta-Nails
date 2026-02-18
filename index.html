@@ -1428,6 +1428,62 @@ const btnRight = document.querySelector(".scroll-btn.right");
 
     const studioGallery = document.querySelector("#studio .gallery");
 
+  const studioBtnLeft = document.querySelector("#studio .scroll-btn.left");
+const studioBtnRight = document.querySelector("#studio .scroll-btn.right");
+
+// funkce pro posouvání přesně na střed fotky
+function scrollStudioImage(direction) {
+    if(window.innerWidth > 768) return; // jen mobil
+
+    const images = Array.from(studioGallery.querySelectorAll("img"));
+    const galleryRect = studioGallery.getBoundingClientRect();
+    const galleryCenter = galleryRect.left + galleryRect.width / 2;
+
+    let currentIndex = 0;
+    let minDistance = Infinity;
+
+    images.forEach((img, i) => {
+        const imgRect = img.getBoundingClientRect();
+        const imgCenter = imgRect.left + imgRect.width / 2;
+        const distance = Math.abs(imgCenter - galleryCenter);
+        if(distance < minDistance){
+            minDistance = distance;
+            currentIndex = i;
+        }
+    });
+
+    let targetIndex = Math.min(Math.max(0, currentIndex + direction), images.length - 1);
+    const target = images[targetIndex];
+    const targetRect = target.getBoundingClientRect();
+
+    const targetScroll =
+        studioGallery.scrollLeft + (targetRect.left - galleryRect.left) + targetRect.width / 2 - galleryRect.width / 2;
+
+    studioGallery.scrollTo({ left: targetScroll, behavior: "smooth" });
+    setTimeout(updateStudioArrowStates, 350);
+}
+
+// funkce pro zobrazení / skrytí šipek
+function updateStudioArrowStates() {
+    if(studioGallery.scrollLeft > 0){
+        studioBtnLeft.style.display = "flex";
+    } else {
+        studioBtnLeft.style.display = "none";
+    }
+    if(studioGallery.scrollLeft + studioGallery.clientWidth >= studioGallery.scrollWidth - 1){
+        studioBtnRight.style.display = "none";
+    } else {
+        studioBtnRight.style.display = "flex";
+    }
+}
+
+// při kliknutí na šipky
+studioBtnLeft.addEventListener("click", () => scrollStudioImage(-1));
+studioBtnRight.addEventListener("click", () => scrollStudioImage(1));
+
+// inicializace stavu šipek
+updateStudioArrowStates();
+
 // --- Drag prstem / myší pro Studio ---
 let isStudioDown = false;
 let studioStartX;
@@ -2089,6 +2145,7 @@ bannerImg.decode().then(() => {
 </body>
 
 </html>
+
 
 
 
