@@ -796,6 +796,43 @@ nav{
         cursor: pointer;
         user-select: none;
     }
+      /* --- Mobilní wrapper pro Studio sekci --- */
+#studio .gallery-wrapper {
+    position: relative;
+    overflow: hidden;  /* přetečení skryto */
+}
+
+/* Šipky pro Studio mobil */
+#studio .scroll-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--rose);
+    border: none;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    font-size: 20px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+#studio .scroll-btn.left {
+    left: 12px;
+}
+
+#studio .scroll-btn.right {
+    right: 12px;
+}
+
+#studio .scroll-btn:hover {
+    background: rgba(212,139,156,0.6);
+}
 
     /* --- GALERIE --- */
     #gallery .gallery {
@@ -1016,13 +1053,19 @@ na detail, kvalitu a individuální přístup.
 
 <h2>Studio</h2>
 
-<div class="gallery">
+<div class="gallery-wrapper"> <!-- ← nový wrapper začíná -->
 
-<img src="studio1.jpg" alt="Studio">    
-<img src="studio2.jpg" alt="Studio">
-<img src="studio3.jpg" alt="Studio">
+    <button class="scroll-btn left">&#10094;</button>
+    
+    <div class="gallery">
+        <img src="studio1.jpg" alt="Studio">    
+        <img src="studio2.jpg" alt="Studio">
+        <img src="studio3.jpg" alt="Studio">
+    </div>
+    
+    <button class="scroll-btn right">&#10095;</button>
 
-</div>
+</div> <!-- ← wrapper končí -->
 
 </section>
 
@@ -2136,6 +2179,7 @@ bannerImg.decode().then(() => {
 </body>
 
 </html>
+
 
 
 
