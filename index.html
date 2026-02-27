@@ -359,7 +359,7 @@ section h2::after{
 }
 
 /* --- O MĚ: fotka vlevo, text vpravo --- */
-.about-wrapper{
+.about-wrapper {
     display: flex;
     align-items: center;
     gap: 40px; /* mezera mezi fotkou a textem */
@@ -368,11 +368,11 @@ section h2::after{
     flex-wrap: wrap; /* na mobil sloupce spadnou pod sebe */
 }
 
-.about-photo{
+.about-photo {
     flex: 1 1 300px; /* minimální šířka fotky */
 }
 
-.about-photo img{
+.about-photo img {
     width: 100%;
     max-width: 200px; /* určuje maximální šířku fotky */
     height: auto;
@@ -380,22 +380,22 @@ section h2::after{
     box-shadow: 0 8px 20px rgba(0,0,0,0.1);
 }
 
-.about-text{
+.about-text {
     flex: 2 1 400px; /* text zabere zbytek místa */
     font-size: 18px;
     line-height: 1.7;
 }
 
 @media (max-width: 768px) {
-    .about-wrapper{
+    .about-wrapper {
         flex-direction: column-reverse; /* text nahoře, fotka dole */
         align-items: center;
         text-align: center;
     }
 
-    .about-text{
+    .about-text {
         margin-top: 0; /* odstraníme mezery nahoře */
-        margin-bottom: 10px; /* mezera pod textem před fotkou */
+        margin-bottom: 10px; /* menší mezera pod textem před fotkou */
     }
 }
   
@@ -2203,6 +2203,7 @@ bannerImg.decode().then(() => {
 </body>
 
 </html>
+
 
 
 
