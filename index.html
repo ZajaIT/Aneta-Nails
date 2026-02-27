@@ -358,8 +358,8 @@ section h2::after{
     font-size:18px;
 }
 
-  /* --- O MĚ: fotka vlevo, text vpravo --- */
-.about-content{
+/* --- O MĚ: fotka vlevo, text vpravo --- */
+.about-wrapper{
     display: flex;
     align-items: center;
     gap: 40px; /* mezera mezi fotkou a textem */
@@ -386,8 +386,8 @@ section h2::after{
     line-height: 1.7;
 }
 
- @media (max-width: 768px) {
-    .about-content{
+@media (max-width: 768px) {
+    .about-wrapper{
         flex-direction: column-reverse; /* text nahoře, fotka dole */
         align-items: center;
         text-align: center;
@@ -2203,6 +2203,7 @@ bannerImg.decode().then(() => {
 </body>
 
 </html>
+
 
 
 
