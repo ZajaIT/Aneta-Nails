@@ -374,10 +374,17 @@ section h2::after{
 
 .about-photo img {
     width: 100%;
-    max-width: 200px; /* určuje maximální šířku fotky */
+    max-width: 200px;
     height: auto;
     border-radius: 20px;
     box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+  @media (min-width: 769px) {
+    .about-photo img:hover {
+        transform: scale(1.05);
+        box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    }
 }
 
 .about-text {
@@ -2229,6 +2236,7 @@ bannerImg.decode().then(() => {
 </body>
 
 </html>
+
 
 
 
