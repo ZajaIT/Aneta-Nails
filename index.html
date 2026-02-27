@@ -388,18 +388,22 @@ section h2::after{
 
 @media (max-width: 768px) {
   .about-wrapper {
-    outline: 4px solid red !important; /* TEST */
     flex-direction: column-reverse;
+    flex-wrap: nowrap;       /* ← DŮLEŽITÉ: zruší wrap */
+    gap: 10px;               /* ← malá mezera (dej 0px, když chceš úplně těsně) */
     align-items: center;
     text-align: center;
-    gap: 0px;
   }
 
-  /* ✅ Tohle obvykle dělá tu velkou mezeru */
-  #about {
-    padding-top: 30px !important;
-    padding-bottom: 30px !important;
-}
+  .about-text,
+  .about-photo {
+    flex: 0 0 auto;          /* ← zruší původní flex: ... 400px/300px */
+    width: 100%;             /* ← oba přes celou šířku */
+  }
+
+  .about-text p {
+    margin: 0;               /* ← aby nebyla mezera z odstavce */
+  }
 
   .about-photo img {
     display: block;
@@ -2211,6 +2215,7 @@ bannerImg.decode().then(() => {
 </body>
 
 </html>
+
 
 
 
