@@ -393,7 +393,14 @@ section h2::after{
     }
 }
 
-@media (max-width: 768px) {
+  /* PC – posun jen fotky */
+@media (min-width: 769px) {
+    .about-photo {
+        margin-left: 80px;
+    }
+}
+
+  @media (max-width: 768px) {
   .about-wrapper {
     flex-direction: column-reverse;
     flex-wrap: nowrap;       /* ← DŮLEŽITÉ: zruší wrap */
@@ -2222,6 +2229,7 @@ bannerImg.decode().then(() => {
 </body>
 
 </html>
+
 
 
 
