@@ -391,12 +391,26 @@ section h2::after{
         flex-direction: column-reverse;
         align-items: center;
         text-align: center;
-        gap: 0px;              /* ← výrazně menší mezera */
+        gap: 0px;
     }
 
-    .about-text {
-        margin-top: 0;
-        margin-bottom: 0;      /* ← úplně odstraníme spodní mezeru */
+    /* 1) Vynulujeme všechny možné mezery */
+    .about-text,
+    .about-photo {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    /* 2) Někdy dělá mezeru přímo <p> (kdyby reset někde neplatil) */
+    .about-text p {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    /* 3) Obrázek dáme jako block, aby nevznikaly "divné mezery" */
+    .about-photo img {
+        display: block;
+        margin: 0 auto;
     }
 }
   
@@ -2204,6 +2218,7 @@ bannerImg.decode().then(() => {
 </body>
 
 </html>
+
 
 
 
