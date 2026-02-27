@@ -392,6 +392,17 @@ section h2::after{
     font-size: 18px;
     line-height: 1.7;
 }
+
+  .about-note {
+    max-width: 700px;
+    margin: 40px auto 0;
+    text-align: center;
+}
+
+.about-note p {
+    font-size: 16px; /* o trochu menší než hlavní text */
+    line-height: 1.6;
+}
   /* PC – posun bloku doprava */
   @media (min-width: 769px) {
     .about-wrapper {
@@ -1079,6 +1090,15 @@ nav{
       </p>
     </div>
   </div>
+
+  <!-- NOVÝ BLOK – jemná poznámka -->
+  <div class="about-note">
+    <p>
+      Díky dlouhodobé důvěře mých klientek mám aktuálně plně obsazenou kapacitu.
+      Vedu však pořadník – pokud si přejete být zařazena, ráda si vás zapíšu.
+    </p>
+  </div>
+  
 </section>
 
 
@@ -2236,6 +2256,7 @@ bannerImg.decode().then(() => {
 </body>
 
 </html>
+
 
 
 
