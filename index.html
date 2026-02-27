@@ -389,18 +389,20 @@ section h2::after{
 @media (max-width: 768px) {
   .about-wrapper {
     outline: 4px solid red !important; /* TEST */
-  }
-
-  .about-wrapper {
     flex-direction: column-reverse;
     align-items: center;
     text-align: center;
     gap: 0px;
   }
 
-  .about-text {
-    margin-top: 0;
-    margin-bottom: 0;
+  /* ✅ Tohle obvykle dělá tu velkou mezeru */
+  .about-text p {
+    margin: 0 !important;
+  }
+
+  .about-photo img {
+    display: block;
+    margin: 0 auto;
   }
 }
   
@@ -2208,6 +2210,7 @@ bannerImg.decode().then(() => {
 </body>
 
 </html>
+
 
 
 
