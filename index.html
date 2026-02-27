@@ -358,6 +358,46 @@ section h2::after{
     font-size:18px;
 }
 
+  /* --- O MĚ: fotka vlevo, text vpravo --- */
+.about-content{
+    display: flex;
+    align-items: center;
+    gap: 40px; /* mezera mezi fotkou a textem */
+    max-width: 900px;
+    margin: 20px auto 0; /* odsazení od nadpisu */
+    flex-wrap: wrap; /* na mobil sloupce spadnou pod sebe */
+}
+
+.about-photo{
+    flex: 1 1 300px; /* minimální šířka fotky */
+}
+
+.about-photo img{
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.about-text{
+    flex: 2 1 400px; /* text zabere zbytek místa */
+    font-size: 18px;
+    line-height: 1.7;
+}
+
+ @media (max-width: 768px) {
+    .about-content{
+        flex-direction: column-reverse; /* text nahoře, fotka dole */
+        align-items: center;
+        text-align: center;
+    }
+
+    .about-text{
+        margin-top: 0; /* odstraníme mezery nahoře */
+        margin-bottom: 20px; /* mezera pod textem před fotkou */
+    }
+}
+  
 /* CONTACT */
 
 .contact{
@@ -990,18 +1030,21 @@ nav{
 
 <!-- ABOUT -->
 <section id="about">
+  <h2>O mně</h2>
 
-<h2>O mně</h2>
+  <div class="about-wrapper">
+    <div class="about-photo">
+      <img src="anet.jpeg" alt="Anet">
+    </div>
 
-<div class="about">
-
-<p>
-Jmenuji se Anet a nehtové modeláži se věnuji více než 12 let.
-Ve své práci propojuji preciznost, smysl pro detail a individuální přístup ke každé klientce. Kvalita je pro mě vždy na prvním místě – jak po stránce estetiky, tak komfortu a péče.
-</p>
-
-</div>
-
+    <div class="about-text">
+      <p>
+        Jmenuji se Anet a nehtové modeláži se věnuji více než 12 let.
+        Ve své práci propojuji preciznost, smysl pro detail a individuální přístup ke každé klientce. 
+        Kvalita je pro mě vždy na prvním místě – jak po stránce estetiky, tak komfortu a péče.
+      </p>
+    </div>
+  </div>
 </section>
 
 
@@ -2159,6 +2202,7 @@ bannerImg.decode().then(() => {
 </body>
 
 </html>
+
 
 
 
