@@ -1,7 +1,4 @@
 
-
-
-
 <!DOCTYPE html>
 <html lang="cs">
 <head>
@@ -2539,12 +2536,12 @@ pricingClose.addEventListener("click", () => {
     pricingContent.classList.remove("open");
     pricingToggle.textContent = "Zobrazit ceník";
 
-    window.scrollBy({
-        top: -600,
+    document.getElementById("pricing").scrollIntoView({
         behavior: "smooth"
     });
 
 });
+
 }
 </script>
 
@@ -2552,42 +2549,4 @@ pricingClose.addEventListener("click", () => {
 </body>
 
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
