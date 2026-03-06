@@ -2536,20 +2536,15 @@ pricingToggle.addEventListener("click", () => {
 
 pricingClose.addEventListener("click", () => {
 
+    const pricingSection = document.getElementById("pricing");
+
     pricingContent.classList.remove("open");
     pricingToggle.textContent = "Zobrazit ceník";
 
-    if(window.innerWidth <= 768){
-        setTimeout(() => {
-            document.getElementById("pricing").scrollIntoView({
-                behavior: "smooth"
-            });
-        }, 350);
-    } else {
-        document.getElementById("pricing").scrollIntoView({
-            behavior: "smooth"
-        });
-    }
+    window.scrollTo({
+        top: pricingSection.offsetTop - 40,
+        behavior: "smooth"
+    });
 
 });
 }
@@ -2559,6 +2554,7 @@ pricingClose.addEventListener("click", () => {
 </body>
 
 </html>
+
 
 
 
