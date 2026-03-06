@@ -245,10 +245,13 @@ section{
     scroll-margin-top: 40px;
 }
 
-  /* Bílé pozadí pro sekce Služby a Ceník */
+  /* Bílé pozadí přes celou šířku */
 #services,
 #pricing{
-    background: white;
+    background:white;
+    width:100vw;
+    margin-left:calc(50% - 50vw);
+    margin-right:calc(50% - 50vw);
 }
 
   /* --- Služby – elegantní textové bloky --- */
@@ -2330,6 +2333,7 @@ bannerImg.decode().then(() => {
 </body>
 
 </html>
+
 
 
 
