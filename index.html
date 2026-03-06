@@ -1,6 +1,7 @@
 
 
 
+
 <!DOCTYPE html>
 <html lang="cs">
 <head>
@@ -2016,6 +2017,15 @@ function handleSwipe() {
 
 });
 
+// vždy po reloadu začni nahoře
+if ("scrollRestoration" in history) {
+    history.scrollRestoration = "manual";
+}
+
+window.addEventListener("load", () => {
+    window.scrollTo(0, 0);
+});
+
 // Hamburger toggle pro mobil
 const hamburger = document.querySelector(".hamburger");
 const navMenu = document.querySelector("nav ul");
@@ -2294,22 +2304,5 @@ bannerImg.decode().then(() => {
 </body>
 
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
