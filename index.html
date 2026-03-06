@@ -1852,6 +1852,19 @@ nav a::before {
     grid-template-columns:1fr;
     max-width:260px;
 }
+
+  #pricing .pricing-item{
+        align-items:flex-start;
+        gap:10px;
+    }
+
+    #pricing .pricing-item span:first-child{
+        flex:1;
+    }
+
+    #pricing .pricing-item span:last-child{
+        white-space:nowrap;
+    }
 }
     body.no-scroll {
     overflow: hidden;   /* zakáže posuvník i kolečko myši */
@@ -2588,6 +2601,7 @@ pricingClose.addEventListener("click", () => {
 </body>
 
 </html>
+
 
 
 
