@@ -358,6 +358,47 @@ section h2::after{
     font-size:18px;
 }
 
+  /* --- Ikonky pod sekcí O mně --- */
+
+.about-features{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:30px;
+    margin-top:40px;
+    text-align:center;
+}
+
+.feature{
+    background:white;
+    padding:25px 20px;
+    border-radius:25px;
+    box-shadow:0 8px 20px rgba(0,0,0,0.07);
+    transition:transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature:hover{
+    transform:translateY(-5px);
+    box-shadow:0 12px 30px rgba(0,0,0,0.1);
+}
+
+.feature-icon{
+    font-size:32px;
+    margin-bottom:10px;
+}
+
+.feature p{
+    font-size:15px;
+    font-weight:500;
+}
+
+/* mobil */
+@media(max-width:768px){
+    .about-features{
+        grid-template-columns:repeat(2,1fr);
+        gap:15px;
+    }
+}
+
 /* --- O MĚ: fotka vlevo, text vpravo --- */
 .about-wrapper {
     display: flex;
@@ -1105,6 +1146,30 @@ nav{
       Vedu však pořadník, kam Vás ráda zapíšu.
     </p>
   </div>
+
+  <div class="about-features">
+
+  <div class="feature">
+    <div class="feature-icon">🧼</div>
+    <p>Hygiena</p>
+  </div>
+
+  <div class="feature">
+    <div class="feature-icon">💎</div>
+    <p>Profesionalita</p>
+  </div>
+
+  <div class="feature">
+    <div class="feature-icon">💗</div>
+    <p>Osobní přístup</p>
+  </div>
+
+  <div class="feature">
+    <div class="feature-icon">✨</div>
+    <p>Prémiové materiály</p>
+  </div>
+
+</div>
   
 </section>
 
@@ -2263,6 +2328,7 @@ bannerImg.decode().then(() => {
 </body>
 
 </html>
+
 
 
 
