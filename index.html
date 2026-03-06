@@ -794,6 +794,76 @@ nav{
     margin: auto;
 }
 
+  /* --- Ceník karta --- */
+
+.pricing-card{
+    max-width:420px;
+    margin:0 auto;
+    background:white;
+    border-radius:30px;
+    padding:40px 30px;
+    text-align:center;
+    box-shadow:0 10px 30px rgba(0,0,0,0.08);
+    transition:0.3s ease;
+}
+
+.pricing-card:hover{
+    transform:translateY(-5px);
+}
+
+.pricing-card img{
+    width:170px;
+    margin-bottom:20px;
+}
+
+.pricing-card h3{
+    font-family:'Cormorant Garamond',serif;
+    font-size:28px;
+    margin-bottom:10px;
+}
+
+.pricing-card p{
+    font-size:15px;
+    margin-bottom:25px;
+}
+
+/* tlačítko */
+
+.pricing-toggle{
+    background:linear-gradient(135deg,#d48b9c,#f3c1cc);
+    border:none;
+    padding:12px 30px;
+    border-radius:40px;
+    color:white;
+    font-weight:500;
+    cursor:pointer;
+}
+
+/* skrytý obsah */
+
+.pricing-content{
+    max-height:0;
+    overflow:hidden;
+    transition:0.4s ease;
+    margin-top:20px;
+}
+
+/* otevřený obsah */
+
+.pricing-content.open{
+    max-height:500px;
+}
+
+/* jednotlivé řádky ceníku */
+
+.pricing-item{
+    display:flex;
+    justify-content:space-between;
+    padding:10px 0;
+    border-bottom:1px solid rgba(212,139,156,0.25);
+    font-size:15px;
+}
+
 /* --- Kontakt: hover efekt pro text a ikonky --- */
 .contact-line {
     display: inline-flex;
@@ -1238,7 +1308,7 @@ Veškeré vybavení je zajištěno ve studiu. Kurz probíhá v mém salonu v Ús
 
 <div class="pricing-card">
 
-    <img src="sml.jpg" alt="Ceník">
+    <img src="InCollage_20260306_140302649.jpg" alt="Ceník">
 
     <h3>Ceník služeb</h3>
 
@@ -2339,11 +2409,30 @@ bannerImg.decode().then(() => {
   document.querySelector("header.banner")
     .classList.add("banner-ready");
 });
+
+      const pricingToggle = document.querySelector(".pricing-toggle");
+const pricingContent = document.querySelector(".pricing-content");
+
+      if(pricingToggle && pricingContent){
+
+pricingToggle.addEventListener("click", () => {
+
+    pricingContent.classList.toggle("open");
+
+    if(pricingContent.classList.contains("open")){
+        pricingToggle.textContent = "Skrýt ceník";
+    } else {
+        pricingToggle.textContent = "Zobrazit ceník";
+    }
+
+});
 </script>
+
   
 </body>
 
 </html>
+
 
 
 
