@@ -881,6 +881,23 @@ nav{
     margin:18px 0;
     opacity:0.85;
     text-align:left;
+
+    position:relative;
+    padding-left:22px; /* místo pro odrážku */
+}
+
+/* stylová odrážka */
+.pricing-note::before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:9px;
+
+    width:8px;
+    height:8px;
+
+    border-radius:50%;
+    background:linear-gradient(135deg,#d48b9c,#f3c1cc);
 }
 
  .pricing-separator{
@@ -2564,6 +2581,7 @@ pricingClose.addEventListener("click", () => {
 </body>
 
 </html>
+
 
 
 
