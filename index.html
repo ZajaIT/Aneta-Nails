@@ -245,6 +245,40 @@ section{
     scroll-margin-top: 40px;
 }
 
+  /* --- Služby – elegantní textové bloky --- */
+
+.services-list{
+    max-width:900px;
+    margin:0 auto;
+}
+
+.service-item{
+    margin-bottom:60px;
+}
+
+.service-item h3{
+    font-family:'Cormorant Garamond',serif;
+    font-size:26px;
+    margin-bottom:10px;
+}
+
+.service-item h3::after{
+    content:"";
+    display:block;
+    width:120px;
+    height:2px;
+    background:linear-gradient(90deg,#d48b9c,#f3c1cc);
+    margin-top:10px;
+    border-radius:2px;
+}
+
+.service-item p{
+    margin-top:18px;
+    font-size:16px;
+    line-height:1.7;
+    opacity:0.9;
+}
+
 /* Galerie potřebuje plnou šířku bez bočního paddingu */
 #gallery{
     padding-left:0;
@@ -273,57 +307,6 @@ section h2::after{
     margin:18px auto 0;
 
     border-radius:2px;
-}
-
-/* SERVICES */
-
-.services{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-    gap:40px;
-}
-
-.service{
-    background:white;
-    padding:40px 30px;
-    border-radius:35px;
-    text-align:center;
-    box-shadow:0 10px 30px rgba(0,0,0,0.07);
-    position:relative;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-/* Zvýraznění nadpisu při hoveru */
-.service h3 {
-    transition: transform 0.3s ease, color 0.3s ease; /* plynulá animace */
-}
-
-.service:hover h3 {
-    transform: translateY(-3px); /* nadpis se lehce posune nahoru */
-    color: #d48b9c; /* barva nadpisu se změní na růžovou */
-}
-
-/* Efekt při najetí myší */
-.service:hover {
-    transform: scale(1.05);
-    box-shadow:0 15px 35px rgba(0,0,0,0.1);
-}
-
-.service p {
-    opacity: 0.8;
-    transform: translateY(5px);
-    transition: transform 0.3s ease, opacity 0.3s ease;
-}
-
-.service:hover p {
-    transform: translateY(0);
-    opacity: 1;
-}
-
-
-.service h3{
-    font-family:'Cormorant Garamond',serif;
-    font-size:26px;
 }
 
 /* GALLERY */
@@ -896,26 +879,6 @@ nav{
     nav a{
         padding:12px 10px;     /* menší touch area */
         font-size:14px;
-    }
-
-    /* SERVICES */
-    .services{
-        grid-template-columns:1fr;  /* 1 sloupec na mobil */
-        gap:20px;
-        padding:0 10px;
-    }
-
-    .service{
-        padding:25px 20px;
-        border-radius:25px;
-    }
-
-    .service h3{
-        font-size:22px;
-    }
-
-    .service p{
-        font-size:15px;
     }
 
     @media(max-width:768px){
@@ -2361,6 +2324,7 @@ bannerImg.decode().then(() => {
 </body>
 
 </html>
+
 
 
 
