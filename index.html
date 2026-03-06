@@ -2539,9 +2539,11 @@ pricingClose.addEventListener("click", () => {
     pricingContent.classList.remove("open");
     pricingToggle.textContent = "Zobrazit ceník";
 
-    document.getElementById("pricing").scrollIntoView({
-        behavior: "smooth"
-    });
+    setTimeout(() => {
+        document.getElementById("pricing").scrollIntoView({
+            behavior: "smooth"
+        });
+    }, 350);
 
 });
 
@@ -2552,6 +2554,7 @@ pricingClose.addEventListener("click", () => {
 </body>
 
 </html>
+
 
 
 
