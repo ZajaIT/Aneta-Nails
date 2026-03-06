@@ -2539,14 +2539,19 @@ pricingClose.addEventListener("click", () => {
     pricingContent.classList.remove("open");
     pricingToggle.textContent = "Zobrazit ceník";
 
-    setTimeout(() => {
+    if(window.innerWidth <= 768){
+        setTimeout(() => {
+            document.getElementById("pricing").scrollIntoView({
+                behavior: "smooth"
+            });
+        }, 350);
+    } else {
         document.getElementById("pricing").scrollIntoView({
             behavior: "smooth"
         });
-    }, 350);
+    }
 
 });
-
 }
 </script>
 
@@ -2554,6 +2559,7 @@ pricingClose.addEventListener("click", () => {
 </body>
 
 </html>
+
 
 
 
