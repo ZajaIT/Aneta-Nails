@@ -1,5 +1,6 @@
 
 
+
 <!DOCTYPE html>
 <html lang="cs">
 <head>
@@ -356,54 +357,6 @@ section h2::after{
     margin:auto;
     text-align:center;
     font-size:18px;
-}
-
-  /* --- Ikonky pod sekcí O mně --- */
-
-.about-features{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:30px;
-    margin-top:40px;
-    text-align:center;
-}
-
-.feature{
-    background:white;
-    padding:25px 20px;
-    border-radius:25px;
-    box-shadow:0 8px 20px rgba(0,0,0,0.07);
-    transition:transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.feature:hover{
-    transform:translateY(-5px);
-    box-shadow:0 12px 30px rgba(0,0,0,0.1);
-}
-
-.feature-icon{
-    font-size:32px;
-    margin-bottom:10px;
-}
-  .feature-icon svg{
-    transition:transform 0.3s ease;
-}
-
-.feature:hover svg{
-    transform:scale(1.15);
-}
-  
-.feature p{
-    font-size:15px;
-    font-weight:500;
-}
-
-/* mobil */
-@media(max-width:768px){
-    .about-features{
-        grid-template-columns:repeat(2,1fr);
-        gap:15px;
-    }
 }
 
 /* --- O MĚ: fotka vlevo, text vpravo --- */
@@ -1153,55 +1106,6 @@ nav{
       Vedu však pořadník, kam Vás ráda zapíšu.
     </p>
   </div>
-
-  <div class="about-features">
-
-  <div class="feature">
-
-  <div class="feature-icon">
-    <svg viewBox="0 0 24 24" stroke="url(#gradient-about)" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M6 2h12"/>
-      <path d="M9 2v4"/>
-      <path d="M15 2v4"/>
-      <path d="M5 6h14"/>
-      <path d="M6 6v12a4 4 0 004 4h4a4 4 0 004-4V6"/>
-    </svg>
-  </div>
-
-  <p>Hygiena</p>
-
-</div>
-
-  <div class="feature">
-    <div class="feature-icon">
-      <svg viewBox="0 0 24 24" width="36" height="36" stroke="url(#gradient-about)" fill="none" stroke-width="1.8">
-        <path d="M12 3l3 6 6 .9-4.5 4.3 1 6-5.5-3-5.5 3 1-6L3 9.9 9 9z"/>
-      </svg>
-    </div>
-    <p>Profesionalita</p>
-  </div>
-
-  <div class="feature">
-    <div class="feature-icon">
-      <svg viewBox="0 0 24 24" width="36" height="36" stroke="url(#gradient-about)" fill="none" stroke-width="1.8">
-        <path d="M12 21s-7-4.5-7-10a4 4 0 018-1 4 4 0 018 1c0 5.5-7 10-7 10z"/>
-      </svg>
-    </div>
-    <p>Osobní přístup</p>
-  </div>
-
-  <div class="feature">
-    <div class="feature-icon">
-      <svg viewBox="0 0 24 24" width="36" height="36" stroke="url(#gradient-about)" fill="none" stroke-width="1.8">
-        <path d="M12 3l4 8-4 10-4-10 4-8z"/>
-      </svg>
-    </div>
-    <p>Prémiové materiály</p>
-  </div>
-
-</div>
-
-</div>
   
 </section>
 
@@ -2356,57 +2260,9 @@ bannerImg.decode().then(() => {
     .classList.add("banner-ready");
 });
 </script>
-
-  <svg width="0" height="0" style="position:absolute">
-  <defs>
-    <linearGradient id="gradient-about" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#d48b9c"/>
-      <stop offset="100%" stop-color="#f3c1cc"/>
-    </linearGradient>
-  </defs>
-</svg>
   
 </body>
 
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
