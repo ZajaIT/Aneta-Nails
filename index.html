@@ -883,6 +883,22 @@ nav{
     opacity:0.7;
 }
 
+  .pricing-close{
+    margin-top:25px;
+    background:linear-gradient(135deg,#d48b9c,#f3c1cc);
+    border:none;
+    padding:12px 30px;
+    border-radius:40px;
+    color:white;
+    font-weight:500;
+    cursor:pointer;
+    transition:0.25s ease;
+}
+
+.pricing-close:hover{
+    transform:scale(1.08);
+}
+
 /* --- Kontakt: hover efekt pro text a ikonky --- */
 .contact-line {
     display: inline-flex;
@@ -1420,6 +1436,10 @@ Vietnamské nehty z důvodu alergie nepředělávám a neodstraňuji!
 <p class="pricing-valid">
 Ceník platný od 1. 1. 2026
 </p>
+
+    <button class="pricing-close">
+    Skrýt ceník
+</button>
 
 </div>
 
@@ -2497,7 +2517,8 @@ bannerImg.decode().then(() => {
 });
 
       const pricingToggle = document.querySelector(".pricing-toggle");
-const pricingContent = document.querySelector(".pricing-content");
+      const pricingContent = document.querySelector(".pricing-content");
+      const pricingClose = document.querySelector(".pricing-close");
 
 if(pricingToggle && pricingContent){
 
@@ -2513,6 +2534,17 @@ pricingToggle.addEventListener("click", () => {
 
 });
 
+pricingClose.addEventListener("click", () => {
+
+    pricingContent.classList.remove("open");
+    pricingToggle.textContent = "Zobrazit ceník";
+
+    document.getElementById("pricing").scrollIntoView({
+        behavior: "smooth"
+    });
+
+});
+
 }
 </script>
 
@@ -2520,6 +2552,7 @@ pricingToggle.addEventListener("click", () => {
 </body>
 
 </html>
+
 
 
 
