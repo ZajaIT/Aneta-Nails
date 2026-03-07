@@ -540,6 +540,17 @@ section h2::after{
     margin:0;
 }
 
+  /* Voucher text – PC jeden řádek, mobil dva */
+.mobile-break{
+    display:none;
+}
+
+@media(max-width:768px){
+    .mobile-break{
+        display:inline;
+    }
+}
+
 .voucher-box{
     max-width:600px;
     margin:auto;
@@ -1525,13 +1536,15 @@ Ceník platný od 1. 1. 2026
 
 <img src="voucher.png" alt="Dárkový poukaz">
 
-<p>
-Dárkové poukazy jsou dostupné<br>
+<p class="voucher-text">
+Dárkové poukazy jsou dostupné
+<span class="mobile-break"><br></span>
 výhradně pro stálé klientky.
 </p>
 
-<p>
-Prosím o předchozí domluvu,<br>
+<p class="voucher-text">
+Prosím o předchozí domluvu,
+<span class="mobile-break"><br></span>
 abych mohla poukaz připravit k předání.
 </p>
 
@@ -2670,6 +2683,7 @@ pricingClose.addEventListener("click", () => {
 </body>
 
 </html>
+
 
 
 
