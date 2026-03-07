@@ -647,6 +647,50 @@ header.banner{
     }
 }
 
+  /* Instagram ikonka v menu */
+
+.ig-btn{
+    position:absolute;
+    left:65px;
+    top:50%;
+    transform:translateY(-50%);
+
+    width:38px;
+    height:38px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:rgba(212,139,156,0.15);
+    backdrop-filter:blur(6px);
+
+    border-radius:50%;
+
+    color:var(--dark);
+    text-decoration:none;
+
+    font-weight:700;
+    font-size:14px;
+    font-family:'Montserrat',sans-serif;
+
+    box-shadow:0 4px 12px rgba(0,0,0,0.05);
+
+    transition:0.3s ease;
+}
+
+.ig-btn:hover{
+    background:rgba(212,139,156,0.25);
+    transform:translateY(-50%) scale(1.1);
+    color:#7a3f4d;
+}
+
+@media(max-width:768px){
+    .ig-btn{
+        display:none;
+    }
+}
+
 /* Animace nadpisů — zoom + fade + slide */
 
 @keyframes fadeUp{
@@ -1240,6 +1284,14 @@ nav{
        aria-label="Facebook">
         f
     </a>
+
+  <a href="https://www.instagram.com/" 
+       class="ig-btn" 
+       target="_blank" 
+       rel="noopener" 
+       aria-label="Instagram">
+        ig
+</a>
 
 <!-- Hamburger button -->
 <button class="hamburger" aria-label="Otevřít menu">
@@ -2683,38 +2735,4 @@ pricingClose.addEventListener("click", () => {
 </body>
 
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
