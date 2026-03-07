@@ -839,11 +839,12 @@ nav{
 }
 
 /* prostor před první a za poslední fotkou */
-#gallery .gallery::before,
+#gallery .gallery::before{
     content: "";
     flex: 0 0 0;
-    
-#gallery .gallery::after {
+}
+
+#gallery .gallery::after{
     content: "";
     flex: 0 0 10px;
 }
@@ -2870,6 +2871,7 @@ pricingClose.addEventListener("click", () => {
 </body>
 
 </html>
+
 
 
 
