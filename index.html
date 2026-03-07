@@ -18,7 +18,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
 
-<link rel="preload" href="banner.png" as="image" fetchpriority="high">
+<link rel="preload" href="banner1.png" as="image" fetchpriority="high">
 
 <style>
 /* --- Fallback fonty pro rychlé vykreslení textu --- */
@@ -180,7 +180,7 @@ header.banner{
     min-height:500px;
     scroll-margin-top: 0;
 
-    background:url("banner.png") center 35% / cover no-repeat;
+    background:url("banner1.png") center 35% / cover no-repeat;
 
     display:flex;
     align-items:center;
@@ -2833,7 +2833,7 @@ rightBtn.addEventListener("click", () => scrollToStudioImage(1));
 </script>
     <script>
 const bannerImg = new Image();
-bannerImg.src = "banner.png";
+bannerImg.src = "banner1.png";
 
 bannerImg.decode().then(() => {
   document.querySelector("header.banner")
@@ -2876,6 +2876,7 @@ pricingClose.addEventListener("click", () => {
 </body>
 
 </html>
+
 
 
 
