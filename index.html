@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="cs">
 <head>
@@ -642,6 +643,12 @@ footer{
         font-size:34px;
     }
 
+header.banner{
+    height:40vh;
+    min-height:250px;
+    }
+}
+
 /* Facebook ikonka v menu */
 
 .fb-btn{
@@ -839,12 +846,11 @@ nav{
 }
 
 /* prostor před první a za poslední fotkou */
-#gallery .gallery::before{
+#gallery .gallery::before,
     content: "";
     flex: 0 0 0;
-}
-
-#gallery .gallery::after{
+    
+#gallery .gallery::after {
     content: "";
     flex: 0 0 10px;
 }
@@ -2852,7 +2858,6 @@ pricingToggle.addEventListener("click", () => {
     }
 
 });
-
 pricingClose.addEventListener("click", () => {
 
     pricingContent.classList.remove("open");
@@ -2861,20 +2866,8 @@ pricingClose.addEventListener("click", () => {
     document.getElementById("pricing").scrollIntoView({
         behavior: "smooth"
     });
-
 });
-
 }
 </script>
-
-  
 </body>
-
 </html>
-
-
-
-
-
-
-
