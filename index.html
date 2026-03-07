@@ -194,7 +194,6 @@ header p{
     letter-spacing:1px;
     transition:0.3s;
 }
-
 .btn:hover{
     transform:translateY(-3px);
     box-shadow:0 10px 20px rgba(0,0,0,0.15);
@@ -222,17 +221,14 @@ section{
     max-width:760px;
     margin:0 auto;
 }
-
 .service-item:not(:last-child){
     margin-bottom:60px;
 }
-
 .service-item h3{
     font-family:'Cormorant Garamond',serif;
     font-size:26px;
     margin-bottom:10px;
 }
-
 .service-item h3::after{
     content:"";
     display:block;
@@ -242,7 +238,6 @@ section{
     margin-top:10px;
     border-radius:2px;
 }
-
 .service-item p{
     margin-top:18px;
     font-size:16px;
@@ -255,7 +250,6 @@ section{
     padding-left:0;
     padding-right:0;
 }
-
 section h2{
     font-family:'Playfair Display', serif;
     text-align:center;
@@ -265,18 +259,13 @@ section h2{
     letter-spacing:0.5px;
     color:#7a3f4d;
 }
-
 section h2::after{
     content:"";
     display:block;
-
     width:60px;
     height:2px;
-
     background:linear-gradient(90deg,#d48b9c,#f3c1cc);
-
     margin:18px auto 0;
-
     border-radius:2px;
 }
 
@@ -287,7 +276,6 @@ section h2::after{
     grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
     gap:25px;
 }
-
 .gallery img{
     width:100%;
     border-radius:30px;
@@ -297,25 +285,20 @@ section h2::after{
 
 /* Hover efekt pro fotky v galerii */
 .gallery img {
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* plynulý efekt */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; 
 }
-
 .gallery img:hover {
-    transform: scale(1.05); /* jemné zvětšení */
-    box-shadow: 0 15px 35px rgba(0,0,0,0.1); /* lehce silnější stín */
+    transform: scale(1.05); 
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1); 
 }
 
 /* ABOUT */
-
 .about{
     max-width:750px;
     margin:auto;
     text-align:center;
     font-size:18px;
 }
-
-  /* --- Ikonky v sekci O mně --- */
-
 .about-icons{
     display:grid;
     grid-template-columns:repeat(4,1fr);
@@ -323,47 +306,39 @@ section h2::after{
     max-width:1100px;
     margin:70px auto 0;
 }
-
 .about-icon{
     background:white;
     border-radius:30px;
     box-shadow:0 10px 30px rgba(0,0,0,0.07);
-
     height:160px;
-
     display:flex;
     align-items:center;
     justify-content:center;
 }
-
 .about-icon img{
     width:200px;
     height:auto;
 }
-
-  .about-icon-item h3{
+.about-icon-item h3{
     font-family:'Cormorant Garamond',serif;
     font-size:26px;
     margin-top:18px;
     text-align:center;
 }
-
-  .about-icon-item p{
+.about-icon-item p{
     font-size:15px;
     line-height:1.6;
     text-align:center;
     margin-top:6px;
     opacity:0.85;
 }
-
-/* --- O MĚ: fotka vlevo, text vpravo --- */
 .about-wrapper {
     display: flex;
     align-items: center;
-    gap: 40px; /* mezera mezi fotkou a textem */
+    gap: 40px; 
     max-width: 900px;
-    margin: 20px auto 0; /* odsazení od nadpisu */
-    flex-wrap: wrap; /* na mobil sloupce spadnou pod sebe */
+    margin: 20px auto 0; 
+    flex-wrap: wrap; 
 }
 
 .about-photo {
@@ -2843,6 +2818,7 @@ pricingClose.addEventListener("click", () => {
 </script>
 </body>
 </html>
+
 
 
 
