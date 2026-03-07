@@ -18,21 +18,26 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
 
-<link rel="preload" href="banner1.png" as="image" fetchpriority="high">
+<link rel="preload" href="banner.png" as="image" fetchpriority="high">
 
 <style>
-
+/* --- Fallback fonty pro rychlé vykreslení textu --- */
 body {
-  font-family: 'Montserrat', Arial, sans-serif; 
+  font-family: 'Montserrat', Arial, sans-serif; /* fallback pro běžný text */
 }
-  h1, h2, h3 {
-  font-family: 'Playfair Display', Georgia, serif; 
+
+h1, h2, h3 {
+  font-family: 'Playfair Display', Georgia, serif; /* fallback pro nadpisy */
 }
-  header.banner {
+    
+/* --- Poladěný header pro rychlé vykreslení --- */
+header.banner {
     min-height: 89vh;
     opacity: 0;
     transform: translateY(30px);
 }
+
+/* aktivace až po načtení obrázku */
 header.banner.banner-ready {
     animation: fadeUp 1.2s ease-out forwards;
 }
@@ -57,6 +62,7 @@ header.banner.banner-ready {
 html{
     scroll-behavior: smooth;
 }
+
 body{
     font-family:'Montserrat',sans-serif;
     background:var(--cream);
@@ -65,6 +71,7 @@ body{
 }
 
 /* DECOR SHAPES */
+
 .shape{
     position:absolute;
     border-radius:50%;
@@ -72,18 +79,21 @@ body{
     opacity:0.6;
     z-index:-1;
 }
+
 .shape.one{
     width:300px;
     height:300px;
     top:-80px;
     left:-80px;
 }
+
 .shape.two{
     width:220px;
     height:220px;
     top:400px;
     right:-80px;
 }
+
 .shape.three{
     width:260px;
     height:260px;
@@ -92,6 +102,7 @@ body{
 }
 
 /* NAV */
+
 nav{
     position:sticky;
     top:0;
@@ -99,22 +110,28 @@ nav{
     backdrop-filter:blur(10px);
     z-index:100;
 }
+
 nav ul{
     display:flex;
     justify-content:center;
     list-style:none;
 }
+
 nav li{
     margin:0 8px;
 }
+
 nav a{
     position:relative;
     display:block;
     padding:20px 18px;
+
     text-decoration:none;
     color:var(--dark);
     font-weight:600;
+
     border-radius:30px;
+
     transition:color 0.3s ease;
     z-index:1;
 }
@@ -123,16 +140,23 @@ nav a{
 nav a::before{
     content:"";
     position:absolute;
+
     top:50%;
     left:50%;
     transform:translate(-50%,-50%) scale(0.7);
+
     width:100%;
     height:100%;
+
     background:rgba(212,139,156,0.15);
     backdrop-filter:blur(6px);
+
     border-radius:30px;
+
     opacity:0;
+
     transition:0.1s ease;
+
     z-index:-1;
 }
 
@@ -141,6 +165,7 @@ nav a:hover::before{
     opacity:1;
     transform:translate(-50%,-50%) scale(1);
 }
+
 nav a:hover{
     color:#7a3f4d;
 }
@@ -154,11 +179,14 @@ header.banner{
     height:89vh;
     min-height:500px;
     scroll-margin-top: 0;
-    background:url("banner1.png") center 35% / cover no-repeat;
+
+    background:url("banner.png") center 35% / cover no-repeat;
+
     display:flex;
     align-items:center;
     justify-content:center;
 }
+
 .hero-box{
     background:rgba(255,255,255,0.75);
     backdrop-filter:blur(12px);
@@ -167,15 +195,18 @@ header.banner{
     max-width:700px;
     box-shadow:0 20px 40px rgba(0,0,0,0.08);
 }
+
 header h1{
     font-family:'Cormorant Garamond',serif;
     font-size:60px;
     font-weight:600;
     letter-spacing:2px;
 }
+
 header span{
     color:var(--rose);
 }
+
 header p{
     margin:25px 0 35px;
     font-size:18px;
@@ -194,6 +225,7 @@ header p{
     letter-spacing:1px;
     transition:0.3s;
 }
+
 .btn:hover{
     transform:translateY(-3px);
     box-shadow:0 10px 20px rgba(0,0,0,0.15);
@@ -221,14 +253,17 @@ section{
     max-width:760px;
     margin:0 auto;
 }
+
 .service-item:not(:last-child){
     margin-bottom:60px;
 }
+
 .service-item h3{
     font-family:'Cormorant Garamond',serif;
     font-size:26px;
     margin-bottom:10px;
 }
+
 .service-item h3::after{
     content:"";
     display:block;
@@ -238,6 +273,7 @@ section{
     margin-top:10px;
     border-radius:2px;
 }
+
 .service-item p{
     margin-top:18px;
     font-size:16px;
@@ -250,6 +286,7 @@ section{
     padding-left:0;
     padding-right:0;
 }
+
 section h2{
     font-family:'Playfair Display', serif;
     text-align:center;
@@ -259,13 +296,18 @@ section h2{
     letter-spacing:0.5px;
     color:#7a3f4d;
 }
+
 section h2::after{
     content:"";
     display:block;
+
     width:60px;
     height:2px;
+
     background:linear-gradient(90deg,#d48b9c,#f3c1cc);
+
     margin:18px auto 0;
+
     border-radius:2px;
 }
 
@@ -276,6 +318,7 @@ section h2::after{
     grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
     gap:25px;
 }
+
 .gallery img{
     width:100%;
     border-radius:30px;
@@ -285,20 +328,25 @@ section h2::after{
 
 /* Hover efekt pro fotky v galerii */
 .gallery img {
-    transition: transform 0.3s ease, box-shadow 0.3s ease; 
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* plynulý efekt */
 }
+
 .gallery img:hover {
-    transform: scale(1.05); 
-    box-shadow: 0 15px 35px rgba(0,0,0,0.1); 
+    transform: scale(1.05); /* jemné zvětšení */
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1); /* lehce silnější stín */
 }
 
 /* ABOUT */
+
 .about{
     max-width:750px;
     margin:auto;
     text-align:center;
     font-size:18px;
 }
+
+  /* --- Ikonky v sekci O mně --- */
+
 .about-icons{
     display:grid;
     grid-template-columns:repeat(4,1fr);
@@ -306,39 +354,47 @@ section h2::after{
     max-width:1100px;
     margin:70px auto 0;
 }
+
 .about-icon{
     background:white;
     border-radius:30px;
     box-shadow:0 10px 30px rgba(0,0,0,0.07);
+
     height:160px;
+
     display:flex;
     align-items:center;
     justify-content:center;
 }
+
 .about-icon img{
     width:200px;
     height:auto;
 }
-.about-icon-item h3{
+
+  .about-icon-item h3{
     font-family:'Cormorant Garamond',serif;
     font-size:26px;
     margin-top:18px;
     text-align:center;
 }
-.about-icon-item p{
+
+  .about-icon-item p{
     font-size:15px;
     line-height:1.6;
     text-align:center;
     margin-top:6px;
     opacity:0.85;
 }
+
+/* --- O MĚ: fotka vlevo, text vpravo --- */
 .about-wrapper {
     display: flex;
     align-items: center;
-    gap: 40px; 
+    gap: 40px; /* mezera mezi fotkou a textem */
     max-width: 900px;
-    margin: 20px auto 0; 
-    flex-wrap: wrap; 
+    margin: 20px auto 0; /* odsazení od nadpisu */
+    flex-wrap: wrap; /* na mobil sloupce spadnou pod sebe */
 }
 
 .about-photo {
@@ -1064,7 +1120,7 @@ nav{
 
     /* HEADER / HERO */
     header.banner{
-        height:calc(60vh - 60px);         
+        height:60vh;           /* vyšší banner, více prostoru pro hero-box */
         min-height:350px;      /* alespoň polovina původní PC výšky */
         display:flex;
         align-items:center;
@@ -1896,10 +1952,6 @@ Po příchodu do patra zazvoňte na zvonek Dvořáková, osobně si Vás vyzvedn
 
 @media(max-width:768px){
 
-  html{
-    overflow-x:hidden;
-}
-
   .contact-left{
     width:100%;
     padding-left:0;
@@ -1949,7 +2001,7 @@ nav{
     align-items:center;
     justify-content:center;
 
-    position:fixed !important;
+    position:fixed;
     top:0;
     left:0;
     width:100%;
@@ -2781,7 +2833,7 @@ rightBtn.addEventListener("click", () => scrollToStudioImage(1));
 </script>
     <script>
 const bannerImg = new Image();
-bannerImg.src = "banner1.png";
+bannerImg.src = "banner.png";
 
 bannerImg.decode().then(() => {
   document.querySelector("header.banner")
@@ -2805,6 +2857,7 @@ pricingToggle.addEventListener("click", () => {
     }
 
 });
+
 pricingClose.addEventListener("click", () => {
 
     pricingContent.classList.remove("open");
@@ -2813,10 +2866,15 @@ pricingClose.addEventListener("click", () => {
     document.getElementById("pricing").scrollIntoView({
         behavior: "smooth"
     });
+
 });
+
 }
 </script>
+
+  
 </body>
+
 </html>
 
 
