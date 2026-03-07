@@ -487,6 +487,31 @@ section h2::after{
     margin:auto;
 }
 
+  .contact-grid{
+    display:flex;
+    gap:40px;
+}
+
+.contact-left{
+    flex:1;
+}
+
+.contact-right{
+    flex:1.2;
+    font-size:15px;
+    line-height:1.6;
+}
+
+.contact-right h3{
+    font-family:'Cormorant Garamond',serif;
+    font-size:20px;
+    margin-bottom:10px;
+}
+
+.contact-right p{
+    margin-bottom:16px;
+}
+
 .contact-item{
     margin-bottom:12px;        /* menší mezera mezi řádky */
 }
@@ -1609,6 +1634,10 @@ abych mohla poukaz připravit k předání.
 
 <div class="contact">
 
+<div class="contact-grid">
+
+<div class="contact-left">
+
   <!-- Telefon -->
   <div class="contact-item">
     <h3>Telefon</h3>
@@ -1655,7 +1684,31 @@ abych mohla poukaz připravit k předání.
     <p>- dle objednávek -</p>
   </div>
 
+</div> 
+
+  <div class="contact-right">
+
+<h3>Jak se ke mně dostanete</h3>
+
+<p><strong>MHD</strong><br>
+Pokud přijedete MHD, vystupte na zastávce Bukov Rondel.
+Budova se nachází přímo u zastávky.
+</p>
+
+<p><strong>Automobilem</strong><br>
+Parkování je možné zdarma u Penny Marketu nebo podél hokejbalového hřiště.
+Prosím, neparkujte před ani za budovou – tato místa jsou soukromá.
+</p>
+
+<p><strong>V budově</strong><br>
+Salon se nachází v 7. patře.  
+K dispozici jsou oba výtahy (vypadají sice trochu unaveně, ale fungují spolehlivě 😊) nebo můžete využít schodiště.  
+Po příchodu do patra zazvoňte na zvonek Dvořáková a já si vás osobně vyzvednu.
+</p>
+
 </div>
+
+</div> 
 </section>
 
 
@@ -2733,6 +2786,7 @@ pricingClose.addEventListener("click", () => {
 </body>
 
 </html>
+
 
 
 
