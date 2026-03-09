@@ -690,15 +690,7 @@ nav{
     box-shadow: 0 8px 20px rgba(0,0,0,0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-#studio .gallery img {
-    width: 100%;
-    border-radius: 30px;
-    object-fit: cover;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    cursor: pointer;       
-    user-select: none;
-}
+
 #studio .gallery img:hover {
     transform: scale(1.05);
     box-shadow: 0 15px 35px rgba(0,0,0,0.1);
@@ -2057,8 +2049,8 @@ body.no-scroll {
 <!-- JavaScript -->
 <script>
 const gallery = document.querySelector("#gallery .gallery");
-const btnLeft = document.querySelector(".scroll-btn.left");
-const btnRight = document.querySelector(".scroll-btn.right");
+const btnLeft = document.querySelector("#gallery .scroll-btn.left");
+const btnRight = document.querySelector("#gallery .scroll-btn.right");
 
     const studioGallery = document.querySelector("#studio .gallery");
 
@@ -2783,6 +2775,7 @@ pricingClose.addEventListener("click", () => {
 </body>
 
 </html>
+
 
 
 
