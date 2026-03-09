@@ -664,11 +664,31 @@ nav{
     animation:fadeUp 0.8s ease-out forwards;
 }
 
-/* --- Studio fotky (grid) --- */
+/* --- Studio horizontální galerie --- */
 #studio .gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 25px;
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding: 10px 0;
+    cursor: grab;
+
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+#studio .gallery::-webkit-scrollbar {
+    display: none;
+}
+
+#studio .gallery img {
+    flex: 0 0 auto;
+    width: 250px;
+    height: 250px;
+    border-radius: 30px;
+    object-fit: cover;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 #studio .gallery img {
     width: 100%;
@@ -707,6 +727,10 @@ nav{
 
 /* Wrapper pro horizontální galerii */
 .gallery-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+  #studio .gallery-wrapper{
     position: relative;
     overflow: hidden;
 }
@@ -1363,15 +1387,20 @@ Veškeré vybavení je zajištěno ve studiu. Kurz probíhá v mém salonu v Ús
 
 <!-- STUDIO -->
 <section id="studio">
-
 <h2>Studio</h2>
 
-<div class="gallery">
+<div class="gallery-wrapper">
+    <button class="scroll-btn left">&#10094;</button>
 
-<img src="studio1.jpg" alt="Studio">    
-<img src="studio2.jpg" alt="Studio">
-<img src="studio3.jpg" alt="Studio">
+    <div class="gallery">
+        <img src="novestudio1.jpeg" alt="Studio">
+        <img src="novestudio2.jpeg" alt="Studio">
+        <img src="novestudio3.jpeg" alt="Studio">
+        <img src="novestudio4.jpeg" alt="Studio">
+        <img src="novestudio5.jpeg" alt="Studio">
+    </div>
 
+    <button class="scroll-btn right">&#10095;</button>
 </div>
 
 </section>
@@ -2754,6 +2783,7 @@ pricingClose.addEventListener("click", () => {
 </body>
 
 </html>
+
 
 
 
