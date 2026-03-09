@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="cs">
 <head>
@@ -665,11 +666,9 @@ nav{
 
 /* --- Studio fotky (grid) --- */
 #studio .gallery {
-    display: flex;
-    gap: 20px;
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    padding: 10px 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
 }
 #studio .gallery img {
     width: 100%;
@@ -1369,11 +1368,9 @@ Veškeré vybavení je zajištěno ve studiu. Kurz probíhá v mém salonu v Ús
 
 <div class="gallery">
 
-<img src="novestudio1.jpeg" alt="Studio">    
-<img src="novestudio2.jpeg" alt="Studio">
-<img src="novestudio3.jpeg" alt="Studio">
-<img src="novestudio4.jpeg" alt="Studio">
-<img src="novestudio5.jpeg" alt="Studio">
+<img src="studio1.jpg" alt="Studio">    
+<img src="studio2.jpg" alt="Studio">
+<img src="studio3.jpg" alt="Studio">
 
 </div>
 
@@ -1410,7 +1407,7 @@ Veškeré vybavení je zajištěno ve studiu. Kurz probíhá v mém salonu v Ús
 
 <div class="pricing-card">
 
-    <img src="nails.png" alt="Ceník">
+    <img src="InCollage_20260306_140302649.jpg" alt="Ceník">
 
    <p>
         Kompletní přehled cen a doplňujících informací k jednotlivým službám.
@@ -2757,11 +2754,6 @@ pricingClose.addEventListener("click", () => {
 </body>
 
 </html>
-
-
-
-
-
 
 
 
