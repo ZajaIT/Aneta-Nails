@@ -664,33 +664,21 @@ nav{
     animation:fadeUp 0.8s ease-out forwards;
 }
 
-/* --- Studio horizontální galerie --- */
+/* --- Studio fotky (grid) --- */
 #studio .gallery {
-    display: flex;
-    gap: 20px;
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    padding: 10px 0;
-    cursor: grab;
-
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
 }
-
-#studio .gallery::-webkit-scrollbar {
-    display: none;
-}
-
 #studio .gallery img {
-    flex: 0 0 auto;
-    width: 320px;
-    height: 320px;
+    width: 100%;
     border-radius: 30px;
     object-fit: cover;
     box-shadow: 0 8px 20px rgba(0,0,0,0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;       
+    user-select: none;
 }
-
 #studio .gallery img:hover {
     transform: scale(1.05);
     box-shadow: 0 15px 35px rgba(0,0,0,0.1);
@@ -719,10 +707,6 @@ nav{
 
 /* Wrapper pro horizontální galerii */
 .gallery-wrapper {
-    position: relative;
-    overflow: hidden;
-}
-  #studio .gallery-wrapper{
     position: relative;
     overflow: hidden;
 }
@@ -1379,20 +1363,15 @@ Veškeré vybavení je zajištěno ve studiu. Kurz probíhá v mém salonu v Ús
 
 <!-- STUDIO -->
 <section id="studio">
+
 <h2>Studio</h2>
 
-<div class="gallery-wrapper">
-    <button class="scroll-btn left">&#10094;</button>
+<div class="gallery">
 
-    <div class="gallery">
-        <img src="novestudio1.jpeg" alt="Studio">
-        <img src="novestudio2.jpeg" alt="Studio">
-        <img src="novestudio3.jpeg" alt="Studio">
-        <img src="novestudio4.jpeg" alt="Studio">
-        <img src="novestudio5.jpeg" alt="Studio">
-    </div>
+<img src="studio1.jpg" alt="Studio">    
+<img src="studio2.jpg" alt="Studio">
+<img src="studio3.jpg" alt="Studio">
 
-    <button class="scroll-btn right">&#10095;</button>
 </div>
 
 </section>
@@ -2049,21 +2028,10 @@ body.no-scroll {
 <!-- JavaScript -->
 <script>
 const gallery = document.querySelector("#gallery .gallery");
-const btnLeft = document.querySelector("#gallery .scroll-btn.left");
-const btnRight = document.querySelector("#gallery .scroll-btn.right");
+const btnLeft = document.querySelector(".scroll-btn.left");
+const btnRight = document.querySelector(".scroll-btn.right");
 
     const studioGallery = document.querySelector("#studio .gallery");
-
-const studioBtnLeft = document.querySelector("#studio .scroll-btn.left");
-const studioBtnRight = document.querySelector("#studio .scroll-btn.right");
-
-studioBtnLeft.addEventListener("click", () => {
-    studioGallery.scrollBy({ left: -320, behavior: "smooth" });
-});
-
-studioBtnRight.addEventListener("click", () => {
-    studioGallery.scrollBy({ left: 320, behavior: "smooth" });
-});
 
 // --- Drag prstem / myší pro Studio ---
 let isStudioDown = false;
@@ -2786,20 +2754,4 @@ pricingClose.addEventListener("click", () => {
 </body>
 
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
