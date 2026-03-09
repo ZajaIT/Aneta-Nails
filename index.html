@@ -665,9 +665,9 @@ nav{
 
 /* --- Studio fotky (grid) --- */
 #studio .gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    display: flex;
     gap: 25px;
+    overflow-x: auto;
 }
 #studio .gallery img {
     width: 100%;
@@ -2755,6 +2755,7 @@ pricingClose.addEventListener("click", () => {
 </body>
 
 </html>
+
 
 
 
