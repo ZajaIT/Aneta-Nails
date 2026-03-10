@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="cs">
 <head>
@@ -1660,6 +1661,17 @@ Zapsána v živnostenském rejstříku
 
 <!-- CSS u obrázků galerie -->
 <style>
+#gallery .gallery img {
+    width: 250px;
+    height: 250px;
+    flex-shrink: 0;
+    border-radius: 30px;
+    object-fit: cover;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    user-select: none;
+}
 
 /* ===== Studio Lightbox ===== */
 #studioLightbox{
@@ -2755,4 +2767,3 @@ pricingClose.addEventListener("click", () => {
 </script>
 </body>
 </html>
-
